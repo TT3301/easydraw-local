@@ -1,0 +1,19 @@
+{
+  "name": "@easydraw/editor-contracts",
+  "version": "0.4.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./element-input": "./src/element-input.ts",
+    "./bridge": "./src/bridge.ts"
+  },
+  "dependencies": {
+    "@easydraw/document-model": "0.4.0",
+    "zod": "^4.4.3"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

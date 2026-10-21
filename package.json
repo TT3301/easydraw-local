@@ -1,0 +1,168 @@
+{
+  "name": "easydraw-local",
+  "version": "0.3.4",
+  "description": "A local-first desktop canvas for editable sketches, prototypes, and AI-assisted drawing.",
+  "author": "EasyDraw contributors",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.0.0"
+  },
+  "workspaces": [
+    "packages/canvas-engine",
+    "packages/document-model",
+    "packages/editor-contracts",
+    "packages/mcp-server"
+  ],
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently --kill-others --success first \"npm run dev:desktop\" \"npm run dev:web\"",
+    "dev:web": "vite --host 127.0.0.1 --force",
+    "dev:desktop": "wait-on --config scripts/desktop-ready.cjs http://127.0.0.1:1420 && electron .",
+    "build": "npm run build:desktop",
+    "build:desktop": "npm run icons:manifest && tsc --noEmit -p tsconfig.desktop.json && npm run typecheck -w @easydraw/mcp-server && vite build && vite build --config vite.mcp.config.ts",
+    "desktop:dir": "npm run build:desktop && node scripts/ensure-electron.cjs && electron-builder --dir --config.electronDist=node_modules/electron/dist",
+    "desktop:pack": "npm run build:desktop && node scripts/ensure-electron.cjs && electron-builder --config.electronDist=node_modules/electron/dist",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:desktop": "npm run build && node scripts/desktop-smoke.cjs",
+    "check:source": "node scripts/check-public-source.mjs",
+    "check": "npm run check:source && npm test && npm run build",
+    "mcp": "tsx packages/mcp-server/src/index.ts",
+    "mcp:smoke": "tsx packages/mcp-server/src/smoke.ts",
+    "mcp:bundle-smoke": "tsx packages/mcp-server/src/smoke.ts --bundle",
+    "mcp:integration:smoke": "node scripts/mcp-integration-smoke.cjs",
+    "mcp:live-smoke": "tsx packages/mcp-server/src/live-smoke.ts",
+    "engine:typecheck": "tsc -p packages/canvas-engine/tsconfig.json --noEmit",
+    "engine:pilot:build": "npm run engine:typecheck && vite build --config vite.engine-pilot.config.ts",
+    "engine:pilot:smoke": "npm run engine:pilot:build && electron scripts/engine-pilot-smoke.cjs",
+    "engine:integration:smoke": "node scripts/engine-integration-smoke.cjs",
+    "canvas:performance:smoke": "npm run build:desktop && electron scripts/canvas-performance-smoke.cjs",
+    "engine:reveal:smoke": "electron scripts/element-reveal-smoke.cjs",
+    "model:typecheck": "tsc -p packages/document-model/tsconfig.json --noEmit",
+    "icons:manifest": "node scripts/generate-remix-icon-manifest.mjs",
+    "icons:index": "npm run icons:manifest && node scripts/generate-icon-vector-index.mjs"
+  },
+  "dependencies": {
+    "@easydraw/canvas-engine": "0.4.0",
+    "@easydraw/document-model": "0.4.0",
+    "@easydraw/editor-contracts": "0.4.0",
+    "@huggingface/tokenizers": "0.2.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@xmldom/xmldom": "^0.8.15",
+    "adm-zip": "0.6.1",
+    "onnxruntime-node": "1.30.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ws": "^8.21.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
+    "@types/lodash.throttle": "^4.1.9",
+    "@types/pako": "^2.0.4",
+    "@types/pica": "^9.0.5",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^6.0.4",
+    "concurrently": "^10.0.3",
+    "electron": "43.2.0",
+    "electron-builder": "^26.15.3",
+    "sass-embedded": "^1.104.0",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10",
+    "wait-on": "^9.1.0"
+  },
+  "build": {
+    "appId": "com.easydraw.local",
+    "productName": "EasyDraw Local",
+    "artifactName": "EasyDraw-Local-${version}-${os}-${arch}.${ext}",
+    "fileAssociations": [
+      {
+        "ext": "edw",
+        "name": "EasyDraw Project",
+        "role": "Editor"
+      }
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "files": [
+      "dist/**/*",
+      "dist-mcp/**/*.cjs",
+      "electron/**/*.cjs",
+      "build/icon.png",
+      "package.json",
+      "!**/*.map",
+      "!**/*.test.*",
+      "!**/__tests__/**"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "extraResources": [
+      {
+        "from": "skills/easydraw-product-sketch",
+        "to": "skills/easydraw-product-sketch"
+      },
+      {
+        "from": "remix-icons",
+        "to": "remix-icons",
+        "filter": [
+          "**/*.svg",
+          "manifest.json",
+          "LICENSE",
+          "README.md",
+          "tags.json"
+        ]
+      },
+      {
+        "from": "placeholder-library",
+        "to": "image-placeholders",
+        "filter": [
+          "image-placeholder-wireframe.svg",
+          "image-placeholder-logo.svg"
+        ]
+      },
+      {
+        "from": "assets/icon-embedding",
+        "to": "icon-embedding"
+      },
+      {
+        "from": "LICENSE",
+        "to": "licenses/EasyDraw-LICENSE"
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "licenses/THIRD_PARTY_NOTICES.md"
+      }
+    ],
+    "mac": {
+      "icon": "build/icon.icns",
+      "signIgnore": [
+        "\\.pak$"
+      ]
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "linux": {
+      "icon": "build/icon.png"
+    },
+    "asarUnpack": [
+      "node_modules/onnxruntime-node/bin/**/*"
+    ],
+    "afterPack": "scripts/prune-icon-runtime.cjs"
+  }
+}

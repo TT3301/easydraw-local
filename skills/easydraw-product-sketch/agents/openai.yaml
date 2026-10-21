@@ -1,0 +1,4 @@
+interface:
+  display_name: "EasyDraw Product Sketch"
+  short_description: "Create editable low-fidelity product interface sketches"
+  default_prompt: "Use $easydraw-product-sketch to turn my product brief into an editable product sketch in EasyDraw."

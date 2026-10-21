@@ -1,0 +1,19 @@
+{
+  "name": "@easydraw/document-model",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts",
+    "./elements": "./src/elements.ts",
+    "./geometry": "./src/geometry.ts",
+    "./style": "./src/style.ts",
+    "./utility-types": "./src/utility-types.ts",
+    "./vector": "./src/vector.ts"
+  },
+  "dependencies": {
+    "zod": "^4.4.3",
+    "fractional-indexing": "3.2.0"
+  }
+}

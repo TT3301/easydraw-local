@@ -1,0 +1,105 @@
+const assert = require("node:assert/strict");
+
+exports.run = async (window) => {
+  const run = code => window.webContents.executeJavaScript(code);
+  const settle = () => new Promise(resolve => setTimeout(resolve,160));
+  const press = async (keyCode) => {
+    window.webContents.sendInputEvent({type:"keyDown",keyCode});
+    if (keyCode === "Space" || keyCode.length === 1) window.webContents.sendInputEvent({type:"char",keyCode:keyCode === "Space" ? " " : keyCode.toLowerCase()});
+    window.webContents.sendInputEvent({type:"keyUp",keyCode});
+    await settle();
+  };
+  const click = async (selector, wait = true) => {
+    require("electron").app.focus({ steal: true });
+    window.focus(); window.webContents.focus();
+    await settle();
+    assert(await run(`document.hasFocus()`),"native input test requires an active window");
+    const point = await run(`(() => {const b=document.querySelector(${JSON.stringify(selector)});const r=b.getBoundingClientRect();return {x:Math.round(r.x+r.width/2),y:Math.round(r.y+r.height/2)};})()`);
+    assert(await run(`document.querySelector(${JSON.stringify(selector)}).contains(document.elementFromPoint(${point.x},${point.y}))`),`control is covered: ${selector}`);
+    window.webContents.sendInputEvent({type:"mouseMove",...point});
+    window.webContents.sendInputEvent({type:"mouseDown",...point,button:"left",clickCount:1});
+    window.webContents.sendInputEvent({type:"mouseUp",...point,button:"left",clickCount:1});
+    if (wait) await settle();
+  };
+  const viewport = () => run(`(() => {const d=document.querySelector('.canvas-wrap').dataset;return [Number(d.viewportScrollX),Number(d.viewportScrollY)];})()`);
+  const pan = async (checkFocus = true) => {
+    if (checkFocus) assert(await run(`document.activeElement === document.querySelector('.canvas-wrap .easydraw')`),"ordinary pointer commands must return focus to the engine");
+    const before = await viewport();
+    window.webContents.sendInputEvent({type:"keyDown",keyCode:"Space"});
+    window.webContents.sendInputEvent({type:"mouseDown",x:1000,y:500,button:"left",clickCount:1});
+    window.webContents.sendInputEvent({type:"mouseMove",x:1050,y:530,button:"left"});
+    window.webContents.sendInputEvent({type:"mouseUp",x:1050,y:530,button:"left",clickCount:1});
+    window.webContents.sendInputEvent({type:"keyUp",keyCode:"Space"});
+    await settle();
+    assert.notDeepEqual(await viewport(),before,"Space must pan after the command");
+  };
+  for (const selector of ['.canvas-top-left > .canvas-control','.zoom-control button:first-child','.zoom-value','.zoom-control button:last-child']) {
+    await click(selector); await pan();
+  }
+  if (!await run(`!!document.querySelector('.left-panel')`)) await click('.canvas-top-left > .canvas-control');
+  await click('[data-panel-tab="materials"]'); await pan();
+  await click('[data-panel-tab="canvases"]'); await pan();
+  await press("V");
+  const tool = () => run(`document.querySelector('.App-toolbar input:checked')?.getAttribute('data-testid')`);
+  const selectionTool = await tool();
+  assert(selectionTool,"toolbar must expose the active tool");
+  await click('[aria-label="搜索画布"]');
+  assert(await run(`document.activeElement === document.querySelector('.tree-search')`),"search retains input focus");
+  const beforeInput = await viewport();
+  await run(`window.workspaceTestKeys=[];window.workspaceTestKeyListener=e=>queueMicrotask(()=>window.workspaceTestKeys.push([e.key,e.defaultPrevented]));document.querySelector('.tree-search').addEventListener('keydown',window.workspaceTestKeyListener)`);
+  await press("Space"); await press("H");
+  assert.deepEqual(await run(`window.workspaceTestKeys`),[[" ",false],["h",false]],"text entry must not be intercepted");
+  await run(`document.querySelector('.tree-search').removeEventListener('keydown',window.workspaceTestKeyListener);delete window.workspaceTestKeyListener;delete window.workspaceTestKeys`);
+  assert.equal(await run(`document.querySelector('.tree-search').value`)," h");
+  assert.equal(await tool(),selectionTool,"typing shortcuts must not change tools");
+  assert.deepEqual(await viewport(),beforeInput);
+  await press("Escape");
+  await click('[data-testid="main-menu-trigger"]');
+  assert(await run(`!!document.querySelector('.dropdown-menu')`));
+  await press("H");
+  assert.equal(await tool(),selectionTool,"menu owns its keyboard scope");
+  await press("Escape");
+  // Using keys within the menu restores its trigger; clicking it twice returns to editing.
+  await click('[data-testid="main-menu-trigger"]');
+  await click('[data-testid="main-menu-trigger"]'); await pan();
+  await click('[aria-label="打开 AI 设置"]');
+  assert(await run(`!!document.querySelector('.mcp-dialog')`));
+  await press("H");
+  assert.equal(await tool(),selectionTool,"dialog must block tool shortcuts");
+  await press("Tab");
+  await press("Escape");
+  assert(await run(`document.activeElement === document.querySelector('[aria-label="打开 AI 设置"]')`),"keyboard dialog navigation restores its trigger");
+  await click('[aria-label="打开 AI 设置"]');
+  assert(await run(`document.elementFromPoint(20,700).classList.contains('dialog-backdrop')`));
+  window.webContents.sendInputEvent({type:"mouseDown",x:20,y:700,button:"left",clickCount:1});
+  window.webContents.sendInputEvent({type:"mouseUp",x:20,y:700,button:"left",clickCount:1});
+  await settle();
+  assert(await run(`!document.querySelector('.mcp-dialog')`));
+  await pan();
+  await click('.zoom-value'); await pan();
+  await click('.zoom-value',false); await pan(false);
+  window.webContents.sendInputEvent({type:"keyDown",keyCode:"Space"});
+  await click('[aria-label="搜索画布"]');
+  assert(await run(`document.activeElement === document.querySelector('.tree-search')`));
+  window.webContents.sendInputEvent({type:"keyUp",keyCode:"Space"});
+  await press("Escape");
+  await click('.zoom-value');
+  const released = await viewport();
+  window.webContents.sendInputEvent({type:"mouseDown",x:1000,y:500,button:"left",clickCount:1});
+  window.webContents.sendInputEvent({type:"mouseMove",x:1050,y:530,button:"left"});
+  window.webContents.sendInputEvent({type:"mouseUp",x:1050,y:530,button:"left",clickCount:1});
+  await settle();
+  assert.deepEqual(await viewport(),released,"releasing Space in an input must end temporary panning");
+  await run(`document.querySelector('.zoom-control button:first-child').focus()`);
+  await press("Tab");
+  assert(await run(`document.activeElement === document.querySelector('.zoom-value')`));
+  await press("Space");
+  assert(await run(`document.activeElement === document.querySelector('.zoom-value')`),"keyboard activation keeps button focus");
+  assert.equal(await run(`document.querySelector('.zoom-value').textContent`),"100%");
+  await click('.zoom-value'); await pan();
+  // A newly added command receives the policy without registering a per-button handler.
+  await run(`(() => {const b=document.createElement('button');b.id='workspace-test-command';b.textContent='Test command';b.style.cssText='position:fixed;left:700px;top:100px;z-index:10000';document.querySelector('.app-shell').append(b);})()`);
+  await click('#workspace-test-command'); await pan();
+  await run(`document.querySelector('#workspace-test-command').remove()`);
+  console.log("WORKSPACE_INTERACTION_OK: native pointer commands, Space pan, input/menu/dialog scope, keyboard navigation and unregistered commands");
+};

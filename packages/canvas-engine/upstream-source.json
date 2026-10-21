@@ -1,0 +1,3662 @@
+{
+  "repository": "https://github.com/excalidraw/excalidraw",
+  "tag": "v0.18.1",
+  "archiveSha256": "be44d1d10865ef0ab2474b59e1430eb12e55eb84a3663e7d11818b8ff6a5c93c",
+  "files": [
+    {
+      "path": "packages/excalidraw/.gitignore",
+      "sha256": "2bdc9a5ad75d12467b8c259204ae74da1b7c0bb33eda75b080fd5674553df069",
+      "destination": "src/editor/.gitignore"
+    },
+    {
+      "path": "packages/excalidraw/.size-limit.json",
+      "sha256": "94a5c28d9612694a117bc7447227360e2fa7542245f8fa4bb5f6b5a8e6abe7b7",
+      "destination": "src/editor/.size-limit.json"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionAddToLibrary.ts",
+      "sha256": "14872c05f8ca804070f4a3f780aaaf8094f61317723a09653f237fd0013802da",
+      "destination": "src/editor/actions/actionAddToLibrary.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionAlign.tsx",
+      "sha256": "5194eb81888ef47b68bd80d6e137858e378de16a435569e29b70689d7787dd4a",
+      "destination": "src/editor/actions/actionAlign.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionBoundText.tsx",
+      "sha256": "8d1528b5004972bd86e7aa391275cb192270f849b546b8fd74d75ef1f20b9805",
+      "destination": "src/editor/actions/actionBoundText.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionCanvas.tsx",
+      "sha256": "3f00723e0f430a3285f1080ae40a9149fd2e44395ff44a91df5159cab8da8f92",
+      "destination": "src/editor/actions/actionCanvas.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionClipboard.tsx",
+      "sha256": "53da7abb4df79b529c50f16d4f90621e0bd4c2c0fb19d12dfc411018290b6c35",
+      "destination": "src/editor/actions/actionClipboard.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionCropEditor.tsx",
+      "sha256": "387c165928bd26c571f64e000328f3efe14d3086747530daa46fb2b3dd738602",
+      "destination": "src/editor/actions/actionCropEditor.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionDeleteSelected.tsx",
+      "sha256": "1be8b7f8866b66ad6d9f0c8c2f572d6477ebd27f71557d0c7e1dff0ecff1b1df",
+      "destination": "src/editor/actions/actionDeleteSelected.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionDistribute.tsx",
+      "sha256": "eb3172017ebad438bc4836fc5ffef70969e448974766c0b4068d82b9d9265d0e",
+      "destination": "src/editor/actions/actionDistribute.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionDuplicateSelection.tsx",
+      "sha256": "3b044efa90f2049c2c9030e6cfbe890e7245e8c8e70d5436cc595a67d9d1f703",
+      "destination": "src/editor/actions/actionDuplicateSelection.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionElementLink.ts",
+      "sha256": "96de08577f73130dd5036e5e6297655c0a13df8c88753fb62979e8d878e5a1e5",
+      "destination": "src/editor/actions/actionElementLink.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionElementLock.ts",
+      "sha256": "592468ae3037fdf8adabfbaf1caf3c7ae258e9d8398cef13c02e7a13c11bb234",
+      "destination": "src/editor/actions/actionElementLock.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionExport.tsx",
+      "sha256": "d8a73bb4ee4ed89a614c3751b9fb8552afb83e70c2e26fd5ca05f27239082e9a",
+      "destination": "src/editor/actions/actionExport.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionFinalize.tsx",
+      "sha256": "2ee0535d654be76183da97798a157930a9c56e152c45ae2e62f93b045610e06b",
+      "destination": "src/editor/actions/actionFinalize.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionFlip.ts",
+      "sha256": "0c804d1bf34c4b6e8dbd827de46c42de7e9ecd169906d24dccffe74eee157527",
+      "destination": "src/editor/actions/actionFlip.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionFrame.ts",
+      "sha256": "35ba7caeefe3363c7c3e62b718e5ca935021435cfac2f185a6a55ea828bbc6ad",
+      "destination": "src/editor/actions/actionFrame.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionGroup.tsx",
+      "sha256": "ec85c2e1c15d2ffda64308360b175ba1990e7f593016048df799a8bd4894cb99",
+      "destination": "src/editor/actions/actionGroup.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionHistory.tsx",
+      "sha256": "24c12ec887f18e676e79d5b7c0d14f79cb84db6878826e1bf52ee7a35cb3e83b",
+      "destination": "src/editor/actions/actionHistory.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionLinearEditor.tsx",
+      "sha256": "1d81ae9cbdf274bc1fc457278dd337f329c81e9f7f94714296173018988cd30e",
+      "destination": "src/editor/actions/actionLinearEditor.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionLink.tsx",
+      "sha256": "6606089a1d089493a4c9ba6b3245391062c893594e4e3492a498428b8b29d123",
+      "destination": "src/editor/actions/actionLink.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionMenu.tsx",
+      "sha256": "01d38b805bdbc616beef7815fcb46389558ba60f8d8ca74f4269ad1d09c04a66",
+      "destination": "src/editor/actions/actionMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionNavigate.tsx",
+      "sha256": "4784333114e2a621745758cff177d97a9fd4de1d873d14c0ec5c09725a2f636b",
+      "destination": "src/editor/actions/actionNavigate.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionProperties.tsx",
+      "sha256": "3a5c6834726f20b8ba270e7d81c47a86dd31ea1fe196351b08a5a0df58f6d287",
+      "destination": "src/editor/actions/actionProperties.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionSelectAll.ts",
+      "sha256": "e4421fa2c5bda20efe196c7730f7ed0b84c107635ad3282c52e4461cb6a775ca",
+      "destination": "src/editor/actions/actionSelectAll.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionStyles.ts",
+      "sha256": "e96260de6a5e3790cc3b7d6ec6f423494992b3a7014d0b5ea70192281b5b5259",
+      "destination": "src/editor/actions/actionStyles.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionTextAutoResize.ts",
+      "sha256": "87375d66d4cb575a76afdb6db06b234c975111e595299eb8ad71d52e87f397b0",
+      "destination": "src/editor/actions/actionTextAutoResize.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionToggleGridMode.tsx",
+      "sha256": "7dab063febc8efd6ed7fd55bcb42aa9b03a9244d7c40fb1c6df442c9a43d1213",
+      "destination": "src/editor/actions/actionToggleGridMode.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionToggleObjectsSnapMode.tsx",
+      "sha256": "6db5acf7cdf43053604fae9a9bb3446c126e9489650a4e3a8a32fd4aa7bcd054",
+      "destination": "src/editor/actions/actionToggleObjectsSnapMode.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionToggleSearchMenu.ts",
+      "sha256": "ceffdb77239d4afcda7139db34eeffeb3048817c2efe8c84c3e844a1e0a9cb1f",
+      "destination": "src/editor/actions/actionToggleSearchMenu.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionToggleStats.tsx",
+      "sha256": "f0fd1a74244186f684022e1da8149c58fb4d75c8c8701603ed6284a8a7fbfd55",
+      "destination": "src/editor/actions/actionToggleStats.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionToggleViewMode.tsx",
+      "sha256": "f0937986a0643c09d8eead45a86647e5daa2d76b2941114aea8a2654b0f05a7f",
+      "destination": "src/editor/actions/actionToggleViewMode.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionToggleZenMode.tsx",
+      "sha256": "437fd9116d4e69ffbdfcac0e5a72d2787566eb6fe5d55ea99eae631ebf19f261",
+      "destination": "src/editor/actions/actionToggleZenMode.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/actionZindex.tsx",
+      "sha256": "fdd7dd1ed790dfc18ec33495b8808ca1b421c53b99a8520e28944a0aea3ffa24",
+      "destination": "src/editor/actions/actionZindex.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/index.ts",
+      "sha256": "cf528a858e5b007093f35deaf1b1eae78d2eb37737a1fbc44d8fcd2b2cc5fcec",
+      "destination": "src/editor/actions/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/manager.tsx",
+      "sha256": "1b226256b890f2befa0af182e7fd379a67678956a596fb0edec5e736c56af050",
+      "destination": "src/editor/actions/manager.tsx"
+    },
+    {
+      "path": "packages/excalidraw/actions/register.ts",
+      "sha256": "74d32bbf9070fb20c8a680a4cddf2a694ae641e6f40441af1d7e913ed1412070",
+      "destination": "src/editor/actions/register.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/shortcuts.ts",
+      "sha256": "dcc74643dddbd3490387ff054193697a4ece7699c93055e42b9c257a0fef5aa1",
+      "destination": "src/editor/actions/shortcuts.ts"
+    },
+    {
+      "path": "packages/excalidraw/actions/types.ts",
+      "sha256": "15cd008473733e63dc3ff98794af2729593ec928a5b0a15776c7e13ea832f7ae",
+      "destination": "src/editor/actions/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/align.ts",
+      "sha256": "d775f2fc183dc2e20a4117c9256b99d399e0ea0bd15dfea49b8b1bd2fc0b301c",
+      "destination": "src/editor/align.ts"
+    },
+    {
+      "path": "packages/excalidraw/analytics.ts",
+      "sha256": "6b0138a7ae8722c4629dfa0a2c1fc4aaed9685cfefc3aadd7ccb435c51096dc8",
+      "destination": "src/editor/analytics.ts"
+    },
+    {
+      "path": "packages/excalidraw/animated-trail.ts",
+      "sha256": "d4c608fb63f9c459f744085b5364ec43f80306788b9b33b16eecfd314a332a5a",
+      "destination": "src/editor/animated-trail.ts"
+    },
+    {
+      "path": "packages/excalidraw/animation-frame-handler.ts",
+      "sha256": "8b98e755bc2cf0ef0b474494a1debd1993a6b9de6961ed4046e7418284fa6cbc",
+      "destination": "src/editor/animation-frame-handler.ts"
+    },
+    {
+      "path": "packages/excalidraw/appState.ts",
+      "sha256": "99211a2a976fce03be4be7db88e2b73ee8f3c1ebdceaa99c88f267bff207da20",
+      "destination": "src/editor/appState.ts"
+    },
+    {
+      "path": "packages/excalidraw/binaryheap.ts",
+      "sha256": "b187b19ad7e53e404d4b48b50baceaf4c558efb05976a851f8769acdfb6ef962",
+      "destination": "src/editor/binaryheap.ts"
+    },
+    {
+      "path": "packages/excalidraw/change.ts",
+      "sha256": "93d184d481ed8725d2b691f331962143da2935dd0797a249ac45851581aef6dc",
+      "destination": "src/editor/change.ts"
+    },
+    {
+      "path": "packages/excalidraw/charts.ts",
+      "sha256": "819f279689f5888253f3831254fadd3efbfbdde413ebc96dacd953fd2b8a5938",
+      "destination": "src/editor/charts.ts"
+    },
+    {
+      "path": "packages/excalidraw/clients.ts",
+      "sha256": "c0ea15ee38ec199d1fd1957e4b9bc15994581c2f667e1c0e85fcec69839971a1",
+      "destination": "src/editor/clients.ts"
+    },
+    {
+      "path": "packages/excalidraw/clipboard.ts",
+      "sha256": "eb8585b1fe0122b5021cd75c6d266fd769bb087b1c4e65740584a441f966f63d",
+      "destination": "src/editor/clipboard.ts"
+    },
+    {
+      "path": "packages/excalidraw/colors.ts",
+      "sha256": "b5ea796e12c57b2a388baacfac96d4c309466fe8f90ec93702a906fa8931650f",
+      "destination": "src/editor/colors.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/Actions.scss",
+      "sha256": "f139939eebb9cd479d89f4ebad08b9f6de243ed084ca8de53d7fcd3c9afbedab",
+      "destination": "src/editor/components/Actions.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Actions.tsx",
+      "sha256": "760f3ada3ff57cd24c71b1261eb1e8e57c9f97e9c215040bbc2b7d4c6a61ddf1",
+      "destination": "src/editor/components/Actions.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ActiveConfirmDialog.tsx",
+      "sha256": "f19d8bccac82e72e1a519dc9302b3d642519992d5d99bdfc5caf023da9e1193f",
+      "destination": "src/editor/components/ActiveConfirmDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/App.tsx",
+      "sha256": "888381b5fb6920c0ffe77f55945cb0338d05f8d541186ca75667abee5eecd85e",
+      "destination": "src/editor/components/App.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Avatar.scss",
+      "sha256": "6bc25a6c74f9ac769eb705a3126a7efca959e869103fb303e901d709eed45d88",
+      "destination": "src/editor/components/Avatar.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Avatar.tsx",
+      "sha256": "ed598d6c2b1c78192ff89d624239b219705245b8af24eeaf38ba343c8c4262b8",
+      "destination": "src/editor/components/Avatar.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/BraveMeasureTextError.tsx",
+      "sha256": "bf9dfbde39cd28a612054956d7df3df28bc66fa3e46632470cffe188637773cf",
+      "destination": "src/editor/components/BraveMeasureTextError.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Button.scss",
+      "sha256": "ce30081c9b6f6df937f1679ff5b548118c0e28672a0f4f115b61eca39dee77e9",
+      "destination": "src/editor/components/Button.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Button.tsx",
+      "sha256": "af08a628d42b11992293fbd9d709712ffb4ca4b6024d6c3a43b8a1287e1353aa",
+      "destination": "src/editor/components/Button.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ButtonIcon.scss",
+      "sha256": "fd4dde92608f6e39d67c80d488a0ef011b1242c5b9214bd83f3e1847503e146e",
+      "destination": "src/editor/components/ButtonIcon.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ButtonIcon.tsx",
+      "sha256": "956f2b83cca29e1b1466f6fbe4474c7639a6e835a949eff16ddfadb4b98eb3c3",
+      "destination": "src/editor/components/ButtonIcon.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ButtonIconCycle.tsx",
+      "sha256": "26174ff4cb4df92279a1bf16f7f70ec3a8db0c0e19b817087a8005f17c7a3e83",
+      "destination": "src/editor/components/ButtonIconCycle.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ButtonIconSelect.tsx",
+      "sha256": "f125c12369870272ee37488a85eb268d9735d03c5d89a97dc7a70214b78ebdfd",
+      "destination": "src/editor/components/ButtonIconSelect.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ButtonSelect.tsx",
+      "sha256": "b49353c7b3d1e6a55082e129810e912e2e36f3a6797e9ef26bfc25ebd66f2973",
+      "destination": "src/editor/components/ButtonSelect.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ButtonSeparator.tsx",
+      "sha256": "a73d0efd4cf13535b51c57b16613cc20ce0b81f9ff8f7c27f48c631a6d813941",
+      "destination": "src/editor/components/ButtonSeparator.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Card.scss",
+      "sha256": "722be2a5f25d138d6f5007ea618f11d5736093d8811b2f18d721af77f554ddbb",
+      "destination": "src/editor/components/Card.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Card.tsx",
+      "sha256": "9921319d02e9932508ef163d52934d9527780db1d2bc04d1691377cd21360bad",
+      "destination": "src/editor/components/Card.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/CheckboxItem.scss",
+      "sha256": "00ac2a293abcbfeab85de96f06cf76fb1cd91c7d2a3f0b9dd2e69b6783cb3e79",
+      "destination": "src/editor/components/CheckboxItem.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/CheckboxItem.tsx",
+      "sha256": "ad85dedb9639b0df3e366729651dfe89d5fa5dcf64f10c1b9010dc2f61f95f02",
+      "destination": "src/editor/components/CheckboxItem.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/ColorInput.tsx",
+      "sha256": "b0e6c36bcabd0ed73ab95e5843058ab9e8a1f88f16d1860707ae3a075dc52987",
+      "destination": "src/editor/components/ColorPicker/ColorInput.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/ColorPicker.scss",
+      "sha256": "c80947f493be049ad057934098920de3b31e6389aa5a918d2326394c1c74a394",
+      "destination": "src/editor/components/ColorPicker/ColorPicker.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/ColorPicker.tsx",
+      "sha256": "e1b50525aa19f89e03cf60f795cf3c2b51538681d1a4533ae0708c636665bed9",
+      "destination": "src/editor/components/ColorPicker/ColorPicker.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/CustomColorList.tsx",
+      "sha256": "5634a02ee4f5edffa8cb71102a6c27f9ed0fd6ce365e4f315145bad077a32c30",
+      "destination": "src/editor/components/ColorPicker/CustomColorList.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/HotkeyLabel.tsx",
+      "sha256": "5f5f1195582b86baf0101911d807656cfd0acba667758fc6394bb55c74fb3838",
+      "destination": "src/editor/components/ColorPicker/HotkeyLabel.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/Picker.tsx",
+      "sha256": "883741190038e0be8b456e4e8a22f077febf80044001e6fc2bf7c2628eab2dc8",
+      "destination": "src/editor/components/ColorPicker/Picker.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/PickerColorList.tsx",
+      "sha256": "10a533fe68c0f1337c9488dff81048c6cc9a30dc0c1735d37af792a908966e32",
+      "destination": "src/editor/components/ColorPicker/PickerColorList.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/PickerHeading.tsx",
+      "sha256": "1ef55ff853c4a6341bcde195ecc643e57372ba3a8e0133471e1d5d941d390d71",
+      "destination": "src/editor/components/ColorPicker/PickerHeading.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/ShadeList.tsx",
+      "sha256": "347d1db2210beb50a4296824467dd34cbdc0e67231b10456d80d5901a61a22c6",
+      "destination": "src/editor/components/ColorPicker/ShadeList.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/TopPicks.tsx",
+      "sha256": "e8af6eb7ab344501d8b305948bd8d34cd38f8e384c2d2feec9b5bf2faeebc09e",
+      "destination": "src/editor/components/ColorPicker/TopPicks.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/colorPickerUtils.ts",
+      "sha256": "359fcec365ef8e713f93a0af9aef7feeb2e3f2e64dff7aa6d40cfd22d07810f8",
+      "destination": "src/editor/components/ColorPicker/colorPickerUtils.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/ColorPicker/keyboardNavHandlers.ts",
+      "sha256": "c37a0f78949b26e06ad8e0e944b56cff93476f8cc4ef23a035879de538225885",
+      "destination": "src/editor/components/ColorPicker/keyboardNavHandlers.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/CommandPalette/CommandPalette.scss",
+      "sha256": "afaf0078b740c97f6f2f56e75bb534b49bf34ba59ac81d8f6d3f171ad45ff031",
+      "destination": "src/editor/components/CommandPalette/CommandPalette.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/CommandPalette/CommandPalette.tsx",
+      "sha256": "9b6a06e49b312fba498980d4aa3232dc822335886814c7607378a3fc5e0fd5cd",
+      "destination": "src/editor/components/CommandPalette/CommandPalette.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/CommandPalette/defaultCommandPaletteItems.ts",
+      "sha256": "b316d8325b60573d9a632b6a492c9595148546ccea586443c3d8a88b1347ff08",
+      "destination": "src/editor/components/CommandPalette/defaultCommandPaletteItems.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/CommandPalette/types.ts",
+      "sha256": "551459d229453a59bb6320433504818aea626f97fae05448bcf84560188c3d1b",
+      "destination": "src/editor/components/CommandPalette/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/ConfirmDialog.scss",
+      "sha256": "2b1d5777d52af33ae5e5d2485f53863b1b65b025bfb713d2972a9c0b445e9e45",
+      "destination": "src/editor/components/ConfirmDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ConfirmDialog.tsx",
+      "sha256": "b9d8b672fab9535ec97dce92cae8c538ba930159e087bf134f33de2c7469a5cc",
+      "destination": "src/editor/components/ConfirmDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ContextMenu.scss",
+      "sha256": "27cdbf1d6edd71fdf546cdf24dfab697ab18f5b1f973b8cbac2ba3a66032e024",
+      "destination": "src/editor/components/ContextMenu.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ContextMenu.tsx",
+      "sha256": "a6a0bd1eee3963504b943c680fb85deadda1174bab86e752e533e83c1a7c05e8",
+      "destination": "src/editor/components/ContextMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/DarkModeToggle.tsx",
+      "sha256": "c6e78d3c9d7f98c4a4d6360694d3512299e4cc38b06e3bdd0379b7df10abcda5",
+      "destination": "src/editor/components/DarkModeToggle.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/DefaultSidebar.tsx",
+      "sha256": "4d6db7de0efd11cef126c697f76cae12cbae018bb93de509afaab7cefc1af1cb",
+      "destination": "src/editor/components/DefaultSidebar.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/DiagramToCodePlugin/DiagramToCodePlugin.tsx",
+      "sha256": "e762533aad78b6cbab50d039800df0ad2dd86465f98ff59aff2d2457f0703e4a",
+      "destination": "src/editor/components/DiagramToCodePlugin/DiagramToCodePlugin.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Dialog.scss",
+      "sha256": "fb78c9c39a29689da25dd068c8412000cecb2054e9090b649fd1f03577948368",
+      "destination": "src/editor/components/Dialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Dialog.tsx",
+      "sha256": "a6e45c0f3feb7beaf60cc389c1cd93a8ad8c1187786fb4a754ae9a27f4600b10",
+      "destination": "src/editor/components/Dialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/DialogActionButton.scss",
+      "sha256": "cf3daa12d0b7f79c6728fd70559af3937e0a19fa37074759a3c28621aa7f0977",
+      "destination": "src/editor/components/DialogActionButton.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/DialogActionButton.tsx",
+      "sha256": "508c38e3e4e4a4adc437850211f84649f580a52e9e013c67af2e1f83fdd56072",
+      "destination": "src/editor/components/DialogActionButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ElementLinkDialog.scss",
+      "sha256": "49adcad9da7ee9070880e85a1c104f2ce8ddedc1021fa1c92e728fbb3991e1db",
+      "destination": "src/editor/components/ElementLinkDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ElementLinkDialog.tsx",
+      "sha256": "3536d2b0bdb93778b0f27a328f9c6f5574d85389db33842bc95d7b59529a0130",
+      "destination": "src/editor/components/ElementLinkDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ErrorDialog.tsx",
+      "sha256": "78e192738cbe277aa4a1b75aac1daf21c76954830c07bff53537c2d921fca809",
+      "destination": "src/editor/components/ErrorDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ExcalidrawLogo.scss",
+      "sha256": "bea68f509bdad01b0aa4ae0165f443827ed5b2e930c36116cda3700c15591a20",
+      "destination": "src/editor/components/EasyDrawLogo.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ExcalidrawLogo.tsx",
+      "sha256": "14882bb405d4ff57fb8a50943f63cc232d44a99badc96e924232ced45c6ea216",
+      "destination": "src/editor/components/EasyDrawLogo.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ExportDialog.scss",
+      "sha256": "28e30f4a83a2241dc7eb15dc2c7610141ad7e37a1b6b4f37066934daf9b55a05",
+      "destination": "src/editor/components/ExportDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/EyeDropper.scss",
+      "sha256": "b7d7d61df22bf59725ccd72428d62716de65bf143391ab6b3f0195dbce2ccc79",
+      "destination": "src/editor/components/EyeDropper.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/EyeDropper.tsx",
+      "sha256": "b3e1a09f094332bab53e7fc3c217720dfa069858f95049b0bc6f0b655713c7ab",
+      "destination": "src/editor/components/EyeDropper.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FilledButton.scss",
+      "sha256": "58681ec6adc7cdd08294aa891375d16d9b4448810c5aa43449ff6264e6bfebfa",
+      "destination": "src/editor/components/FilledButton.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/FilledButton.tsx",
+      "sha256": "511b3507ae8b8f9f38df40daa6de16073805939d2fa9720eb01436f103f7abdb",
+      "destination": "src/editor/components/FilledButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FixedSideContainer.scss",
+      "sha256": "ac2e9e308ffe1935f46b4554b99dff942b6e3403d0665d6b4cfdc6b6ce9fc8a1",
+      "destination": "src/editor/components/FixedSideContainer.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/FixedSideContainer.tsx",
+      "sha256": "194524ab75ec7fccd5bc74c44e70622e40f6c85a03a9c7dfb3649b73f287d154",
+      "destination": "src/editor/components/FixedSideContainer.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FollowMode/FollowMode.scss",
+      "sha256": "468b561ada279da4a0837939d3ae2ff116c3934f1a620461a5f613ecfd1fa7e0",
+      "destination": "src/editor/components/FollowMode/FollowMode.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/FollowMode/FollowMode.tsx",
+      "sha256": "7167184a2bba66766b7196290448a74552376e29d55e065150ea0ac90c4481b9",
+      "destination": "src/editor/components/FollowMode/FollowMode.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FontPicker/FontPicker.scss",
+      "sha256": "bc16982d1653c36754e6a6c3b9ad9e44867c6150d784556a054eb96105a41699",
+      "destination": "src/editor/components/FontPicker/FontPicker.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/FontPicker/FontPicker.tsx",
+      "sha256": "d3befb8ac593877cbed24953e4c740c59ce63a12f0a4f5f3740edcc07c229639",
+      "destination": "src/editor/components/FontPicker/FontPicker.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FontPicker/FontPickerList.tsx",
+      "sha256": "0a66fe245a0dc45eac8d803ca4569d0e8f22c8eac3c358cbdd368391a5ea31ec",
+      "destination": "src/editor/components/FontPicker/FontPickerList.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FontPicker/FontPickerTrigger.tsx",
+      "sha256": "9fce843130f1821d08f6417fb2827983df553366cb3c57d55884efb81a19f3d9",
+      "destination": "src/editor/components/FontPicker/FontPickerTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/FontPicker/keyboardNavHandlers.ts",
+      "sha256": "96f3d77b80b1ef5f980cb1445dea6ef66d9e8bbee83f632eeab3c209f1339701",
+      "destination": "src/editor/components/FontPicker/keyboardNavHandlers.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/HandButton.tsx",
+      "sha256": "0467dfc8730d99d54285e034e8696b04cb8834829441bcee1d609dd2b25f0320",
+      "destination": "src/editor/components/HandButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/HelpButton.tsx",
+      "sha256": "57b4c24568546d614676789de367b19bd9848811e767bb0afae76ac157b91bc0",
+      "destination": "src/editor/components/HelpButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/HelpDialog.scss",
+      "sha256": "94f47c0b089df647851212fb495d6b86e9c03b90cee0c079a8a82cee4eaa85ae",
+      "destination": "src/editor/components/HelpDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/HelpDialog.tsx",
+      "sha256": "d0af2e81e351eac024642b7868dbe361835f68e0259751cc93af6352fca16e19",
+      "destination": "src/editor/components/HelpDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/HintViewer.scss",
+      "sha256": "2a046e40075985b16da1a6d470a1c4220d10626daa31ec9174f7154f55aefe9d",
+      "destination": "src/editor/components/HintViewer.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/HintViewer.tsx",
+      "sha256": "1cfeb92e7be60d007f8807a56c678397fb20ae5b89c1e5dc5a763b162228a08f",
+      "destination": "src/editor/components/HintViewer.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/IconPicker.scss",
+      "sha256": "3707f0b84f667b3898f931b5889879b71f95f50cee869f6395307a223ce109b2",
+      "destination": "src/editor/components/IconPicker.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/IconPicker.tsx",
+      "sha256": "2f93eb9b9671b3f65efa0e28c545c6a678a071f2697524692a0302c4724cac76",
+      "destination": "src/editor/components/IconPicker.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ImageExportDialog.scss",
+      "sha256": "cef35975a5f9d8693f0d4766421ad17e5c0dc837ca604fb87c69755d5704a1ac",
+      "destination": "src/editor/components/ImageExportDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ImageExportDialog.tsx",
+      "sha256": "3ab12ede8e209aa6689edc4707b83f6e22bc3a03802795c97ac3cdf5930a2acb",
+      "destination": "src/editor/components/ImageExportDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/InitializeApp.tsx",
+      "sha256": "d93ccc251dbc4132c90655944b62c86221ecaf99485a8aadb05eb36be1326496",
+      "destination": "src/editor/components/InitializeApp.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/InlineIcon.tsx",
+      "sha256": "acde7f6166758202f7cbbfddf919ad581b829a77cc5e031de3576f3ad99268de",
+      "destination": "src/editor/components/InlineIcon.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Island.scss",
+      "sha256": "9af69ba6cd8adbb423e1a12c02c359eceaab04cf4ef15a1808e483e2cfda4cf4",
+      "destination": "src/editor/components/Island.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Island.tsx",
+      "sha256": "31154b6e56a0476836d42787a11f3e692b1a2d20eb0850833953c9beb3539c30",
+      "destination": "src/editor/components/Island.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/JSONExportDialog.tsx",
+      "sha256": "64e569bc926c726caccedea91949a6fe7d4fdcc047dbf47d3112c383bf888527",
+      "destination": "src/editor/components/JSONExportDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LaserPointerButton.tsx",
+      "sha256": "d20ff6f9417d0460f8926398040d34654394b2730119786805e31874381b5ba2",
+      "destination": "src/editor/components/LaserPointerButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LayerUI.scss",
+      "sha256": "2c9834b4f801705b43ef8f6079be8797ac5b2427ce43fe8ff73a016568b36339",
+      "destination": "src/editor/components/LayerUI.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/LayerUI.tsx",
+      "sha256": "bb3f542b9e103a9e6b98f26c07584b0130ce58e1519c5221074a2e053a447044",
+      "destination": "src/editor/components/LayerUI.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenu.scss",
+      "sha256": "8118cf980930bfdcae917e63d4040c35b13b03be50ce61a57a1791c4a8c0237a",
+      "destination": "src/editor/components/LibraryMenu.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenu.tsx",
+      "sha256": "5db15568f92275f034641ec35ca1eb4218edf3eeaaa9d31364e2a4562a078bb8",
+      "destination": "src/editor/components/LibraryMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenuBrowseButton.tsx",
+      "sha256": "47182bf468c72cc4206332da85dda0a954bdfbc8fc67755ffbb4d9dfd31f3990",
+      "destination": "src/editor/components/LibraryMenuBrowseButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenuControlButtons.tsx",
+      "sha256": "2bac777482d3d034383b3be2e7b5894489c6dc6459fd0eca69df2a7cbbc6e1c6",
+      "destination": "src/editor/components/LibraryMenuControlButtons.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenuHeaderContent.tsx",
+      "sha256": "abfa959b66866c3547719058d435cf45d60ffc60c841a949f4fb1499020c460a",
+      "destination": "src/editor/components/LibraryMenuHeaderContent.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenuItems.scss",
+      "sha256": "2c7cc0a7e60449651c68c1ff3a899707f0c3c0bdeef7fe44beca458eb2b62312",
+      "destination": "src/editor/components/LibraryMenuItems.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenuItems.tsx",
+      "sha256": "c3d6f8846155f9c0908c55c60adb4a83b0917df184f636a6e25e8f610959faee",
+      "destination": "src/editor/components/LibraryMenuItems.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryMenuSection.tsx",
+      "sha256": "623db8118b38f35f634b655ffeb900a2f8afa89305736f7de21cc5b08aff2886",
+      "destination": "src/editor/components/LibraryMenuSection.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryUnit.scss",
+      "sha256": "af5f070dff83bc214d005326629d0e1fb3d2c1d52a453f645d60077c511b54ee",
+      "destination": "src/editor/components/LibraryUnit.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/LibraryUnit.tsx",
+      "sha256": "23c52adb46c3e924e6805b84c7a69ab226fc39fb0f3c3992ae9c61d3ce9d4c50",
+      "destination": "src/editor/components/LibraryUnit.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LoadingMessage.tsx",
+      "sha256": "6bcbe62f87945665a4d8edfca66fb055439e175226b564a038d741ac99fed698",
+      "destination": "src/editor/components/LoadingMessage.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/LockButton.tsx",
+      "sha256": "9155b35dfff30015e12481a3e9430463c1abf774019d8e1c5bd76ec4da71ed3c",
+      "destination": "src/editor/components/LockButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/MagicButton.tsx",
+      "sha256": "98df2591ad75b378c11b8996eb55ecb1845fb6ef7e64e6c3477da30ad6ffe55b",
+      "destination": "src/editor/components/MagicButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/MobileMenu.tsx",
+      "sha256": "0e5997f164d024671d2b4ecf6f748a39134ee0a5b075d527101f4dbb6eb3f8d3",
+      "destination": "src/editor/components/MobileMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Modal.scss",
+      "sha256": "4ae76022830e24010cbc8352452e8ceebe7b3c05d4a14c05430faaa419609e3c",
+      "destination": "src/editor/components/Modal.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Modal.tsx",
+      "sha256": "47fd0cd229c682859e3e16da71e9602f467f10643ab83180cbc00b74a211d85b",
+      "destination": "src/editor/components/Modal.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/OverwriteConfirm/OverwriteConfirm.scss",
+      "sha256": "6d6cc04979186a2db97ab23097a92fffc268acbf987178d10072ffbeef49486e",
+      "destination": "src/editor/components/OverwriteConfirm/OverwriteConfirm.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/OverwriteConfirm/OverwriteConfirm.tsx",
+      "sha256": "5cd88468ae32c49160a9f8464a2a07140975e7e6bfc82585883d7a733d10564b",
+      "destination": "src/editor/components/OverwriteConfirm/OverwriteConfirm.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/OverwriteConfirm/OverwriteConfirmActions.tsx",
+      "sha256": "17536cf31ea877b0449b5c825a6f1757af5ae7d0fac3cb0d584b2f3d6203bb07",
+      "destination": "src/editor/components/OverwriteConfirm/OverwriteConfirmActions.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/OverwriteConfirm/OverwriteConfirmState.ts",
+      "sha256": "d0a80f565411edf13dd903dd8ea23392393f726426044344961443919f8e7dc1",
+      "destination": "src/editor/components/OverwriteConfirm/OverwriteConfirmState.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/Paragraph.tsx",
+      "sha256": "7b9f6ccc13276e54be0560aea40ce42e889baed74d96ba8d9d58ced1a26beaba",
+      "destination": "src/editor/components/Paragraph.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/PasteChartDialog.scss",
+      "sha256": "69088d81cd6f1031b2d2538e595a36c3e2b4e34afc4b3a18f6f8e4fe3305494f",
+      "destination": "src/editor/components/PasteChartDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/PasteChartDialog.tsx",
+      "sha256": "58183bd049be4b802404539464e102a8b2a6cce6a74c2800b34d6eefa5fa1054",
+      "destination": "src/editor/components/PasteChartDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/PenModeButton.tsx",
+      "sha256": "56ec191df6c9216800b267c4203bed161598da3e64ab15b7305386c91a34d5c0",
+      "destination": "src/editor/components/PenModeButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Popover.scss",
+      "sha256": "750b3059789eb9732fc3f92fc5fee175369079952875a5255049022b95ff63a4",
+      "destination": "src/editor/components/Popover.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Popover.tsx",
+      "sha256": "c1ea67b2761ac4256a4cb8b9f7ede84cc63d1b117bc2fc610ed350c6f656da1c",
+      "destination": "src/editor/components/Popover.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ProjectName.scss",
+      "sha256": "6589c612a8f4fa522f4e8d9711b2241002a7f3f197a90feefaacb07c38ea5a60",
+      "destination": "src/editor/components/ProjectName.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ProjectName.tsx",
+      "sha256": "2970739e7e50cf56b654a461e4513218adca9866f4b977e6939a524d55f98525",
+      "destination": "src/editor/components/ProjectName.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/PropertiesPopover.tsx",
+      "sha256": "64ed4a5c5bef73254f72f65a842989c827e034692aed44b7f14044394bac175a",
+      "destination": "src/editor/components/PropertiesPopover.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/PublishLibrary.scss",
+      "sha256": "f5201ed3f4f0f256d1885018b48c1e386301f22c5e49b23daae47feba4bf119e",
+      "destination": "src/editor/components/PublishLibrary.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/PublishLibrary.tsx",
+      "sha256": "e04fc873eef1644babdc81bb96928824dbc5e06b507452981c08247290e67a6c",
+      "destination": "src/editor/components/PublishLibrary.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/QuickSearch.scss",
+      "sha256": "3e9132edc5e44df08c3e5a11929443ac20b8fdb44e99d336b57a599eede42182",
+      "destination": "src/editor/components/QuickSearch.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/QuickSearch.tsx",
+      "sha256": "39e15daab382a47cb9609690f0ceed5bc8d125099cd4a219c847a918a294b2c3",
+      "destination": "src/editor/components/QuickSearch.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/RadioGroup.scss",
+      "sha256": "2596d791251bb1c7bc28d2d6a08f2a7404f1e5df4c25e8e77b550ae5a98bcb1d",
+      "destination": "src/editor/components/RadioGroup.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/RadioGroup.tsx",
+      "sha256": "520daa24e13726a31f1f240811ab6e70961d9184a5449832062f74e86bafa062",
+      "destination": "src/editor/components/RadioGroup.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Range.scss",
+      "sha256": "a8cf2a00e5864682bfffa33efbbb273b93337cccb84629eb32f069accb30d510",
+      "destination": "src/editor/components/Range.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Range.tsx",
+      "sha256": "c037a8774fcd38a0b520aacb745e61f15e82c49837e1cb04d098b6db747151f6",
+      "destination": "src/editor/components/Range.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/SVGLayer.scss",
+      "sha256": "ddb893be8a7e178dd18765cff018c6587f1523212aa1264073ca694884a84451",
+      "destination": "src/editor/components/SVGLayer.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/SVGLayer.tsx",
+      "sha256": "fdc31bcb284f2c53d05926685d31d93df0f268260686a0b6807a89416040dc1f",
+      "destination": "src/editor/components/SVGLayer.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ScrollableList.scss",
+      "sha256": "52c1dce3421280f7fbfee5b78e70ab4bcf9f042c64c824c455d72bd8665bbd0e",
+      "destination": "src/editor/components/ScrollableList.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ScrollableList.tsx",
+      "sha256": "0b04e2c1a0a243a0fb6e93fae01e5190428b437d9ea3766eb64535d03b847a6e",
+      "destination": "src/editor/components/ScrollableList.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/SearchMenu.scss",
+      "sha256": "aeb40c4e9c65f2c308b38ae956c17a2090f3cf00e74b05a885bcd9a070eed0c6",
+      "destination": "src/editor/components/SearchMenu.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/SearchMenu.tsx",
+      "sha256": "3eb5e14de3263c2f363d605b61f225778882e974d11a1b061066b10606be69af",
+      "destination": "src/editor/components/SearchMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Section.tsx",
+      "sha256": "3a6fec0094c164f3ecb828ed12dd3ecbabf570721fd4e0e80756a60222494bc2",
+      "destination": "src/editor/components/Section.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ShareableLinkDialog.scss",
+      "sha256": "8ab2c6716838f272eda76a3e1eaefbf26574c4464b2c1877a1d3e4521b1c6c51",
+      "destination": "src/editor/components/ShareableLinkDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/ShareableLinkDialog.tsx",
+      "sha256": "3b960aebb4d78484da9660968cbcaa887655cf17e38f20b73f1964656f85d1e6",
+      "destination": "src/editor/components/ShareableLinkDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/Sidebar.scss",
+      "sha256": "699076b093d9bb749aca12264b120bd9b6d45e080c1ebec8d2a6389cd589e10c",
+      "destination": "src/editor/components/Sidebar/Sidebar.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/Sidebar.tsx",
+      "sha256": "98a65386852b9fa4f9741beea340ba27d7e282bfad80ee774c13d3dbf5946d4f",
+      "destination": "src/editor/components/Sidebar/Sidebar.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarHeader.tsx",
+      "sha256": "6b03b94c56b7663a590a635a2cce3ccf0fbad5496016c040d306b4c45e585e9c",
+      "destination": "src/editor/components/Sidebar/SidebarHeader.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarTab.tsx",
+      "sha256": "b2b4f98f101427f5cb0475bfb00976c5f5106e4da8b329d60438b5bfc4994e22",
+      "destination": "src/editor/components/Sidebar/SidebarTab.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarTabTrigger.tsx",
+      "sha256": "44bd9e66449cbdf1e1824cd067a2fe2574d34b15154f978863a819783f4816a3",
+      "destination": "src/editor/components/Sidebar/SidebarTabTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarTabTriggers.tsx",
+      "sha256": "c3ba8e5395992fb39b5ea3646157566b0b07463abd61e9686d477d20a6c9f003",
+      "destination": "src/editor/components/Sidebar/SidebarTabTriggers.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarTabs.tsx",
+      "sha256": "18bdf81c6bcb4acb030c05aa016d1f1086848d520505ee2355cb738cf855f2fe",
+      "destination": "src/editor/components/Sidebar/SidebarTabs.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarTrigger.scss",
+      "sha256": "6dd3f930a290747bf598f09eca5d4d3187843f1941bc3d2f976bbf3ae9016747",
+      "destination": "src/editor/components/Sidebar/SidebarTrigger.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/SidebarTrigger.tsx",
+      "sha256": "3e64d6887731e299784527b84ddcc306aab03b7634a705ede34ccba09e3519c2",
+      "destination": "src/editor/components/Sidebar/SidebarTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Sidebar/common.ts",
+      "sha256": "af8b007b8cc8fbe50116bbfbc6b514c7b7c69519efe603ffd7d78ee099ceb223",
+      "destination": "src/editor/components/Sidebar/common.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/Spinner.scss",
+      "sha256": "68dc1fbc60a7a668436e852f341e62ec1843e2cfc7b642ca7de105f7eb7327d7",
+      "destination": "src/editor/components/Spinner.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Spinner.tsx",
+      "sha256": "11e05b8f82eb13faae6dd6835e0063e33c5c5804f05e5375fc24c124322d9596",
+      "destination": "src/editor/components/Spinner.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stack.scss",
+      "sha256": "6fb9144491548f9cb949993dd73d2c50291eb72748b4dc9e468e62e2c1ef5675",
+      "destination": "src/editor/components/Stack.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Stack.tsx",
+      "sha256": "9b0c96b563a4992209d155cc11ed3ad311b083dfe4fd674d114688eb1bddb9f1",
+      "destination": "src/editor/components/Stack.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/Angle.tsx",
+      "sha256": "647e0e0f3ed87d3f0207864b2791d0a999295958a581ea94312db416845e87c9",
+      "destination": "src/editor/components/Stats/Angle.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/CanvasGrid.tsx",
+      "sha256": "ac350e48622739ce271e833f72cf54dcdfdd2babfa55242c420172e1980cf7e1",
+      "destination": "src/editor/components/Stats/CanvasGrid.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/Collapsible.tsx",
+      "sha256": "91117fd9e941f9aad85c20847a7faf1ba8dbc74147faf1df5c1893d898382cfc",
+      "destination": "src/editor/components/Stats/Collapsible.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/Dimension.tsx",
+      "sha256": "c7b6da1869695b2907eec6850cef49a3da1445f062fa0687dad40c59c9be034d",
+      "destination": "src/editor/components/Stats/Dimension.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/DragInput.scss",
+      "sha256": "7e56151860a872201461ed8c550ae5620ef3622795644f38751d710e95e8dcd2",
+      "destination": "src/editor/components/Stats/DragInput.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/DragInput.tsx",
+      "sha256": "d12648c4a3ff1cbbe1f9121f25360fd45c81627191e395690116f4bc57baeafd",
+      "destination": "src/editor/components/Stats/DragInput.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/FontSize.tsx",
+      "sha256": "bd16ad0fa6bb75b8f2d5ebd75c909f17ee17e571a8824d893283661ab22634c6",
+      "destination": "src/editor/components/Stats/FontSize.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/MultiAngle.tsx",
+      "sha256": "e0b027f3dcbb9290dc6c0e487521c9998f74bb2797a31eb13d1356ac65c2ad6a",
+      "destination": "src/editor/components/Stats/MultiAngle.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/MultiDimension.tsx",
+      "sha256": "5824b5f2724698be20f1599c44fa6b6b3605084096adfda9073963aa105d9480",
+      "destination": "src/editor/components/Stats/MultiDimension.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/MultiFontSize.tsx",
+      "sha256": "988b62edef782fe71831697365a7e7de866e3774500943696c057a39c48a4e35",
+      "destination": "src/editor/components/Stats/MultiFontSize.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/MultiPosition.tsx",
+      "sha256": "22dfba80dda253e5bcf2709b634d0666f5d0182b803f058a1c524e43ae5b3fdf",
+      "destination": "src/editor/components/Stats/MultiPosition.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/Position.tsx",
+      "sha256": "819f9376e9985555aa2f03ea318a92a469b171b71e36eddb3fcb0803122079e4",
+      "destination": "src/editor/components/Stats/Position.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/Stats.scss",
+      "sha256": "3e9e00badca6cd2289a1aa6d516fc1fa63131dc5ff3d22d537b45cff59f7e42f",
+      "destination": "src/editor/components/Stats/Stats.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/index.tsx",
+      "sha256": "b0f4f8cce14379e1aeab688534bd5ff8bcf26241abe40b14e3833a1b3257d0ae",
+      "destination": "src/editor/components/Stats/index.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Stats/utils.ts",
+      "sha256": "c5e33d7009c6f00bb8d7b59c9034b64dba3cafd910e5af7a7fa5585cff105fea",
+      "destination": "src/editor/components/Stats/utils.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/Switch.scss",
+      "sha256": "6b9ecb2938e0ae4f4cbc93f8a8b7ee81b22c18a2a82bb3378171d5933a335412",
+      "destination": "src/editor/components/Switch.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Switch.tsx",
+      "sha256": "557384314bb9fd9da2c415f00433053abb9c6a07a5b28a3269d21fdfc2d65b0c",
+      "destination": "src/editor/components/Switch.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/MermaidToExcalidraw.scss",
+      "sha256": "c2c3b49314eae09b30f2aa701943089c5fb83fd821c64e794c8a4f9969283bf1",
+      "destination": "src/editor/components/TTDDialog/MermaidToEasyDraw.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/MermaidToExcalidraw.tsx",
+      "sha256": "fd6c48c91cd66b456f35266bd6e464cc37a434f438cf6c984e29d331667505bd",
+      "destination": "src/editor/components/TTDDialog/MermaidToEasyDraw.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialog.scss",
+      "sha256": "dbeb10f3652727730e8f605df66313f11f75b47bf918d567d3528a70c15cebcf",
+      "destination": "src/editor/components/TTDDialog/TTDDialog.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialog.tsx",
+      "sha256": "4ecf39335c16d563c793d287867c133beb3fa33cca08d00f508a837a05c4e4af",
+      "destination": "src/editor/components/TTDDialog/TTDDialog.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogInput.tsx",
+      "sha256": "043c995177b0d9f921ad27a7f91a314a1e20f6c0d55191a8f69d0a2e7d63b78a",
+      "destination": "src/editor/components/TTDDialog/TTDDialogInput.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogOutput.tsx",
+      "sha256": "57b079d9c224b7ade3b80aa9ff1113ebd18a7d82cb3158187280e3c2a0927f91",
+      "destination": "src/editor/components/TTDDialog/TTDDialogOutput.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogPanel.tsx",
+      "sha256": "7fb385a792e21456a5251666348771b864cc7312762b3a1a56236c73cf548286",
+      "destination": "src/editor/components/TTDDialog/TTDDialogPanel.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogPanels.tsx",
+      "sha256": "ec80b122165047fb3fb2e79a1e5640d2ee7055b01d300c8ab7656c1f6589eac7",
+      "destination": "src/editor/components/TTDDialog/TTDDialogPanels.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogSubmitShortcut.tsx",
+      "sha256": "1f960478383dd6ab0330d41091171b073ed97db2df0d233fbc7e94191cf2509a",
+      "destination": "src/editor/components/TTDDialog/TTDDialogSubmitShortcut.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogTab.tsx",
+      "sha256": "58cab378b78b8175d6ebbfb9924507d5620762b25a4f1873b6973968f92462dd",
+      "destination": "src/editor/components/TTDDialog/TTDDialogTab.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogTabTrigger.tsx",
+      "sha256": "8986809610ac614cf0d53b3dd998db8db3cf37a04f2fffdfb5d71e3f6f806e12",
+      "destination": "src/editor/components/TTDDialog/TTDDialogTabTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogTabTriggers.tsx",
+      "sha256": "0e89ae44ea47232f7913ac0d8a666b6acd63454e51b618675812cf5f461618e1",
+      "destination": "src/editor/components/TTDDialog/TTDDialogTabTriggers.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogTabs.tsx",
+      "sha256": "cf2d6beb9b20d5c77b666719e7bab4371a869083701433abf5a9f95e923fd9fd",
+      "destination": "src/editor/components/TTDDialog/TTDDialogTabs.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/TTDDialogTrigger.tsx",
+      "sha256": "fcca77961d270c6be4767b9081b16b87888753ca2492c6c7442f79b9792836c9",
+      "destination": "src/editor/components/TTDDialog/TTDDialogTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TTDDialog/common.ts",
+      "sha256": "dcd3f68264206b4ade49236dd8f3776df47345c66e3ddcd6cf6b834e5dd53461",
+      "destination": "src/editor/components/TTDDialog/common.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/TextField.scss",
+      "sha256": "92ba7f911278ae71a3c9351cbb6e002e781da46510d751a7de5131b9b520ea75",
+      "destination": "src/editor/components/TextField.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/TextField.tsx",
+      "sha256": "d492243cf845c3e4c3d1904662311aff81732ef66059d3db81892ed6b0f91a20",
+      "destination": "src/editor/components/TextField.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/TextInput.scss",
+      "sha256": "c93da090e3a499e52f87b448c59655e4e7e4179db686321f33d2bb713a13c5c0",
+      "destination": "src/editor/components/TextInput.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Toast.scss",
+      "sha256": "13c6c965c994d6781a88f652a86ed1d506b38f3dee28e12e6c7ddf8c76e1e552",
+      "destination": "src/editor/components/Toast.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Toast.tsx",
+      "sha256": "d37d16b5cfd8a716fcd5b8036991bcbbd6aa8c3aac149d4fc098f9755e7390c6",
+      "destination": "src/editor/components/Toast.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ToolButton.tsx",
+      "sha256": "bddac97188feca765ddd6cd845dcf61941f14bb8f98e7dd2bca413f71cb9a93f",
+      "destination": "src/editor/components/ToolButton.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/ToolIcon.scss",
+      "sha256": "575d3f91c28050c0f00be87cda7639dc3bc4362586cdce4843939dfc37c28615",
+      "destination": "src/editor/components/ToolIcon.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Toolbar.scss",
+      "sha256": "78604151e1b1c953ff2d7de1cf3af31f67106dc766ef688322c33b2d90f9a9a0",
+      "destination": "src/editor/components/Toolbar.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Tooltip.scss",
+      "sha256": "66173b4d456ef98d43e4cf639fc0ecaf25305fa34ea3cecb32c2a3b62272d702",
+      "destination": "src/editor/components/Tooltip.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/Tooltip.tsx",
+      "sha256": "ee52f1a01e994150bec4d181c296bc22eb3a9cb5529bcdc2358d54750e5c69b8",
+      "destination": "src/editor/components/Tooltip.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/Trans.tsx",
+      "sha256": "3748dc57c3202d5025ee6e94301d96b7d52be06080340c2928b21d5472fbed34",
+      "destination": "src/editor/components/Trans.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/UserList.scss",
+      "sha256": "0d585466a981d18a540d276573880917c17173f7e6a02477b7590f064a38134c",
+      "destination": "src/editor/components/UserList.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/UserList.tsx",
+      "sha256": "041bc3b00ea76f08620be25f582f1ca48f62448e30745f98a65bfe1ceda5487e",
+      "destination": "src/editor/components/UserList.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/canvases/InteractiveCanvas.tsx",
+      "sha256": "ffea19fd4234f4190deef21bcd5f41cbd4fcae372c47279c041d3736c1a0899e",
+      "destination": "src/editor/components/canvases/InteractiveCanvas.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/canvases/NewElementCanvas.tsx",
+      "sha256": "33373ecbcb5184dd4de77b41a253ea15c2c903348159ede8bb5b3fe6cbe2fa9b",
+      "destination": "src/editor/components/canvases/NewElementCanvas.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/canvases/StaticCanvas.tsx",
+      "sha256": "f53d2dd40a761f2a0fe0096a903d2982ff6b5c8c706aec64be97204c9a02252f",
+      "destination": "src/editor/components/canvases/StaticCanvas.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/canvases/index.tsx",
+      "sha256": "79b37d155ac1a90987e0baeb535b08b528a593ab814a425ffbe16e03590bf5d5",
+      "destination": "src/editor/components/canvases/index.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenu.scss",
+      "sha256": "f6f7632024bd0abfd1a14c0e365da0b3ec01468388619e917ae02f5d7e1f5964",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenu.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenu.tsx",
+      "sha256": "44cdaf4b25659b96a7d1ac952b30226eacc1e5ee4ffa8d35186662ecc1f12888",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuContent.tsx",
+      "sha256": "0072a02bc9786e8a19f550feb29bde28db3dd20b46cf33845ef18ad443f28637",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuContent.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuGroup.tsx",
+      "sha256": "63bc148b541301004c4a7ae6f7f76290c7c57bf06e48f4618b70680e4bdcc18c",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuGroup.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuItem.tsx",
+      "sha256": "b3fc9eb1c100171b0d239f11519a1f8e75ecc3703955182d82559028dafcbd18",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuItem.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuItemContent.tsx",
+      "sha256": "d70dbcb236bf485eff8ceccc110cd2b039723ce182f10157aabfbd8172581dfb",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuItemContent.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuItemContentRadio.tsx",
+      "sha256": "849d21292483d22b5080960c7eec7e1f575fb35a923501ac8a4f1378c65d98a2",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuItemContentRadio.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuItemCustom.tsx",
+      "sha256": "973715699bf64c2549799b352bc9290e91030bece11d44b41c80ab0700ad7805",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuItemCustom.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuItemLink.tsx",
+      "sha256": "b6ba9476626324f476dd4327b0505332b4463a12c3fed65f21a6816b17de29c3",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuItemLink.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuSeparator.tsx",
+      "sha256": "27607dfc5991ec4ad01804718a6b0ccd96d00e59bd508dff2e83738c9ebe5500",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuSeparator.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/DropdownMenuTrigger.tsx",
+      "sha256": "985c8cf917b50f582b4352d75ecf92ee5d7f646a73938a8d1f34a78bcafdbfa5",
+      "destination": "src/editor/components/dropdownMenu/DropdownMenuTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/common.ts",
+      "sha256": "6c2a359eb89592b5551d2abad55aee9b99ab09341944eede93e0498be6f555df",
+      "destination": "src/editor/components/dropdownMenu/common.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/dropdownMenu/dropdownMenuUtils.ts",
+      "sha256": "30093deab5df03cfd7e938634ba57b47f45bc34b7ad17d585a83adc46b087754",
+      "destination": "src/editor/components/dropdownMenu/dropdownMenuUtils.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/footer/Footer.tsx",
+      "sha256": "c4b80d35787dbb7219551c507b608b51afd3fbfaf2a8aa4db2c435cf93d85f65",
+      "destination": "src/editor/components/footer/Footer.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/footer/FooterCenter.scss",
+      "sha256": "5d0a1b22b124f9dc111e7367778afba9043572a618df7c4b3be1ece83ace300d",
+      "destination": "src/editor/components/footer/FooterCenter.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/footer/FooterCenter.tsx",
+      "sha256": "491fa4c7f2aad6d3c8f463a762d75ef7b8f70bf5e314c19a3f981cb502f2e837",
+      "destination": "src/editor/components/footer/FooterCenter.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/hoc/withInternalFallback.tsx",
+      "sha256": "e3c15588eb79b121c9a7c6492ad4429257d8bbd7d0e45002a994a68bd0896ea4",
+      "destination": "src/editor/components/hoc/withInternalFallback.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/hyperlink/Hyperlink.scss",
+      "sha256": "e53fc8ab48cb2635a388a09b3a85ee8c2fba9ebb806e45e51a8e01a32df3ce74",
+      "destination": "src/editor/components/hyperlink/Hyperlink.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/hyperlink/Hyperlink.tsx",
+      "sha256": "7bdbb21d812e163dd8afbe3aa77643fe61527048abd8ff59feb15be2f90fc134",
+      "destination": "src/editor/components/hyperlink/Hyperlink.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/hyperlink/helpers.ts",
+      "sha256": "a5f4f6a8f1e68ab4bb44df705dfab969b7eee67d6e8e82fea31ac7be35b4a689",
+      "destination": "src/editor/components/hyperlink/helpers.ts"
+    },
+    {
+      "path": "packages/excalidraw/components/icons.tsx",
+      "sha256": "f3420ac3dbb9162dde719b1f9cfa878a1d93106fece59c69869f6a7b416abdb7",
+      "destination": "src/editor/components/icons.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/live-collaboration/LiveCollaborationTrigger.scss",
+      "sha256": "76f509da993738328d1f71603f9fa6a3b67a075b8e3073c6f1c468bc6e9f5c63",
+      "destination": "src/editor/components/live-collaboration/LiveCollaborationTrigger.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/live-collaboration/LiveCollaborationTrigger.tsx",
+      "sha256": "390392aa2148fecded6f5aab4621408aa524b2563344b9ed206f1438969f98aa",
+      "destination": "src/editor/components/live-collaboration/LiveCollaborationTrigger.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/main-menu/DefaultItems.scss",
+      "sha256": "bb4cbb13107c7d0ddc03c7d1b0f7916174faa2eac0d0eeb2704e756252398586",
+      "destination": "src/editor/components/main-menu/DefaultItems.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/main-menu/DefaultItems.tsx",
+      "sha256": "ca4b929a9a7f2c96356a9a8a287a92e24d4c38ad65493c45193c261c7010e038",
+      "destination": "src/editor/components/main-menu/DefaultItems.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/main-menu/MainMenu.tsx",
+      "sha256": "98ad5969be2a6585469dc59058380950a9abbfb18514fb68703bf18cfec86320",
+      "destination": "src/editor/components/main-menu/MainMenu.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/welcome-screen/WelcomeScreen.Center.tsx",
+      "sha256": "104437a1d0cc155039f4206843e40fa10ced43125eff790c5fa000f9993325bb",
+      "destination": "src/editor/components/welcome-screen/WelcomeScreen.Center.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/welcome-screen/WelcomeScreen.Hints.tsx",
+      "sha256": "8e004d3e89407ddc3e235b56424120a377d15c3ece238532815d92ee5cb8eef9",
+      "destination": "src/editor/components/welcome-screen/WelcomeScreen.Hints.tsx"
+    },
+    {
+      "path": "packages/excalidraw/components/welcome-screen/WelcomeScreen.scss",
+      "sha256": "71d116bb8917dd5b7c304f0e34bf2376eaadaf7c6499d43e9fb1b4db839c5105",
+      "destination": "src/editor/components/welcome-screen/WelcomeScreen.scss"
+    },
+    {
+      "path": "packages/excalidraw/components/welcome-screen/WelcomeScreen.tsx",
+      "sha256": "c1d0cc2e769ba83a8d99d27be0f2f58723abdbfa83009f8aaec43ef7b9b7631f",
+      "destination": "src/editor/components/welcome-screen/WelcomeScreen.tsx"
+    },
+    {
+      "path": "packages/excalidraw/constants.ts",
+      "sha256": "61f1c7d7ce185497e1d3014f7bfb6b5d358834339869bb3953970c5486a98b7d",
+      "destination": "src/editor/constants.ts"
+    },
+    {
+      "path": "packages/excalidraw/context/tunnels.ts",
+      "sha256": "ffa4df2f5f03f956e7ed84051ed352989d3a707df6f56aaf7bdb0529e044ac45",
+      "destination": "src/editor/context/tunnels.ts"
+    },
+    {
+      "path": "packages/excalidraw/context/ui-appState.ts",
+      "sha256": "98ba866c86bf80305c6bba434da663f5c5136d1ce30dbd0415b6ee5934c18380",
+      "destination": "src/editor/context/ui-appState.ts"
+    },
+    {
+      "path": "packages/excalidraw/css/app.scss",
+      "sha256": "36fe2b843d90e0cec223499f22f387b864c45e8c7d4ac8263626a044bccff8f0",
+      "destination": "src/editor/css/app.scss"
+    },
+    {
+      "path": "packages/excalidraw/css/styles.scss",
+      "sha256": "e903331cada0ec7613090747e726650829c5f587d2a459a58e09b1486dab3c5d",
+      "destination": "src/editor/css/styles.scss"
+    },
+    {
+      "path": "packages/excalidraw/css/theme.scss",
+      "sha256": "e0b8c88051598647b289419d99a7ec222506d303e6da785a512f876fa4f5f876",
+      "destination": "src/editor/css/theme.scss"
+    },
+    {
+      "path": "packages/excalidraw/css/variables.module.scss",
+      "sha256": "f2b243b3cf1921751fc9a35109ba70438d1607ee5bd1b2812b8b82adb44955b6",
+      "destination": "src/editor/css/variables.module.scss"
+    },
+    {
+      "path": "packages/excalidraw/css.d.ts",
+      "sha256": "25639fb7a82fed12a3cb9498444e78bb2e407c450dad484d76d44457896ccd5a",
+      "destination": "src/editor/css.d.ts"
+    },
+    {
+      "path": "packages/excalidraw/cursor.ts",
+      "sha256": "952bf7636291cd6bb39023a93efba28ca964e6ece4922ae28ff5f6b9dec5dc61",
+      "destination": "src/editor/cursor.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/EditorLocalStorage.ts",
+      "sha256": "87e67ea5cf6f67f981979a6f113c2157b338575b3f975458edf50aede060eb6e",
+      "destination": "src/editor/data/EditorLocalStorage.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/ai/types.ts",
+      "sha256": "1e29941e343553c3fd94603db5b4de0f474cb3e1c640cc49605d9f72e31cbdf3",
+      "destination": "src/editor/data/ai/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/blob.ts",
+      "sha256": "c7db2e317783585d60248c810f8d090373584cf7f494291fed8ecb3d9538d46f",
+      "destination": "src/editor/data/blob.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/encode.ts",
+      "sha256": "0d11c9b07df04fc06e49f2f7388f9a712462665dfef4791a7a628aa0b15e9b07",
+      "destination": "src/editor/data/encode.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/encryption.ts",
+      "sha256": "05206a450fcf6eb16857902dd163b89850e80eb5287feed2fe0d86f04e4a87a6",
+      "destination": "src/editor/data/encryption.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/filesystem.ts",
+      "sha256": "874986e43e2571a31691c0bdd81e558d6e56f0138e5459abc6d6844cc349497b",
+      "destination": "src/editor/data/filesystem.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/image.ts",
+      "sha256": "aa36fa06edb94ece27ec89f555ee6228adcd59c51b9bf6a36333ef5f7eb8f995",
+      "destination": "src/editor/data/image.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/index.ts",
+      "sha256": "9d80d6c94deb8abbf4a9ade4c35aafb0acbb6ed7c9e940f42ee0929e9faed965",
+      "destination": "src/editor/data/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/json.ts",
+      "sha256": "c3cfa4a83f59151a18eaa3ecf509f78151bd1eed94bb3022dc385ed5a8abab80",
+      "destination": "src/editor/data/json.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/library.ts",
+      "sha256": "58462d1f865f195e59282975e53e5744aea761b6912289a5932c09c306e6dc58",
+      "destination": "src/editor/data/library.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/reconcile.ts",
+      "sha256": "5968b33ad454dbf1a656b2fa69ae9d022428ecbc6bd9d01f43fc7115a1dc756d",
+      "destination": "src/editor/data/reconcile.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/resave.ts",
+      "sha256": "ac0f89d902e120a28a019f28ab885bee030eb2fe75ba4d0472212add031fff11",
+      "destination": "src/editor/data/resave.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/restore.ts",
+      "sha256": "52a7042e93cb9e575ccf676ca622a0f25f3cdb69112fdb40fc1af3d1d17e9509",
+      "destination": "src/editor/data/restore.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/transform.ts",
+      "sha256": "1d5e72a57177dbc21e418f0b4880c657c85dff28ddb31e3ce92675402998c182",
+      "destination": "src/editor/data/transform.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/types.ts",
+      "sha256": "aa7948805b66bbc8ccc275d1b7ba5ba7cbb9caf7bcdf255656cbd4ef8ded6ba9",
+      "destination": "src/editor/data/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/data/url.ts",
+      "sha256": "9871f0786c8029d3e20a9ef32058e32634f0ef152e07b9ffadbbf1ffe1cd20ca",
+      "destination": "src/editor/data/url.ts"
+    },
+    {
+      "path": "packages/excalidraw/deburr.ts",
+      "sha256": "f375bf4b731a5ad54a93ca401a5b8fe99b5e54571b6b1dc18acb45b4a577adf4",
+      "destination": "src/editor/deburr.ts"
+    },
+    {
+      "path": "packages/excalidraw/distribute.ts",
+      "sha256": "3870751b76150b1db0ba78c486d9216cb6b05c70055fe4cc7049a511e9e2849e",
+      "destination": "src/editor/distribute.ts"
+    },
+    {
+      "path": "packages/excalidraw/editor-jotai.ts",
+      "sha256": "1fc27ac6175f58c4f20e5b053ea2b516b508e49d6c981b53c6e00e3c7fbd863a",
+      "destination": "src/editor/editor-jotai.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/ElementCanvasButtons.scss",
+      "sha256": "ad0f2a6d9f83c3a253e54ac45b8c7eeee34190b76943fe0ee7b7d5481468ce1e",
+      "destination": "src/editor/element/ElementCanvasButtons.scss"
+    },
+    {
+      "path": "packages/excalidraw/element/ElementCanvasButtons.tsx",
+      "sha256": "8aa2192039bef2a9edb4ee6113ff6990fe79a7495beb87c30f3310882cf89b94",
+      "destination": "src/editor/element/ElementCanvasButtons.tsx"
+    },
+    {
+      "path": "packages/excalidraw/element/binding.ts",
+      "sha256": "0ee025bd0c81f8f6b35df7c3ea7a95a5de7a855b7d796630a1c37205d79c86cf",
+      "destination": "src/editor/element/binding.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/bounds.ts",
+      "sha256": "0f8ae2afeb065e39ed8b2fb4c73b4efde48eb57343083513c85ce114191884da",
+      "destination": "src/editor/element/bounds.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/collision.ts",
+      "sha256": "96ee0e447ecbccbd78eeec6a78ec274b565019881d340d6fe9f6896c874cc101",
+      "destination": "src/editor/element/collision.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/containerCache.ts",
+      "sha256": "ad153ecd3f879d0bf830030de1f2c4ccf151091baa173ec44aa6e4ce7870b5ae",
+      "destination": "src/editor/element/containerCache.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/cropElement.ts",
+      "sha256": "59913a7dc11ac0b909a82a0ad8735f2a592960b75c8a824a109cface7eeee2cc",
+      "destination": "src/editor/element/cropElement.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/distance.ts",
+      "sha256": "89c12ec5247a1c1c14412b46e1ae5ad645f3c4b4d8d029b0a4ba9f590919b0a9",
+      "destination": "src/editor/element/distance.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/dragElements.ts",
+      "sha256": "9caf0a9dcde88bfe93d8521af42b0bd39df39eca24ec350fed7f978df8b2620c",
+      "destination": "src/editor/element/dragElements.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/elbowArrow.ts",
+      "sha256": "99a086ff74d2ae92a2d6d0c049b2ae233e0a944365553cb20827d147f03850a0",
+      "destination": "src/editor/element/elbowArrow.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/elementLink.ts",
+      "sha256": "737e308177ad67c0f43406677f04afc265f9bbef531dd7cebc57b02cfe6d26bd",
+      "destination": "src/editor/element/elementLink.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/embeddable.ts",
+      "sha256": "e27969acba740323a4a128ee16b315d99e353ff8e7d4036f1c455bf3a07fb5af",
+      "destination": "src/editor/element/embeddable.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/flowchart.ts",
+      "sha256": "f39a4762792a406459533a12ea3361b0c90d98eb8956dd43fc9acf4cd7db6faf",
+      "destination": "src/editor/element/flowchart.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/heading.ts",
+      "sha256": "eca58a7ecc9f4fbfe14561ce4887c2593c13e1842738bbbf2dabcafc19f679ce",
+      "destination": "src/editor/element/heading.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/image.ts",
+      "sha256": "1410bd0e79c1eb2d159613e4bda6d04ffea2fa3db26e60330894031ffec6953e",
+      "destination": "src/editor/element/image.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/index.ts",
+      "sha256": "3e86cb9d7bfe173cf118e29069509d653b180d9dcf4b85b23992146de56aa422",
+      "destination": "src/editor/element/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/linearElementEditor.ts",
+      "sha256": "abe1d0958f36a9f80663313b3dbed85a79b5043df566fa32fe9aa5db77e0c61f",
+      "destination": "src/editor/element/linearElementEditor.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/mutateElement.ts",
+      "sha256": "11bc0cfce93aaea374d7732708ca03aa59a10f82ea776621c0f01109ea8d2023",
+      "destination": "src/editor/element/mutateElement.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/newElement.ts",
+      "sha256": "efef02a77390600934a5739721927219f957682f25bd962c10247ae9ce847d44",
+      "destination": "src/editor/element/newElement.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/resizeElements.ts",
+      "sha256": "1ea14cf3ab67801473f4fadc109d88d3b3472e44f07367aa0bcadf3b3c180533",
+      "destination": "src/editor/element/resizeElements.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/resizeTest.ts",
+      "sha256": "de30bb6e0a112979d1b7d75a4b128a884ce2ebf059fb66112cde55a2ab1814c2",
+      "destination": "src/editor/element/resizeTest.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/showSelectedShapeActions.ts",
+      "sha256": "bca70daa9ebc685ec46971c26f76bc7a07b17996889e36aaa1e78932fab46ef1",
+      "destination": "src/editor/element/showSelectedShapeActions.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/sizeHelpers.ts",
+      "sha256": "804567d8a5130b2e951e4117da3ebf6375799faa0da180c2b33230ff47fb0195",
+      "destination": "src/editor/element/sizeHelpers.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/sortElements.ts",
+      "sha256": "54f3513b7dc42f49f777c56b7cd5c968fcc74ada3ff3c84381741b693e91aa49",
+      "destination": "src/editor/element/sortElements.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/textElement.ts",
+      "sha256": "d44e477bb37b980e706c184fae8a29a2e1225cb75f8755752a8c1e2b86be0a24",
+      "destination": "src/editor/element/textElement.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/textMeasurements.ts",
+      "sha256": "0f13fc156a3bcd8adce81deb9c82216ca64292505db6f31260e7789df50d4b74",
+      "destination": "src/editor/element/textMeasurements.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/textWrapping.ts",
+      "sha256": "5470055a7c6fce8194cc42e28f82611be1ae937bb550167edfe011fccad737c0",
+      "destination": "src/editor/element/textWrapping.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/textWysiwyg.tsx",
+      "sha256": "145efe252967d70529d98d15c0b75e82de66e3ec5fb67dd5cf19680455b1a4a8",
+      "destination": "src/editor/element/textWysiwyg.tsx"
+    },
+    {
+      "path": "packages/excalidraw/element/transformHandles.ts",
+      "sha256": "065fbfcfe2cbfbdb108683363a7b2a6712f23ca234d61ff9ef5b5f2a08beed32",
+      "destination": "src/editor/element/transformHandles.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/typeChecks.ts",
+      "sha256": "a75cbe5d16d05036dafea9ffa3f204a836ec9e6e2ac629d9d7b0e94155efd3a5",
+      "destination": "src/editor/element/typeChecks.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/types.ts",
+      "sha256": "4e3c128f8c66fbb61b83938b23ed5b50816361aef1c95419329fea0b4834e800",
+      "destination": "src/editor/element/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/element/utils.ts",
+      "sha256": "f4094acbbb9fd568485b841d37b2c7fbf18373ab31ae97a2b027c135c20b1614",
+      "destination": "src/editor/element/utils.ts"
+    },
+    {
+      "path": "packages/excalidraw/emitter.ts",
+      "sha256": "c1b878ab1f8c8e215eb77529e66be84b9b393e839d70ff4ced190f5d45ef695e",
+      "destination": "src/editor/emitter.ts"
+    },
+    {
+      "path": "packages/excalidraw/env.cjs",
+      "sha256": "d0f7db5ad70de7cea60b09880f815b4d0eb0af927eabb4c38f4fb76252affac8",
+      "destination": "src/editor/env.cjs"
+    },
+    {
+      "path": "packages/excalidraw/errors.ts",
+      "sha256": "1b5378ee87aa4dad9331728d0841dce3ea41e74715bf3345e7a2760d4d3abea8",
+      "destination": "src/editor/errors.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Assistant/Assistant-Bold.woff2",
+      "sha256": "e0cdd332ce039770e93ec44336b6db65f931940f42b0342aad35a06e7f991d29",
+      "destination": "src/editor/fonts/Assistant/Assistant-Bold.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Assistant/Assistant-Medium.woff2",
+      "sha256": "81a9f280ce6a790f20ca8cd521183caa430f1f7fdc0752c36ef1cc6dc828ac57",
+      "destination": "src/editor/fonts/Assistant/Assistant-Medium.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Assistant/Assistant-Regular.woff2",
+      "sha256": "76945f09225aae65bdbd204cb4ac40d4caa4ff67150e5074bab1a04d1b778fc3",
+      "destination": "src/editor/fonts/Assistant/Assistant-Regular.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Assistant/Assistant-SemiBold.woff2",
+      "sha256": "bba47a7d1b185a4a2e0d265ec82aeac5dbc2dc9cb0f482a2ff57cbdfe4e5045d",
+      "destination": "src/editor/fonts/Assistant/Assistant-SemiBold.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Cascadia/CascadiaCode-Regular.woff2",
+      "sha256": "5bce041e0fcce617e35efbc335b1372d27a84acb65fb464c65ff80ab3424a885",
+      "destination": "src/editor/fonts/Cascadia/CascadiaCode-Regular.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Cascadia/index.ts",
+      "sha256": "fd5005c2b41c1534f68f61024fcdb109ea8eb98a737821e96dfaa3dadc9e949b",
+      "destination": "src/editor/fonts/Cascadia/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ComicShanns/ComicShanns-Regular-279a7b317d12eb88de06167bd672b4b4.woff2",
+      "sha256": "fa930fceb529a4b51ba3055d590302722c27704f6a6357495873950136b1e2ea",
+      "destination": "src/editor/fonts/ComicShanns/ComicShanns-Regular-279a7b317d12eb88de06167bd672b4b4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ComicShanns/ComicShanns-Regular-6e066e8de2ac57ea9283adb9c24d7f0c.woff2",
+      "sha256": "782f24081b810b8de9f04da055007ce4f1445c18abbf096c831f8888d65935c1",
+      "destination": "src/editor/fonts/ComicShanns/ComicShanns-Regular-6e066e8de2ac57ea9283adb9c24d7f0c.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ComicShanns/ComicShanns-Regular-dc6a8806fa96795d7b3be5026f989a17.woff2",
+      "sha256": "61c376d32e1773588f6163599aed24fe0387b5a5cb622bd200455f20c2b36a87",
+      "destination": "src/editor/fonts/ComicShanns/ComicShanns-Regular-dc6a8806fa96795d7b3be5026f989a17.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ComicShanns/ComicShanns-Regular-fcb0fc02dcbee4c9846b3e2508668039.woff2",
+      "sha256": "ee641c2e35730c3e6e3826855f1b6cc3b343a017c3e216e4e4a2e47010c53ad1",
+      "destination": "src/editor/fonts/ComicShanns/ComicShanns-Regular-fcb0fc02dcbee4c9846b3e2508668039.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ComicShanns/ComicShanns-Regular.sfd",
+      "sha256": "ccb87f5dda14ae0800b57d1052e4b9faddda8b2d4a1aeb2e28e6cb11722539fe",
+      "destination": "src/editor/fonts/ComicShanns/ComicShanns-Regular.sfd"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ComicShanns/index.ts",
+      "sha256": "43742ce64655de872db8eeaaab9c12a665fb0b333114ae59283714848b988bec",
+      "destination": "src/editor/fonts/ComicShanns/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Emoji/index.ts",
+      "sha256": "466c9a73dc966127f4710d099493fcdc3c033da0c2f87e4d8f923808cde023b7",
+      "destination": "src/editor/fonts/Emoji/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/ExcalidrawFontFace.ts",
+      "sha256": "570bf13275664d3663910c752b0dbfb2e5f84108680411208d43a5a41306a91d",
+      "destination": "src/editor/fonts/EasyDrawFontFace.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-349fac6ca4700ffec595a7150a0d1e1d.woff2",
+      "sha256": "a0637cff365c7344d2f7a15905a1f74dceaf56b5ac2ff913d150358bed6921f0",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-349fac6ca4700ffec595a7150a0d1e1d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-3f2c5db56cc93c5a6873b1361d730c16.woff2",
+      "sha256": "18ea9be1dd6b5a67b057f44eba8e34cb290f88308c272bcf35c79c1a220d0d7b",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-3f2c5db56cc93c5a6873b1361d730c16.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-41b173a47b57366892116a575a43e2b6.woff2",
+      "sha256": "c96649a5f96e2faa9143ee94e5b590b5afb08092f8d67c67f09cef332d66e4a7",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-41b173a47b57366892116a575a43e2b6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-623ccf21b21ef6b3a0d87738f77eb071.woff2",
+      "sha256": "b004007be100261e58188cf8a0f7e850e997702f35d57110915995cd880e49f1",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-623ccf21b21ef6b3a0d87738f77eb071.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-a88b72a24fb54c9f94e3b5fdaa7481c9.woff2",
+      "sha256": "e4423b318e11432aff2e6e865e300b7ca270f92321a3f56632268fede01c1b48",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-a88b72a24fb54c9f94e3b5fdaa7481c9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-b9dcf9d2e50a1eaf42fc664b50a3fd0d.woff2",
+      "sha256": "b424d16da4398be3e9852857a54ff70e043c8e2ec5c4444dbf7f88d7469b9859",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-b9dcf9d2e50a1eaf42fc664b50a3fd0d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/Excalifont-Regular-be310b9bcd4f1a43f571c46df7809174.woff2",
+      "sha256": "4fb8ad69be9aeac5664d99e5aa3a68a27ea40c98943b80387f7cd55c034fcc93",
+      "destination": "src/editor/fonts/Excalifont/Excalifont-Regular-be310b9bcd4f1a43f571c46df7809174.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Excalifont/index.ts",
+      "sha256": "db994e57791014204ba89e7ff902f2409b46ace3cd53907c3b4ac0e88d8e18c9",
+      "destination": "src/editor/fonts/Excalifont/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/FontMetadata.ts",
+      "sha256": "3ee67bfd6ad376f4c38e37d7fa895bda13e820154619b2310895cb7d183fd36c",
+      "destination": "src/editor/fonts/FontMetadata.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Fonts.ts",
+      "sha256": "1fc4089f7f7660dfcec9c86238c7cceca6b50b0286a0f289a92fe113e5d0d15a",
+      "destination": "src/editor/fonts/Fonts.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Helvetica/index.ts",
+      "sha256": "70047885c2e2c5016ffdee43409020494f4fcc89f3bead2ae5049fc1f84251ab",
+      "destination": "src/editor/fonts/Helvetica/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Liberation/LiberationSans-Regular.woff2",
+      "sha256": "006a2b28cbbeeaec937d1b367d0949f5f48ef4b2e7b4e1d8dc7a799d2d639be8",
+      "destination": "src/editor/fonts/Liberation/LiberationSans-Regular.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Liberation/index.ts",
+      "sha256": "e414bc5461b571e99abdee36253674c04b264cace349aa6c9b563f35f1619f9c",
+      "destination": "src/editor/fonts/Liberation/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Lilita/Lilita-Regular-i7dPIFZ9Zz-WBtRtedDbYE98RXi4EwSsbg.woff2",
+      "sha256": "2b6568c7a0f16300bc6c8d292bd426c361fcdb40699c2cbfab2bd3e9e6993dea",
+      "destination": "src/editor/fonts/Lilita/Lilita-Regular-i7dPIFZ9Zz-WBtRtedDbYE98RXi4EwSsbg.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Lilita/Lilita-Regular-i7dPIFZ9Zz-WBtRtedDbYEF8RXi4EwQ.woff2",
+      "sha256": "8d6cd0f298738a92ca9bf6e13f54a9191afd06ce04ea00ebbf24499c017191b7",
+      "destination": "src/editor/fonts/Lilita/Lilita-Regular-i7dPIFZ9Zz-WBtRtedDbYEF8RXi4EwQ.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Lilita/index.ts",
+      "sha256": "812b532e303a10bc1a33a6cba241d39d71d7905feecdc84d00bed360ff3216f4",
+      "destination": "src/editor/fonts/Lilita/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTA3j6zbXWjgevT5.woff2",
+      "sha256": "e512f2d7c9fe062b1acf8f6ea64d4bfd89a77d26728150977627e445c7b6e937",
+      "destination": "src/editor/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTA3j6zbXWjgevT5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTQ3j6zbXWjgeg.woff2",
+      "sha256": "6d1626aac658786e37e78e0adce3ffffddbd75abc923d72e45a7168bd80053da",
+      "destination": "src/editor/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTQ3j6zbXWjgeg.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTk3j6zbXWjgevT5.woff2",
+      "sha256": "3e7f76fcc8798b8bba4d6bcc06bdb0d788f6e89706c1d6e64ac81d65ca683c14",
+      "destination": "src/editor/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTk3j6zbXWjgevT5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTo3j6zbXWjgevT5.woff2",
+      "sha256": "7928f47b21192cb6fdb2f46b71a474a3bd2fd608945c5ad7d7ed6bde8b0ae24c",
+      "destination": "src/editor/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTo3j6zbXWjgevT5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTs3j6zbXWjgevT5.woff2",
+      "sha256": "5117398298dd0dba3c95a406ff12fbeb88289fa4e913e3a5cf482cafe7f7071a",
+      "destination": "src/editor/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTs3j6zbXWjgevT5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Nunito/index.ts",
+      "sha256": "c94f269e5747d376137019b3dc32af42ac6511bd1fea9c70a7e0ffbe2956907c",
+      "destination": "src/editor/fonts/Nunito/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Virgil/Virgil-Regular.woff2",
+      "sha256": "2279cf7daf1c42a3a53b2c1437ad72f0050efb67ac263e0245f67612fd766714",
+      "destination": "src/editor/fonts/Virgil/Virgil-Regular.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Virgil/index.ts",
+      "sha256": "b62db4947c999610491b4826f029a11266719dfc120f851eeb2358dbe9be005a",
+      "destination": "src/editor/fonts/Virgil/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-019d66dcad46dc156b162d267f981c20.woff2",
+      "sha256": "7404ad8086cf238269c6f6aa3ecb754dac903c7b28be88d1f683b9eab7c463e6",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-019d66dcad46dc156b162d267f981c20.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-04b718e5623574919c8b0dea5f301444.woff2",
+      "sha256": "cfdf67b97d5eee43f06d4fd6c8d8a1136d66e3391c3500341cef41bf39672559",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-04b718e5623574919c8b0dea5f301444.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-069e77aac84590e2e991d0a0176d34f2.woff2",
+      "sha256": "9a8e521a24e531cbeadfbd2750108c48aef9c0f13b0c0840e2cc9fae3257aed4",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-069e77aac84590e2e991d0a0176d34f2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-06c77b8c66e51ed6c63ccb502dd8b8af.woff2",
+      "sha256": "cc2e553954218cc43f5f6f7cf54136d4d0a4317b88d670ae1940797545bdec61",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-06c77b8c66e51ed6c63ccb502dd8b8af.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-08e0dc436ad0ad61ba5558db0674d762.woff2",
+      "sha256": "101960c709c4a146a181f002808861249fe13ede28fc2d9cff24175715191abc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-08e0dc436ad0ad61ba5558db0674d762.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-093b9ef39a46ceae95a1df18a0a3a326.woff2",
+      "sha256": "819bbcac2468e1b44363442bca0a7a894883c32ce5cf9b28f707d94304a8a3ed",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-093b9ef39a46ceae95a1df18a0a3a326.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-095c169f3314805276f603a362766abd.woff2",
+      "sha256": "7f05badb0edb31118c69aa6f9bd20b13e737b5719f816617d342a50dc51c9506",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-095c169f3314805276f603a362766abd.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-09850c4077f3fffe707905872e0e2460.woff2",
+      "sha256": "4cd090f380a82950208e5ff0b83b63f82d9a998881dfa12a8b8a8e6c7fd298bf",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-09850c4077f3fffe707905872e0e2460.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0986d134c05864f5025962eef9f994a0.woff2",
+      "sha256": "76cdc801e75369e01fe0907f0e603a699dccf1fa0d880a717b8dceb0c8751806",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-0986d134c05864f5025962eef9f994a0.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0b5d723fdc4e249c140f0909e87d03b4.woff2",
+      "sha256": "4a5ab634a6839e983344645d82d31d85a1786fd4e81d344f8544181158a86c45",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-0b5d723fdc4e249c140f0909e87d03b4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0f626226ba1272e832aea87bafd9720e.woff2",
+      "sha256": "c261de5643a0b6fdfeb3fa6c43548dc6270f19756532c2953a4c8f74a1bb670d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-0f626226ba1272e832aea87bafd9720e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0f7fb1e0d5015bb1371343153ecf7ce3.woff2",
+      "sha256": "7d92022e9005636c778ebccb89ca8ab3a17c7d99e17201c422ce833e4d4e0e04",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-0f7fb1e0d5015bb1371343153ecf7ce3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0fa55a080fcd0f9dc2e0b0058b793df8.woff2",
+      "sha256": "a3531eb15218eca282196405dca5e502a0b0ce14d82824ee5c3104e241f12c56",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-0fa55a080fcd0f9dc2e0b0058b793df8.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0facdf1ea213ba40261022f5d5ed4493.woff2",
+      "sha256": "4692019d3f011ff2b8c012ef4d5bcb9d649259bb3e68b8d5eded06fd5f6948ff",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-0facdf1ea213ba40261022f5d5ed4493.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-10a7ae9a371830a80c3d844acf1c02d7.woff2",
+      "sha256": "343e81a0225cf0848a0c5c3df11589aba1386a8ea954fa549dd8749384e54c15",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-10a7ae9a371830a80c3d844acf1c02d7.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-112c051027b2d766c19a519f6ee1f4f7.woff2",
+      "sha256": "64d5521ca4b191e41422c2a1e775aae43a831a720a96c64b42d70a2229e1bec7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-112c051027b2d766c19a519f6ee1f4f7.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-11c345711937f0ba4b8f7b6b919c8440.woff2",
+      "sha256": "cb5cc5380aa885e6ea2d9502f15673ffe1e96d08a8e240cadc8a9a9e727a85d2",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-11c345711937f0ba4b8f7b6b919c8440.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-12b52b58eb3df36804b9a654ec9ee194.woff2",
+      "sha256": "d10137e035185e36212a9ec70ea8c2b0b10f30b175f9543f57412a6f48abfddf",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-12b52b58eb3df36804b9a654ec9ee194.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-13ae07ed2e272d26d59bc0691cd7117a.woff2",
+      "sha256": "4f0db89e7086b5eef3a83dc41d81ee3d46f9d7ae761e150e5689684e95ceb022",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-13ae07ed2e272d26d59bc0691cd7117a.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-13d2887ec8ee73c43acdabc52a05af7b.woff2",
+      "sha256": "b8a3f1ac2323db2a1ef228f021be3d13b1190ed7c1f4af6b0d50d0c4d454adbc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-13d2887ec8ee73c43acdabc52a05af7b.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-145aa02cdd91946e67dc934e1acffe75.woff2",
+      "sha256": "96f696dd01f2534ceca68a6c9795f927c7c1dd276f7e97069cc7d76d85c9156c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-145aa02cdd91946e67dc934e1acffe75.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-15dc6d811c9cd078f9086a740d5a1038.woff2",
+      "sha256": "b62e88759e83e6898a7c7588f8587d064aba185b9e6b9b79c15c22c7b195225f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-15dc6d811c9cd078f9086a740d5a1038.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-173945821411c09f70c95f98d590e697.woff2",
+      "sha256": "ef5693cd230dcc67a120cf627d59d9b66acab7b8f356f9a36c3a1e2edf479f0a",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-173945821411c09f70c95f98d590e697.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1b611157cd46bb184d4fa4dae2d6a2b8.woff2",
+      "sha256": "5b79154058f247d013a6561ba070b044911b3206e872ce8a2476392245f9de27",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-1b611157cd46bb184d4fa4dae2d6a2b8.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1e6fd68f1f3902ce48ce8c69df385622.woff2",
+      "sha256": "7a1db91b8de7dee60467eafa390af5aa6e8ad313e6b6fb62c31e7a03ea26f385",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-1e6fd68f1f3902ce48ce8c69df385622.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1ee544f0f1dac422545c505baa788992.woff2",
+      "sha256": "4c478c0638b0ede25838805d6f99badcc57fbf022e44562c9194c0c75118f1c1",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-1ee544f0f1dac422545c505baa788992.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1fdc0c67ed57263a80fd108c1f6ccf24.woff2",
+      "sha256": "cdc443c022e8300966f91ec8b3185953579979dd5bffbcc66b498fe6b71e6c39",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-1fdc0c67ed57263a80fd108c1f6ccf24.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-203b0e569e3b14aac86a003dc3fa523e.woff2",
+      "sha256": "ddfc3cd617e83e271190a01fcfeb8625cd5ff9c105ca362c8804b7f762e595b2",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-203b0e569e3b14aac86a003dc3fa523e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-20cc1bbf50e7efb442756cb605672c1f.woff2",
+      "sha256": "27dce6f37362f4ad1495da86e9aa9ec808237d41d69d3f2f13d54ccbfe504c83",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-20cc1bbf50e7efb442756cb605672c1f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-20e7bf72fa05de9adf7dbcc7bf51dde6.woff2",
+      "sha256": "d9742a018d17fea1da72556502ef20d02b5cb80ddd571e539b60ce26cd19d4df",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-20e7bf72fa05de9adf7dbcc7bf51dde6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-21430ee05a1248901da8d0de08744d47.woff2",
+      "sha256": "d7d7130ac4a5ce5cf5f0a01f408267133cde16ef2966dfb35a9fc5a37f762cf8",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-21430ee05a1248901da8d0de08744d47.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-23686f7f29da6e8008c36dd3a80c83d6.woff2",
+      "sha256": "ab60b69500468e81eb3a6796b8e23560699e2de1be596956bd1832256fae9d44",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-23686f7f29da6e8008c36dd3a80c83d6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-23ad2d71b280f00b1363b95b7bea94eb.woff2",
+      "sha256": "e8dec71d8ede1b9b9f3d7325e1ea31432474a83095719bd2149852fef4794ed5",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-23ad2d71b280f00b1363b95b7bea94eb.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-23f228f3999c01983860012330e4be08.woff2",
+      "sha256": "20a7232989878afcad6de84b68872facaf96fb85c6827f0457d532c1cbf6bbcc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-23f228f3999c01983860012330e4be08.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-24476a126f129212beb33f66853ea151.woff2",
+      "sha256": "c0c147e916a32a86306f2f9864982d87fdf41b6a0c3d1ed77c2aabd2ed772a94",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-24476a126f129212beb33f66853ea151.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-24a21c1e4449222e8d1898d69ff3a404.woff2",
+      "sha256": "e49f1063fddb7928f50c6490912df4bce1042795bd372ce0673cc0d87beec559",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-24a21c1e4449222e8d1898d69ff3a404.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-25b7f38e18f035f96cb5e547bd2bd08c.woff2",
+      "sha256": "a6ec4baa25d737b49526c152b69a98e66373e3ab2a337ca1c7a895d7a6d8b45b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-25b7f38e18f035f96cb5e547bd2bd08c.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-29cec36cd205b211da97acabaa62f055.woff2",
+      "sha256": "9ab470df6c456a0a376521f52fc8a857849ad15c640b6c8fae020fbdeb0cde0b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-29cec36cd205b211da97acabaa62f055.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2a26d20a23b00898ce82f09d2ee47c3f.woff2",
+      "sha256": "d85471a49823e8757af9c1c7d920fbfb4ccdb9660e06f7b43ea2b2325b438d0f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2a26d20a23b00898ce82f09d2ee47c3f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2adbc89c11e65905393d3dfc468b9d5b.woff2",
+      "sha256": "896a9145f32c6db6eb6ccdff9986859f08e349f505628dd9eeff2139def675cc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2adbc89c11e65905393d3dfc468b9d5b.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2b7441d46298788ac94e610ffcc709b6.woff2",
+      "sha256": "d0493edd4b70aab6e7c4d78be1d5976d2fb0113c486f20bc2114d8d0f8256f5d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2b7441d46298788ac94e610ffcc709b6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2b77e8ebfb2367ab2662396a60e7d320.woff2",
+      "sha256": "6cba567589067e182dd06054fa24e52ce5e8ac8d07278861125e3b6f6d2d2a31",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2b77e8ebfb2367ab2662396a60e7d320.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2cf96d082d35ea3d8106851223ad0d16.woff2",
+      "sha256": "714626f97e78b4ee72f935408a48508e9f9855399429ba23dc0c9ef0f4074368",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2cf96d082d35ea3d8106851223ad0d16.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2d43040e86ff03ba677f6f9c04cd0805.woff2",
+      "sha256": "cb1ac8f87c3e4c2e3dd925480e2b6c659100acd59266e957065708c5c46d7385",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2d43040e86ff03ba677f6f9c04cd0805.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2e33e8dc771ef5e1d9127d60a6b73679.woff2",
+      "sha256": "13941783dc59754f2bcdcd3c54e7bb665e433fc1ffe1cafa0e273ddcd4f62dbe",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-2e33e8dc771ef5e1d9127d60a6b73679.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-33432927cd87d40cfe393c7482bf221f.woff2",
+      "sha256": "9b2a6cb479d1b3d2966a5beb93ba63f30d6b05e83c2985b3f9aab447d802a4b5",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-33432927cd87d40cfe393c7482bf221f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-353f33792a8f60dc69323ddf635a269e.woff2",
+      "sha256": "aee4567e54a8428067774cbcc9ca8faf2d9bbb10d0a780a374c950d286e1d8d3",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-353f33792a8f60dc69323ddf635a269e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-36925dfe329a45086cbb7fc5c20d45ac.woff2",
+      "sha256": "542fd6f0fb2eabcd2cfd79b0cecafb376691aa74afcfbf718c8d26160d0cd9ab",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-36925dfe329a45086cbb7fc5c20d45ac.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3717077e38f98d89eae729b6c14e56dc.woff2",
+      "sha256": "34718d3ab2e153ea66994f9b20475c76bcbe61c73dcef6b7d4096f0eec2eef6b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3717077e38f98d89eae729b6c14e56dc.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3756e81d3e149cf6099163ee79944fec.woff2",
+      "sha256": "9db5961935f12cad41726aa81c08c9783b6c71ecaaf7dfea1e4b8f5768defb4d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3756e81d3e149cf6099163ee79944fec.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-395c35dd584b56b0789f58a0559beaf1.woff2",
+      "sha256": "8d6bb509725a27cd4cde2daaf743be8ec74114ad3719add4c805cd1c2fdd0f13",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-395c35dd584b56b0789f58a0559beaf1.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3c9de2ae0ea4bc91a510942dfa4be8d2.woff2",
+      "sha256": "9c4e535e741d6a13ec36bb2909058db1321919cb14561e661c62be8f0ffda7f9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3c9de2ae0ea4bc91a510942dfa4be8d2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3cc70dbb64df5b21f1326cc24dee2195.woff2",
+      "sha256": "71a3287e8998e47016b5159ae03f636939516b4f5b251ee71f0c5a5212e4df6b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3cc70dbb64df5b21f1326cc24dee2195.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3e1f8f654357353bf0e04ba5c34b5f7f.woff2",
+      "sha256": "8c3887fce9435759019e1ecba3ee315164d0f8a598ce24b94c8bfecebbb724a4",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3e1f8f654357353bf0e04ba5c34b5f7f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3e63ed8162808a9e425ed80a8bc79114.woff2",
+      "sha256": "cfafe77006c4bbd7ece2231a735f8c219a3faa6831d4d5733ab14bd91779157a",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3e63ed8162808a9e425ed80a8bc79114.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3eaa538115d76932653c21d8dc28f207.woff2",
+      "sha256": "04a7b1244c272a46ca740937e1a3e790e8ff142d6fcf53934be0e4a167eacdc9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-3eaa538115d76932653c21d8dc28f207.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4095eb84ef3874e2600247bee0b04026.woff2",
+      "sha256": "6ab6ac356c313d98d26c9a23e9b1d5239330974b090d8aba8184ce99c24fcf16",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4095eb84ef3874e2600247bee0b04026.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-41521fade99856108931b4768b1b2648.woff2",
+      "sha256": "2c096e4a843896d2d735c8f19b8e2e8e1293202d2e0a41adfab16995e32ae07e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-41521fade99856108931b4768b1b2648.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-450da755d5bcb70906e1295e559b9602.woff2",
+      "sha256": "e07fdcb886eb2f90a49b22e3d369eb1f480fdef7c509249d0437ba95af3aedc6",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-450da755d5bcb70906e1295e559b9602.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-452225341522a7942f0f6aab1a5c91a3.woff2",
+      "sha256": "a432715f6fed8499a420cb44acfe8f71e600afe0aa340ff2e63b741fa05f6fae",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-452225341522a7942f0f6aab1a5c91a3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4535823663ad81405188a528d8f2b1a2.woff2",
+      "sha256": "f3c72f094659af2e6fbdbb0e5dba91089c4f5990d479dd9bbe5fa5ae4f95ab41",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4535823663ad81405188a528d8f2b1a2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4806e761d750087c2d734fc64596eaff.woff2",
+      "sha256": "29aa32e6f5a6f5cee931aed56aaedb8d974b2913c71591c605ce5729842497ba",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4806e761d750087c2d734fc64596eaff.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4a0fdb40036e87b40aa08dd30584cb85.woff2",
+      "sha256": "9be1f8a2fd341f5058d483304063535b6ac5be04294846c89a0a946f7fb33f9d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4a0fdb40036e87b40aa08dd30584cb85.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4a38cc3e9cf104e69ba246d37f8cf135.woff2",
+      "sha256": "b3aebf243c2be02360a1452ba3b0090d223faf7a76fde5f7495bf25cedfda5a1",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4a38cc3e9cf104e69ba246d37f8cf135.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4aca6a43e59aceee2166b0c7e4e85ef1.woff2",
+      "sha256": "cdf1f8c3ff1154762aa390d8babe5ee12450d7ad5cdc3a0b8e58a66dcb75b8ea",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4aca6a43e59aceee2166b0c7e4e85ef1.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4bfaa8ffa64c5ee560aa2daba7c9cbd3.woff2",
+      "sha256": "0405baa428ee4175650f5ea85196d2e2950c3749da32c902f94381ee69b3b72c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4bfaa8ffa64c5ee560aa2daba7c9cbd3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4dc6d5f188d5c96d44815cd1e81aa885.woff2",
+      "sha256": "a206f427ff843dbdeaddc1509a92d7b69faebc24871c3138d94baf9b1922b335",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4dc6d5f188d5c96d44815cd1e81aa885.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4ddc14ed3eb0c3e46364317dfc0144a3.woff2",
+      "sha256": "033809b0d9848a6161681c8e9c5e7ee2bf10e0b639feb800eba43f87dd32a5c2",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4ddc14ed3eb0c3e46364317dfc0144a3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4ee10ae43505e2e0bc62656ced49c0fa.woff2",
+      "sha256": "a70dd8aa91b85b3a92f4edec64307dbeba67a3e829300abf38bb9ca206c318c5",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4ee10ae43505e2e0bc62656ced49c0fa.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4f50e5136e136527280bc902c5817561.woff2",
+      "sha256": "59f4770cf5df29b54036ca5f42e6eafdd70d2dd28acbdcea6e8275c30d2208f0",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-4f50e5136e136527280bc902c5817561.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-51502f1206be09c565f1547c406e9558.woff2",
+      "sha256": "27f0dd9bee1139710abf7ab0f51c0e37df058bef7f2e41a5f8f919dc0ce54fa7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-51502f1206be09c565f1547c406e9558.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-51a0e808bbc8361236ac521a119758a3.woff2",
+      "sha256": "6f7d20f47fee620a9b6cfac10202ee7350a21667bacd5398084d6781841e9d4c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-51a0e808bbc8361236ac521a119758a3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-52a84a22fd1369bffeaf21da2d6158dc.woff2",
+      "sha256": "bb00bece144c8b55b92445e0bcf013c64eb7250588ebcd8d33d4e972feceba1d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-52a84a22fd1369bffeaf21da2d6158dc.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5330a2119a716e4e7224ed108b085dac.woff2",
+      "sha256": "c3d926f24f41fa042951f940854f7094b394929ba2b393c1ad0f69b8ac1e18d7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5330a2119a716e4e7224ed108b085dac.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-543fa46ace099a7099dad69123399400.woff2",
+      "sha256": "dc52bcf986f21c5ecf4f95614edc3fb086008bc4589a606a5545d7be83c6aae7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-543fa46ace099a7099dad69123399400.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-544fc28abe2c5c30e62383fd4dac255f.woff2",
+      "sha256": "1822913d0e7128a0d6b8affd019c551f06023368ef8608aa3a9718320d16011c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-544fc28abe2c5c30e62383fd4dac255f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-54acdfc2166ad7fcbd074f75fd4a56ba.woff2",
+      "sha256": "7c5ee14e16e509b359baef1bc7aed848475cf6286bd449a56e9afaaa0b5d8c5d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-54acdfc2166ad7fcbd074f75fd4a56ba.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5572b3513ba8df57a3d5d7303ee6b11b.woff2",
+      "sha256": "3faaa516fc74d539ca46940b392648c9e3cc4c031e9ad52242aa8b54f7d9e2f8",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5572b3513ba8df57a3d5d7303ee6b11b.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-56467a5c8840c4d23a60b2f935114848.woff2",
+      "sha256": "0535fd40943797bebaab03292f269eeb09b9844e28ee0a9b20bafcfe6d6f253c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-56467a5c8840c4d23a60b2f935114848.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-56a32a7689abd0326e57c10c6c069bb4.woff2",
+      "sha256": "0861a51a85640834a936afe816dc9262712a3b5fceb9d268c3ef013131b7f1c9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-56a32a7689abd0326e57c10c6c069bb4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-57862b464a55b18c7bf234ce22907d73.woff2",
+      "sha256": "2ab06e5e9dc995faad6240b1b1f6edee7e8865ecfd24aa041dad0bf71aab94f9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-57862b464a55b18c7bf234ce22907d73.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-583d166e56ba0de4b77eabb47ef67839.woff2",
+      "sha256": "fbc085efd02787634c45076cfcd3f9a943919b1fd491953bd3199338d3655681",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-583d166e56ba0de4b77eabb47ef67839.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5882ffa04f32584d26109137e2da4352.woff2",
+      "sha256": "0bca2dd7bf9c581d3b9aa2485571f919272790e346a37ead6522d169b9af2d4a",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5882ffa04f32584d26109137e2da4352.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-58fd02350d0bc52cf1ca3bb32ce9766e.woff2",
+      "sha256": "3f843a854c82af7042965ae7f00b6f8698a05e87bbce715cbe087a3ec47899ff",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-58fd02350d0bc52cf1ca3bb32ce9766e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5935a5775af3d5c6307ac667bd9ae74e.woff2",
+      "sha256": "c54f2d93aa1b89e19903c4abc3008742613dcc52b45055a058ec13de99d3a91f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5935a5775af3d5c6307ac667bd9ae74e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-59e9ff77b0efaf684bc09274fb6908c9.woff2",
+      "sha256": "57426b72fb5d6a406df24e2b60c9b3f8d09c095aade40ae55c23972e5b7d9e1c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-59e9ff77b0efaf684bc09274fb6908c9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5a1ce3117cfe90c48e8fb4a9a00f694d.woff2",
+      "sha256": "164d468fbdee79c04b3898c7e62959de3ff43729c407ba60f0f8f27974352292",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5a1ce3117cfe90c48e8fb4a9a00f694d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5a45d991244d4c7140217e1e5f5ca4f4.woff2",
+      "sha256": "b7bc4c809953df9d0ed98cf11a9542ba959ed3c66a94d3090bb466395f945184",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5a45d991244d4c7140217e1e5f5ca4f4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5a7fac4b8b23a6e4e5ba0c9bf1756c91.woff2",
+      "sha256": "2802ab8038ff5266fe6303d79665f0b6cf370361aa67b22639e10e1f4634726b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5a7fac4b8b23a6e4e5ba0c9bf1756c91.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5b0ed6971aaab9c8ad563230bd5471a7.woff2",
+      "sha256": "ec7e47923ed16e54d1a25bf22ad0638846be78be6e8f46009649d9cf7727e58b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5b0ed6971aaab9c8ad563230bd5471a7.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5d2898fbc097a7e24c6f38d80587621e.woff2",
+      "sha256": "9473d9ba649a6a614fb877bc6051590cb19da98e54ef6104d25f31f1ff52ed55",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-5d2898fbc097a7e24c6f38d80587621e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-603aefd23e350ba7eb124273e3c9bcf1.woff2",
+      "sha256": "cdd0e13364c932bb3cb2c9ae58369716ce47c8d55cbabe86585bf742e710fb5e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-603aefd23e350ba7eb124273e3c9bcf1.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-60a3089806700d379f11827ee9843b6b.woff2",
+      "sha256": "d964d94147e46e90fd06f0e271a19aacde808acfffb23e66b896be7fcb359544",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-60a3089806700d379f11827ee9843b6b.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-60a41c7e1c68f22424e6d22df544bc82.woff2",
+      "sha256": "0534b52a8dbb84d43b13773bba5cd15bb6d256aa4fb96c58a435ebe391904f66",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-60a41c7e1c68f22424e6d22df544bc82.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-642b26e2e5f5fb780b51b593dbc8c851.woff2",
+      "sha256": "961bf60030e7c8b4f5395cd8b748c6979d967b7629e6c582d68e5c11b5d2dfc8",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-642b26e2e5f5fb780b51b593dbc8c851.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-66493ba5a8367f2928812f446f47b56a.woff2",
+      "sha256": "3b759c89aca9110eddc48220362b6e1113bf8e390f40ddeaccade9bec603028e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-66493ba5a8367f2928812f446f47b56a.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-670ba603758d94268e8606f240a42e12.woff2",
+      "sha256": "1c0d75c27b530030e64e77d99967230f71d4ea9db40ecdc2e10a6f1eaf1f150d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-670ba603758d94268e8606f240a42e12.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-671a2c20b1eb9e4ef8a192833940e319.woff2",
+      "sha256": "3dd77c6fa69a4f80de93433e2868e457b7d04d68662d8d042e6348e7b6ffaf15",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-671a2c20b1eb9e4ef8a192833940e319.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-684d65f1793cac449dde5d59cb3c47fb.woff2",
+      "sha256": "079d03e554628ed20a18018875b1bb5681ae892dd56604074969619ebd9f36f2",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-684d65f1793cac449dde5d59cb3c47fb.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-69c09cc5fa3e55c74fc4821f76909cc3.woff2",
+      "sha256": "dde445e5fe69c7ab363f034df157c89750b421f31e52757f7a642be3c5644f2a",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-69c09cc5fa3e55c74fc4821f76909cc3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6ae5b42180ad70b971c91e7eefb8eba2.woff2",
+      "sha256": "dc1eea8f0592ee505adb539566a9cebefa81ece39c3e70624afd06af0e323729",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-6ae5b42180ad70b971c91e7eefb8eba2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6e092f71c1e634059ada0e52abadce67.woff2",
+      "sha256": "9b771d7ec93aab9efc47096f33c16c724d57a462b99d54735080759cc56e749d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-6e092f71c1e634059ada0e52abadce67.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6f3256af8454371776bc46670d33cc65.woff2",
+      "sha256": "4d1cd583547d080c6b94552d1473685c60e6a96340c74a659616e16cdde6bbae",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-6f3256af8454371776bc46670d33cc65.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6fe5c5973cc06f74b2387a631ea36b88.woff2",
+      "sha256": "7142a02b00a992b9a57b75c05ddfaa28956c11f554fb9f1e3fe0333285dd6791",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-6fe5c5973cc06f74b2387a631ea36b88.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-70c2eb8d64e71a42a834eb857ea9df51.woff2",
+      "sha256": "89474028dcdfc03b27f45d5adc112d9d53a4d810c7e8f0ebf95f599b50ae84ed",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-70c2eb8d64e71a42a834eb857ea9df51.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-70e811fd7994e61f408c923de6ddd078.woff2",
+      "sha256": "e6818bb44f7d47d16cd8935ed9f5b29b8f10ac0e80043f85957b80501f85bcd9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-70e811fd7994e61f408c923de6ddd078.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7197d6fda6cba7c3874c53d6381ca239.woff2",
+      "sha256": "66b77ead39e2479ee3bf4911920fb5cf39217c6b60e3cd84080c7fe429432430",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7197d6fda6cba7c3874c53d6381ca239.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-72252d73220fa3cd856677888cee1635.woff2",
+      "sha256": "1e34a49b238d61c6a723e79c2957f309687bcca89eeaebe99221883f302b80a2",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-72252d73220fa3cd856677888cee1635.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-72536a3d71b694a0d53dd90ddceae41e.woff2",
+      "sha256": "4058683136a7bf8ebaadc59aaba8644044eff3b91776f6b0206954bf805a3132",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-72536a3d71b694a0d53dd90ddceae41e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-726303e0774b4e678bff8c2deb6ca603.woff2",
+      "sha256": "1ad344f682254b66d56187f673f817fe1ac8117d59cb26614796ebba9f2494aa",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-726303e0774b4e678bff8c2deb6ca603.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-733171b4ffcd17ea1fe1c0ba627173bf.woff2",
+      "sha256": "af32f1c4a193d9866655c866d4067b190b121fdc538b380cd45e99f172b4355b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-733171b4ffcd17ea1fe1c0ba627173bf.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-739bc1a567439c7cffcd1614644593d2.woff2",
+      "sha256": "9bbdcb718fa1010f13c0a6058cca89d75774371e766eb1edf319ac25dc057f0b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-739bc1a567439c7cffcd1614644593d2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-73e309718fd16cea44b4d54a33581811.woff2",
+      "sha256": "6507fb8092efc309d9fdcc301fab6c90330b89931e7007fe7ed7fd1e722a738b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-73e309718fd16cea44b4d54a33581811.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7494dc504ae00ee9cd0505f990f88c5d.woff2",
+      "sha256": "df7f6131e265282b00981c86f4c8d0fbae08c8fa3b3464909609abdafebe5d03",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7494dc504ae00ee9cd0505f990f88c5d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-74e2263a91439c25b91d5132ce9f4d62.woff2",
+      "sha256": "322645e0e2737aed64e43e45e97276930f67ce5aa1bfe845eb6090b27b0acc29",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-74e2263a91439c25b91d5132ce9f4d62.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-761d05e3cd968cf574166867998ef06a.woff2",
+      "sha256": "5da4dd830dbcb73f6228469f49b12a1cc3db1edf00e5875e3f530ba62c907538",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-761d05e3cd968cf574166867998ef06a.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7718fe60986d8b42b1be9c5ace5ccf25.woff2",
+      "sha256": "ed029431ebadd93a1ffae89347ced2b6835ed92703613d10f3dcd3d37c3ce19b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7718fe60986d8b42b1be9c5ace5ccf25.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-774d4f764a1299da5d28ec2f2ffe0d69.woff2",
+      "sha256": "6238cf7ea6f5e88177688f281f55c8d427f0110ca56a0786d8577ab748fb5f8e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-774d4f764a1299da5d28ec2f2ffe0d69.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-79d494361ae093b69e74ee9dbe65bfd4.woff2",
+      "sha256": "6f78f52b32b85a686bae2602b6f4bd9197e508140a87c23eb38ced0fa501808e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-79d494361ae093b69e74ee9dbe65bfd4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-79f007c1c6d07557120982951ea67998.woff2",
+      "sha256": "ecd5160dfe937d1e8271e2c7efe45569c2d3f53c94f5d7acaf600434c758a423",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-79f007c1c6d07557120982951ea67998.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7a07ddc0f0c0f5f4a9bad6ee3dda66b5.woff2",
+      "sha256": "e1443444d7865b4650e51da424a02e2b58a75ce1d3b5d125b9d4424c0cc5cff7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7a07ddc0f0c0f5f4a9bad6ee3dda66b5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7ab2bed91166a9dca83a5ebfbe2a7f38.woff2",
+      "sha256": "3d692c33792626f84eaf48e73fb2c9dfd237ffd3a5b8a882d0f1e4a7301949c7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7ab2bed91166a9dca83a5ebfbe2a7f38.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7ccce86603f80a099ddb0cb21d4ae3e3.woff2",
+      "sha256": "ba4c2f8e126245571624eb841623e3a13a394fba39fc215c60786e786d4e4f35",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7ccce86603f80a099ddb0cb21d4ae3e3.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7e4bde7e9c7f84cd34d8a845e384c746.woff2",
+      "sha256": "934ad4e8abe120c1dba1ff0427a04bfa431ecf61e8402d93965fdfc000198e66",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7e4bde7e9c7f84cd34d8a845e384c746.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7e929f262f30c8ee78bf398150b1a7cd.woff2",
+      "sha256": "03de58036f102830f522035221d660524c01ff4ad4240d6273d6cb0aa8ccbccc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7e929f262f30c8ee78bf398150b1a7cd.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7eb9fffd1aa890d07d0f88cc82e6cfe4.woff2",
+      "sha256": "ccf132ae51caa20dd14896b26c829b3e45f676d933bcf91f8068bf658a4f2860",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7eb9fffd1aa890d07d0f88cc82e6cfe4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7f855356ab893b0d2b9c1c83b8116f0e.woff2",
+      "sha256": "1060f535a62ceaa15c3709cc71d5ba65aa7b25ca9f175b039b692a2f36427c3a",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-7f855356ab893b0d2b9c1c83b8116f0e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-829615148e6357d826b9242eb7fbbd1e.woff2",
+      "sha256": "4252a1dcca7da24ba065620e30429e9a2de3ee8b5ec7cbfb672c8a008779fefc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-829615148e6357d826b9242eb7fbbd1e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-866fa7613df6b3fd272bcfd4530c0bb9.woff2",
+      "sha256": "a4a710432761544ce376c443375cd3c30212a7eac28fe3e02c38fb6a51b30808",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-866fa7613df6b3fd272bcfd4530c0bb9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-87599f94b6cc129d505b375798d0d751.woff2",
+      "sha256": "3cb8e87a420ef7412eac2b1e7acd90557e3133f5926ab23b307cdd35d3293f7c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-87599f94b6cc129d505b375798d0d751.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8c2f33cee3993174f7e87c28e4bf42ee.woff2",
+      "sha256": "6b01fcbbd25e0588b009efee8aa02c56315c13b071e42f27b3a1b9ded83b9f4b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-8c2f33cee3993174f7e87c28e4bf42ee.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8d3bcabb847b56243b16afe62adaaf21.woff2",
+      "sha256": "5a27b08a7634da4e22ef40981ff0b4376a5c667fe6d315013c8283660bb3c175",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-8d3bcabb847b56243b16afe62adaaf21.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8de5b863cb50dfefdd07cb11c774d579.woff2",
+      "sha256": "8dc7c9aa8d7932d8a62b0d7e556cb7a94c1bb1728a84d50a7952d75b9f159ae0",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-8de5b863cb50dfefdd07cb11c774d579.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8e9f97f01034820170065b2921b4fb5e.woff2",
+      "sha256": "e053872045b6e69fa2b374386a30985985700925ea09831eb411299d61cc48a5",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-8e9f97f01034820170065b2921b4fb5e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8f476c4c99813d57cbe6eca4727388ad.woff2",
+      "sha256": "018d866b5eef3c096a75a56f53df14e4f3ed2b69fc546178b61095736a0cf92e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-8f476c4c99813d57cbe6eca4727388ad.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-903bb6865f3452e2fda42e3a25547bc5.woff2",
+      "sha256": "4f9d77b306f63f69dc23f187858c688f20590a582f4d614f8934b8fcb31cc01b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-903bb6865f3452e2fda42e3a25547bc5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-91ddb2969bf2d31ba02ad82998d1314c.woff2",
+      "sha256": "b1c7f6ba934a56bb9ef3c85602de346d594654798004ebfed86cb68fdec23a9f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-91ddb2969bf2d31ba02ad82998d1314c.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-938d90c10ff8c20386af7f242c05d6b0.woff2",
+      "sha256": "3d4cb06a72e43dcee4114ca345cfbb93c3a037cc27164cad3ecd979b0affc62c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-938d90c10ff8c20386af7f242c05d6b0.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-93fc8f28a33234bcadf1527cafabd502.woff2",
+      "sha256": "950ff7a9d636ca4b7684833ff898ca7b4c3d21072c322dd6ca482825aaf6f06d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-93fc8f28a33234bcadf1527cafabd502.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-95429962233afd82db1c27df1500a28c.woff2",
+      "sha256": "63474c129283d98a4426f2af09ce89e7e0fc0a8bf897a5423c3230d513a2816d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-95429962233afd82db1c27df1500a28c.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9544732d2e62d1a429674f8ee41b5d3a.woff2",
+      "sha256": "b67f74ffa8e1b8ea3b4617c3fa4c68408ec54e34cc532ec71031adc8b15c3343",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-9544732d2e62d1a429674f8ee41b5d3a.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9592bfc861f07bcb8d75c196b370e548.woff2",
+      "sha256": "aae1aaab500a71b28d1ec96380b49ccaf7550d06b57db71e75737d17715f5261",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-9592bfc861f07bcb8d75c196b370e548.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-95bfd249da4902577b4b7d76ebdd0b44.woff2",
+      "sha256": "ce77aebaeee894d03a85f1d9ccecdb3447ab27f77eb8e3f685c961464119c5ef",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-95bfd249da4902577b4b7d76ebdd0b44.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-968cffdc8ee679da094e77ebf50f58ef.woff2",
+      "sha256": "7af27211f5491341d85b051445a7ddbc9e28bec438b8124a18783708fef68667",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-968cffdc8ee679da094e77ebf50f58ef.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-97f7f48ce90c9429bf32ae51469db74d.woff2",
+      "sha256": "b61251e62c3ecd8d556201f75e5d46e48f1e7619e67ecad2c36690e8d5a9ed4f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-97f7f48ce90c9429bf32ae51469db74d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-982b630266d87db93d2539affb1275c6.woff2",
+      "sha256": "64ffc06d05e0eb263f161fc3ab45747bc09c916c92195450600576b0867a43cf",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-982b630266d87db93d2539affb1275c6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-98f2ad84457de7f3740d9920b8fa8667.woff2",
+      "sha256": "20e0422c76332e759d6daabb96bfa9ccdc02be80b17e9928e3873683ae5b9995",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-98f2ad84457de7f3740d9920b8fa8667.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-99a16ef6a64934d5781933dbd9c46b2e.woff2",
+      "sha256": "8bdc8f9731f8730a61043729f403e06e6b9bcfed2fb65e71f7fc421ae51b37b7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-99a16ef6a64934d5781933dbd9c46b2e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9cfb2a77a4e45025105ad29a1748b90d.woff2",
+      "sha256": "8a83a1c27c1dc42db2653f37bb39fb95e3bb8180e99ea372766366c995248cee",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-9cfb2a77a4e45025105ad29a1748b90d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9d81066dd2b337c938df6e90380a00dc.woff2",
+      "sha256": "3e7444c5704402da829c61e1cdeee82c1867939590d9b25290793c58de548867",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-9d81066dd2b337c938df6e90380a00dc.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9eb5a99df4e76ac3363453ac9ca288b1.woff2",
+      "sha256": "c464198e0903b1025c20e23e6df719933adbcea5f5e3b68fa67bd388e66dc738",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-9eb5a99df4e76ac3363453ac9ca288b1.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a004ddfcb26e67bd6e678c8ed19e25ce.woff2",
+      "sha256": "429f417980fd11df51d1b7c6e2481e65e2f1a2bf3f16531b3d189556b22be20d",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a004ddfcb26e67bd6e678c8ed19e25ce.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a0ca5df4258213d7fc9fce80f65ce760.woff2",
+      "sha256": "4577ce8d2f2161ddcbb02f1154a9899bc55a77d3a715a3650261c56839153ee6",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a0ca5df4258213d7fc9fce80f65ce760.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a1f916d6039285c4ffb900cd654e418f.woff2",
+      "sha256": "355bbd7b9ccfe3501325f51a8b14fcbac0a784b72b5629f7e54d28ab00060ea9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a1f916d6039285c4ffb900cd654e418f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a203b91dad570bf05a58c3c3ddb529bf.woff2",
+      "sha256": "664f032ffd3d67ac08c988cb9df5ed9e14ef1bd29b599085aae5ce019535b8f4",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a203b91dad570bf05a58c3c3ddb529bf.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a365e82ed54697a52f27adcea1315fe8.woff2",
+      "sha256": "7431d7c929b66ddef73132026c17ba2bdd1c749a2733b12b15a2bd53da10cee9",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a365e82ed54697a52f27adcea1315fe8.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a4c34be6d42152e64b0df90bc4607f64.woff2",
+      "sha256": "85c4fb4d97312f0260a0db861ddcd8e1f14cc031db4c0fa8bfff098114eed1a1",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a4c34be6d42152e64b0df90bc4607f64.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a7accba310e821da5505f71c03b76bdb.woff2",
+      "sha256": "a630539dbb8b53eeef26d3c14c65e8aa65056e6ee70ed55d02bad8c6e2cc34b1",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-a7accba310e821da5505f71c03b76bdb.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-aa0d470430e6391eca720c7cfa44446f.woff2",
+      "sha256": "9e7d4e67d3026e623581bbb8ffb9767e5cc8ae4208ea1ad9589e1c877a396ae0",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-aa0d470430e6391eca720c7cfa44446f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-aa5c9ca6cf4fba00433b7aa3fa10671a.woff2",
+      "sha256": "a612a4deee08c188d304a75acfaa1a5f606ec0e959ee36572585a21d63a05767",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-aa5c9ca6cf4fba00433b7aa3fa10671a.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ac9ceb44437becc3e9c4dbfebab7fc2d.woff2",
+      "sha256": "88cdb98b8b47719cb34de6d927db93102845979729309ed7c9d81c2eca267d18",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-ac9ceb44437becc3e9c4dbfebab7fc2d.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b1220a3c61f85cc0408deedb4c5f57a2.woff2",
+      "sha256": "0c5b4365bec5a439a325347b8e373ce2d733e69a31227d9be1a6bfb1a81f8339",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b1220a3c61f85cc0408deedb4c5f57a2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b358f7a51ece39a3247942b1feabdb29.woff2",
+      "sha256": "da427d935e5286ddb7bc67bbddb53f19f21b1b22a08eb18b81202d6a0d7104ff",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b358f7a51ece39a3247942b1feabdb29.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b57aaedfd8ebdf3931f25119dc6a5eb2.woff2",
+      "sha256": "489368f841681abe8c4a10d8c04eb1f3dd7ca0431866ee6d998738cb5d953e94",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b57aaedfd8ebdf3931f25119dc6a5eb2.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b5c1596551c256e0e9cf02028595b092.woff2",
+      "sha256": "53ddc8aec903cc6923e7bea4290f8c22748d8a9d3fef9310c8db45144b8602f5",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b5c1596551c256e0e9cf02028595b092.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b6d128682ee29e471486354d486a1b90.woff2",
+      "sha256": "6fec9175d81ae947476b6e3d23d8a952b3f6f2abf3a236a16d3b2030aec8ee2f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b6d128682ee29e471486354d486a1b90.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b6fd38ca30869792244804b04bc058da.woff2",
+      "sha256": "729394216762fa8e54dcf7d8a6623812c68ee868fa423cb150eb730fa142d5fe",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b6fd38ca30869792244804b04bc058da.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b7d203b051eff504ff59ddca7576b6a9.woff2",
+      "sha256": "012348fc81bad86733c10d93edc49b31fa98d161162a7b9c7cbe2d02f184e684",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b7d203b051eff504ff59ddca7576b6a9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b96d9226ce77ec94ceca043d712182e6.woff2",
+      "sha256": "55f3829b501cf10b929c86d8703be025941489012ae3a237a0f7d4bde532e316",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-b96d9226ce77ec94ceca043d712182e6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ba3de316d63c7e339987b16f41a0b879.woff2",
+      "sha256": "204c98c6d957da9076afe9318003ced09bd3b44a4ce8365b555337fdd574a04b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-ba3de316d63c7e339987b16f41a0b879.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-bafff7a14c27403dcc6cf1432e8ea836.woff2",
+      "sha256": "16a0b6a3f5462fc87a5043bb89dfaeab6070f9b15bf7bb33d74c6f1f0e945d7e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-bafff7a14c27403dcc6cf1432e8ea836.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-bd77e3c7f9e0b072d96af37f73d1aa32.woff2",
+      "sha256": "762f6b930564a70639a89c41e38b55e4fe93753fe30063aee0577ee6a57b14ed",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-bd77e3c7f9e0b072d96af37f73d1aa32.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-be549ab72f0719d606a5c01e2c0219b6.woff2",
+      "sha256": "51f88e333f2a5b2ed3b6670c7b7ff122d16e6b0a09d0297ae4dec70de721bcf3",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-be549ab72f0719d606a5c01e2c0219b6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c16ed9740b85badf16e86ea782a3062f.woff2",
+      "sha256": "2650a650f03c1d5736cc0f1d774f778639d4df2eee805766ec69410108996344",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c16ed9740b85badf16e86ea782a3062f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c1f94158256bb1f3bf665b053d895af9.woff2",
+      "sha256": "0d5a4da13c00111ae6e921de8a5d3e7e407773ceb415771997a9e08d490fc603",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c1f94158256bb1f3bf665b053d895af9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c40533fdf4cc57177b12803598af7e59.woff2",
+      "sha256": "bf57ac6c74823d2193e4fd637e0fef9f3cf65867dc573bf287cab541eee2862e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c40533fdf4cc57177b12803598af7e59.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c4a687ac4f0c2766eefc9f77ed99cddf.woff2",
+      "sha256": "fbd978baf163d2cf637804b525e7df206e0657d217d3d4339aa204ec584460a0",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c4a687ac4f0c2766eefc9f77ed99cddf.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c69f61a4ab18d0488c8d1fc12e7028e8.woff2",
+      "sha256": "1d7f8daeee505d3f7830d0c0c74af7af68abc2a0b01b2e92147a85239b72249f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c69f61a4ab18d0488c8d1fc12e7028e8.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c8b71798409ccc126ee264a00aadcf21.woff2",
+      "sha256": "5e78c653a12851d95e2754fd01052e65c952fa2cc603e6e40a7c1a104fe366e8",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c8b71798409ccc126ee264a00aadcf21.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c99eda15fc26a2941579560f76c3a5cf.woff2",
+      "sha256": "234ca0a3ee22640185863709a91ed8574ee10cdc97103c74913ef9e7aae8b399",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-c99eda15fc26a2941579560f76c3a5cf.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cb17fc3db95f6d139afc9d31a8e93293.woff2",
+      "sha256": "366d1d64220e84149380d851590fa86decac06ab04af7b5d6b84b1593fbc03a7",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cb17fc3db95f6d139afc9d31a8e93293.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cbaaefaaf326668277aa24dfa93c4d28.woff2",
+      "sha256": "d912c56af1eb36e3cf58ee3fd05a54cfaa2474d721bf6ebbeafde0163c10d6b3",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cbaaefaaf326668277aa24dfa93c4d28.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cd145ce4a0ea18469358df53c207bc1b.woff2",
+      "sha256": "3ef057732d62da9572e373f78d282b218e0f5cb8e003d275adaef15abd2d2cbf",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cd145ce4a0ea18469358df53c207bc1b.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cdbce89e82cc1ab53a2decbf5819278f.woff2",
+      "sha256": "fc2ac910be82739b996e39063360efcccc5b82f4c99a048d8655885afc3ef933",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cdbce89e82cc1ab53a2decbf5819278f.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ce4884f96f11589608b76b726a755803.woff2",
+      "sha256": "ea1d4e3f3fa68c9193a72d5df249986350e892091e3edac9025baf7e1759cdee",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-ce4884f96f11589608b76b726a755803.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cf2cc71752631e579e35b0e423bf2638.woff2",
+      "sha256": "ce5a8058ed21535db620e89a942f8d4fe33968cbb4557c26c4521c536d5e8c66",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cf2cc71752631e579e35b0e423bf2638.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cf6ff4e0f491ca0cf3038187a997b9b4.woff2",
+      "sha256": "996fd1d3fe4f0783b30ffec0912ea858cadf71a077eef41bcbb6f488aa1853ed",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cf6ff4e0f491ca0cf3038187a997b9b4.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cfb211578629b7e8153b37240de6a9d5.woff2",
+      "sha256": "d07bdf1bc149ae52b05fff010bf5a5c97da67d7bd612cd7975939102446da207",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-cfb211578629b7e8153b37240de6a9d5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-d0cf73942fea1c74edbdf0b3011f4656.woff2",
+      "sha256": "e802ce5eb6306d4272a9188ba65c41423894ccaa71e679d1b8f53df3acf7298f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-d0cf73942fea1c74edbdf0b3011f4656.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-d2666cbed13462c5dc36fa2f15c202ca.woff2",
+      "sha256": "6d157af83341041b1110824b12bcad95a1267c6088aadb7cfebc1fee77c81a27",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-d2666cbed13462c5dc36fa2f15c202ca.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-d3716376641d615e2995605b29bca7b6.woff2",
+      "sha256": "9b9fa9f96d1ed9160912efab73c4883324225fe1096e6aa6c6f5a534fcac292b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-d3716376641d615e2995605b29bca7b6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-dac48066b5883d8b4551fc584f0c2a3e.woff2",
+      "sha256": "50fd052c2e0b0ebf8f304eae64965486d1721da85fbbce115683055f05785bf0",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-dac48066b5883d8b4551fc584f0c2a3e.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-dbea1af6dcd9860be40c3d18254338f5.woff2",
+      "sha256": "4bb0a8345e803f659aca813aadca25703c16bfddf5d89b82ddcec2a50e338471",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-dbea1af6dcd9860be40c3d18254338f5.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e11567fd2accf9957cd0d3c2be937d87.woff2",
+      "sha256": "dc6a09381a42ce3aa802d029bc61ed01b4302f0303a1defa8234f130dafa5428",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e11567fd2accf9957cd0d3c2be937d87.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e2ead7ea7da0437f085f42ffc05f8d13.woff2",
+      "sha256": "b4648f5ae511c1d0d4b2aa75a72a547e8436aaa5f1ca15c042e722a9fa8c77f4",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e2ead7ea7da0437f085f42ffc05f8d13.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e3fcf5180fd466c8915c4e8069491054.woff2",
+      "sha256": "29a56eb3d183f71ddb753f000c8bd902d1b9a35ca08ff2d403c6af19934661fa",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e3fcf5180fd466c8915c4e8069491054.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e480d9c614742d05f0e78f274f1e69e6.woff2",
+      "sha256": "0ceef1123d1f46d7c9434f5d7f1d3896ba4d1f1b0fe0076383d920ea8da94ec5",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e480d9c614742d05f0e78f274f1e69e6.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e4bca6cfa53e499cae0a6be4894a90e9.woff2",
+      "sha256": "3cc764666e9c2c6483c73c911b3823d74ee680bae209fb3ddee6b976c599f9f1",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e4bca6cfa53e499cae0a6be4894a90e9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e51ef413167c6e14e0c0fdcc585f2fc9.woff2",
+      "sha256": "931c27e602508ea6d712803d5647dabb164438140e309fd0be4f15917943f480",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e51ef413167c6e14e0c0fdcc585f2fc9.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e5f453bb04da18eed01675eeebd88bf8.woff2",
+      "sha256": "ab6c969a6b7c481d03f26f68e77eec932b55232608c9b86d710c48f5c200f259",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e5f453bb04da18eed01675eeebd88bf8.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e656f091b9dc4709722c9f4b84d3c797.woff2",
+      "sha256": "b90cfb35e64c7f9f5b7e1fb48d0c396c44f757349e5669e64a25d98806d642fc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-e656f091b9dc4709722c9f4b84d3c797.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ec181b795ac1fb5a50d700b6e996d745.woff2",
+      "sha256": "6b18e2adafaad34cf0544c53915d65af94806ab621f5de6a60f718ef60c9cb1e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-ec181b795ac1fb5a50d700b6e996d745.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ee8bae97908d5147b423f77ad0d3c1bb.woff2",
+      "sha256": "6ccb9581b563074b1e101d2f5ed1efe5c1c53e2406f23139543a139f81a4ae5f",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-ee8bae97908d5147b423f77ad0d3c1bb.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f0f13b5c60e0af5553bd359f5513be1b.woff2",
+      "sha256": "75eac42c2d875a86029c0a684b728abb0dc8baa56e503aaaacb1c457f0a01aa6",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-f0f13b5c60e0af5553bd359f5513be1b.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f2b54d4e7be0eaefe1c2c56836fa5368.woff2",
+      "sha256": "da1a8fde33ea6a56d70b5c87b1a4030c3fe663772effcbe45019fde0b336d3dc",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-f2b54d4e7be0eaefe1c2c56836fa5368.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f56414bf9bced67990def8660e306759.woff2",
+      "sha256": "ffb6a7253b90f6f82b90619935ab41e063db09686921f6dace943f5ec183b16b",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-f56414bf9bced67990def8660e306759.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f5d079153c99a25b9be5b8583c4cc8a7.woff2",
+      "sha256": "b8ec5b4516ddc269a99f306b9d63ff0bdecd37a800736cd0eab28f254291b15e",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-f5d079153c99a25b9be5b8583c4cc8a7.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f6032fc06eb20480f096199713f70885.woff2",
+      "sha256": "937b4d5222bb42c0e190a3f40a1aa9f984edcaa9e8d275e9d4bf1d88ef74754c",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-f6032fc06eb20480f096199713f70885.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f8ee5d36068a42b51d0e4a1116cfcec1.woff2",
+      "sha256": "ae083037bfb691cf96205e109a287255f87a45a90848fe2a63cb0b3e7af3e904",
+      "destination": "src/editor/fonts/Xiaolai/Xiaolai-Regular-f8ee5d36068a42b51d0e4a1116cfcec1.woff2"
+    },
+    {
+      "path": "packages/excalidraw/fonts/Xiaolai/index.ts",
+      "sha256": "c2cbbbfa669404795527e06cf596ab4b1b851f9bb993c608c8ab9c3c2aabe9d3",
+      "destination": "src/editor/fonts/Xiaolai/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fonts/fonts.css",
+      "sha256": "45f1993459e438245df7a5d2ebeee5b6ac5f3c818a04d5cd4c86f2b0b122d398",
+      "destination": "src/editor/fonts/fonts.css"
+    },
+    {
+      "path": "packages/excalidraw/fonts/index.ts",
+      "sha256": "b8d8306e6db8520053bd90166eed5a1773c94394f1e6d5b68ee39243e3bef0e6",
+      "destination": "src/editor/fonts/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/fractionalIndex.ts",
+      "sha256": "951adbbd8bbfa96b61df8854a5fb90a4e2355e1d59268b653dd48cd8a2fd5eab",
+      "destination": "src/editor/fractionalIndex.ts"
+    },
+    {
+      "path": "packages/excalidraw/frame.ts",
+      "sha256": "3a62b05eb10828ab204c355f69574980bf4227757634553745ce3dc7873d442f",
+      "destination": "src/editor/frame.ts"
+    },
+    {
+      "path": "packages/excalidraw/gesture.ts",
+      "sha256": "4964b16fbf58474e705801199221da83a2a5cb4338eb6e477a6c3ac25a66534f",
+      "destination": "src/editor/gesture.ts"
+    },
+    {
+      "path": "packages/excalidraw/global.d.ts",
+      "sha256": "783f82d2e9876aa69b8b1b9a843b76098da5f2e1fa7c1860bc4ceab997ebacd0",
+      "destination": "src/editor/global.d.ts"
+    },
+    {
+      "path": "packages/excalidraw/groups.ts",
+      "sha256": "2e165caaec4bd04e52f4122c5f64fde28ce3a224378fffa55729b2ddb4ea7a73",
+      "destination": "src/editor/groups.ts"
+    },
+    {
+      "path": "packages/excalidraw/history.ts",
+      "sha256": "a0355c80f8e6a5f00f807bac4d9d1647895c3caea720437638c68f51fb332d9f",
+      "destination": "src/editor/history.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useCallbackRefState.ts",
+      "sha256": "e792287b2eba5f8892bf7ddb39ba1bc2fa9faf1d6fa50de306cb5573fe56dfb3",
+      "destination": "src/editor/hooks/useCallbackRefState.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useCopiedIndicator.ts",
+      "sha256": "e36a5eb305ed362d8ade46f22d03b8f68f6fc0e5e6136c81d85e9d6b9c25142f",
+      "destination": "src/editor/hooks/useCopiedIndicator.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useCreatePortalContainer.ts",
+      "sha256": "47dd47bc0760f61781c19402a195aa0bbace0b88c8900a981e91f60cbd94319a",
+      "destination": "src/editor/hooks/useCreatePortalContainer.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useEmitter.ts",
+      "sha256": "490476e057ee029bfd170297583c285fcf2cac806dd27ea7f5a08c97fe3e9194",
+      "destination": "src/editor/hooks/useEmitter.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useLibraryItemSvg.ts",
+      "sha256": "562fbf5f171d231567d5e32803b71cacb9347d63d0b42ebe0f900639f516e0d7",
+      "destination": "src/editor/hooks/useLibraryItemSvg.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useOutsideClick.ts",
+      "sha256": "1b83ae198b71b3d1ce786bd3b2e3239b0f8ca28b5c2b8c0fec360ae20a6ab90c",
+      "destination": "src/editor/hooks/useOutsideClick.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useScrollPosition.ts",
+      "sha256": "ba807e3604bddaec34e6311ebbdb4694308305e44924dd13f0c7b9de7c6999ca",
+      "destination": "src/editor/hooks/useScrollPosition.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useStable.ts",
+      "sha256": "618d97ba6196d8cb0ca0ce43ba959f0dfbc8afb632875793269ffb8f4e7ac518",
+      "destination": "src/editor/hooks/useStable.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useStableCallback.ts",
+      "sha256": "8a417249192da76e2b1533b52b50fa477cc6ffd8005bfae35d955cbcc976a0f9",
+      "destination": "src/editor/hooks/useStableCallback.ts"
+    },
+    {
+      "path": "packages/excalidraw/hooks/useTransition.ts",
+      "sha256": "c65961a7cb1c48d49f01ca9ded6a29aa1b8c93d35ab6c859e63265cb7bbd1a76",
+      "destination": "src/editor/hooks/useTransition.ts"
+    },
+    {
+      "path": "packages/excalidraw/i18n.ts",
+      "sha256": "2edd95226a0f3e099375770c3346766273dc4b7e9c1c68e825f2fabc2984f65c",
+      "destination": "src/editor/i18n.ts"
+    },
+    {
+      "path": "packages/excalidraw/index-node.ts",
+      "sha256": "fe1de88954cb0bbf0bb0aae4a2f4457cc221ee3bccbd481de581e1ca7b6a18e3",
+      "destination": "src/editor/index-node.ts"
+    },
+    {
+      "path": "packages/excalidraw/index.tsx",
+      "sha256": "d0fd263267f74ca6dadd15c57790637619e562f97c7e5451d723cd4aa645eaac",
+      "destination": "src/editor/index.tsx"
+    },
+    {
+      "path": "packages/excalidraw/keys.ts",
+      "sha256": "6bfb3d4eeddca5d564a7f5f4c5efd6169245fd28afdbd0fe3976b75e7de7c499",
+      "destination": "src/editor/keys.ts"
+    },
+    {
+      "path": "packages/excalidraw/laser-trails.ts",
+      "sha256": "9664c4339080dce9ab3875946be2f088a6ac2e258c905ad84c21ced7307b2f2f",
+      "destination": "src/editor/laser-trails.ts"
+    },
+    {
+      "path": "packages/excalidraw/locales/ar-SA.json",
+      "sha256": "8226af349c28264eb393a907d35599fc4aed043e8396b8b3f5a2816e486f6e73",
+      "destination": "src/editor/locales/ar-SA.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/az-AZ.json",
+      "sha256": "1d4df26ebd921e6e4d69ab79d0cc19d022dd835c0bd613c5003718219a7ab04f",
+      "destination": "src/editor/locales/az-AZ.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/bg-BG.json",
+      "sha256": "56643c2954a71960ce2da99bfd21465a81c8cf24c8b5d0b462730d07f5ede422",
+      "destination": "src/editor/locales/bg-BG.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/bn-BD.json",
+      "sha256": "f9a8b700bb695242675fb60f29981f97e87cc19df63b088c7caf4b7f573d26e3",
+      "destination": "src/editor/locales/bn-BD.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ca-ES.json",
+      "sha256": "1c50fa8b5a6ea677c4a12ca75283c0530c84e910c6af464f3caca8e739a25135",
+      "destination": "src/editor/locales/ca-ES.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/cs-CZ.json",
+      "sha256": "07dfb5d359b8efe79ccf4b5fed0579a88bd9a1434936daaee56dc795562256d9",
+      "destination": "src/editor/locales/cs-CZ.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/da-DK.json",
+      "sha256": "4b534a116134c809976cacda8fa4a74982ede1f09469ce37c1311bc48c8a0b92",
+      "destination": "src/editor/locales/da-DK.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/de-DE.json",
+      "sha256": "65738b397808e2536019fe524a3a957d28cfebcbdbe8abb4e91e34e51202cadf",
+      "destination": "src/editor/locales/de-DE.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/el-GR.json",
+      "sha256": "87ee26b8ce3273815f744abd80f32f929dd86edb828c504a142189c767dce9f5",
+      "destination": "src/editor/locales/el-GR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/en.json",
+      "sha256": "c8c9c8a50a14cd2d5c53703a273ce134608712f84335d9c4e2613b6d3b5bb6f5",
+      "destination": "src/editor/locales/en.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/es-ES.json",
+      "sha256": "326101d2a8750734dbefa834b5a6085e8f090cde67642f61cd4eec518fef9654",
+      "destination": "src/editor/locales/es-ES.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/eu-ES.json",
+      "sha256": "e17b9c35f687ae0829a65e13f373c384224edf594611ce8f844f5cd8917be12c",
+      "destination": "src/editor/locales/eu-ES.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/fa-IR.json",
+      "sha256": "fec154bec220c7644e0deaf3e2db1da9d4c8e3fd60ec66a08ad52956f06cc2a4",
+      "destination": "src/editor/locales/fa-IR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/fi-FI.json",
+      "sha256": "c5a3bbc185777920e65a9db8bc0a53080adee51bea62de1e3a12e79d1ce11b0e",
+      "destination": "src/editor/locales/fi-FI.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/fr-FR.json",
+      "sha256": "f00f83d2e72cfb3474a15e3693d0097623b320b38d60c5d39ceb900b9927efe5",
+      "destination": "src/editor/locales/fr-FR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/gl-ES.json",
+      "sha256": "bbb9f342412bcddba4d5cbfe0b7139b1361df78fb299fb38b10968a8a7239567",
+      "destination": "src/editor/locales/gl-ES.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/he-IL.json",
+      "sha256": "9408b93efd7c30f976c167218daa3efb1c55f2a845e3554f271b527f270ae5b6",
+      "destination": "src/editor/locales/he-IL.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/hi-IN.json",
+      "sha256": "368689032f9a8f04dc2a62b1bb311ea2ce1a25624f9298063413fc243dee7b68",
+      "destination": "src/editor/locales/hi-IN.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/hu-HU.json",
+      "sha256": "b5b66b85faa9275cf4b033300ac87f386c80d1b4a4447e2c5614cb81917e967f",
+      "destination": "src/editor/locales/hu-HU.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/id-ID.json",
+      "sha256": "6be2d5aa0bf2c1065d5cc47d1ea5bb2727dcc5259776638aa427919d5c2a0aa9",
+      "destination": "src/editor/locales/id-ID.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/it-IT.json",
+      "sha256": "d8306afdd176dcc5d64c4d2ee47a92a6934437ed791cfe4d748d83bd50ccbf14",
+      "destination": "src/editor/locales/it-IT.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ja-JP.json",
+      "sha256": "ae51279e5fcd6df024e45d8b2bc9731d85942b791b9e43d31bf1f624ea78f75e",
+      "destination": "src/editor/locales/ja-JP.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/kaa.json",
+      "sha256": "c08093f52f86431c33904bf5b31436c83cb1061dcdc42854dc5cef042c3305c6",
+      "destination": "src/editor/locales/kaa.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/kab-KAB.json",
+      "sha256": "32825cbdcf7482ced128c2cc73b12100934983601f307c05c6712e398ad36483",
+      "destination": "src/editor/locales/kab-KAB.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/kk-KZ.json",
+      "sha256": "95e77d3fc3c668569422f90a9f270a20093d4c3cd67f8d830d62a0d71dbe9c45",
+      "destination": "src/editor/locales/kk-KZ.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/km-KH.json",
+      "sha256": "bbff4df4451e088d6fbf01cbf0f0561b5dc9781c5cb97469a26372454c7912d2",
+      "destination": "src/editor/locales/km-KH.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ko-KR.json",
+      "sha256": "b247d6b637957dd98a1ef81bfbae495d09e8a1a26899d6d2c6753f0214732951",
+      "destination": "src/editor/locales/ko-KR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ku-TR.json",
+      "sha256": "095279e394d1cfa736910921718b7b97810c2bff8a89b6261cee3b4c3d36d5c8",
+      "destination": "src/editor/locales/ku-TR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/lt-LT.json",
+      "sha256": "53d08ceb617882d4257b8c4adc19e3bba194b5bfb505970707ae67737fa52ee6",
+      "destination": "src/editor/locales/lt-LT.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/lv-LV.json",
+      "sha256": "c2c6a602d8bca9edf4ad286372df9b9c60b0e0293696fa8ab6db0fbbf62f76b1",
+      "destination": "src/editor/locales/lv-LV.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/mr-IN.json",
+      "sha256": "0b1b3685badd7297aaef5c6a700db677cb8d26dcf58c584a5018412138ae5186",
+      "destination": "src/editor/locales/mr-IN.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/my-MM.json",
+      "sha256": "7f41ee1b6e5b581dd6033677ba55f56acfca5977346d7a4aaaa166625edfcd76",
+      "destination": "src/editor/locales/my-MM.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/nb-NO.json",
+      "sha256": "b983313dfec4b1b0c2c1d5d69975eee25c8e269f588fba748232850c6fccc877",
+      "destination": "src/editor/locales/nb-NO.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/nl-NL.json",
+      "sha256": "ce7ebe1af4bb0ea1eff5d52b4a7d52e341752c2580acd3983a5ae4f6143e3889",
+      "destination": "src/editor/locales/nl-NL.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/nn-NO.json",
+      "sha256": "0a53f6d46b4c9400eb00cbaec19e85bd41747f889f614966db005503cb83ad47",
+      "destination": "src/editor/locales/nn-NO.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/oc-FR.json",
+      "sha256": "cb4ddef1e771dffc9e87f799020e6f95cb9209767823cdee02dfd0a3a4d59aaa",
+      "destination": "src/editor/locales/oc-FR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/pa-IN.json",
+      "sha256": "04d5088ae04d11347f55a5b0e125fbe517dc1a100f5b710f9de865aa9a33d0ce",
+      "destination": "src/editor/locales/pa-IN.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/percentages.json",
+      "sha256": "825cf148ab73b0fd5c3a9ea1018e0785b7bf1605e7d4a7079434c5c44d2bf48b",
+      "destination": "src/editor/locales/percentages.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/pl-PL.json",
+      "sha256": "159cbe38c8578b8f1c02e800a0ca7268b14a6dcee55467d1b19f8101ea86944a",
+      "destination": "src/editor/locales/pl-PL.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/pt-BR.json",
+      "sha256": "f73a73e11cd8ef68cc8a7cfa86f3bde367c64837f4ac0cff5fd72478639c9915",
+      "destination": "src/editor/locales/pt-BR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/pt-PT.json",
+      "sha256": "473625928496cff8488e685405093bec321442aa024b4951a5213b60140bc9e1",
+      "destination": "src/editor/locales/pt-PT.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ro-RO.json",
+      "sha256": "1da69a02b1b3ec486657f01424216cd7b571c833aec6a4602fb7c112f7b48551",
+      "destination": "src/editor/locales/ro-RO.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ru-RU.json",
+      "sha256": "716e9d91f159ed69b9c0dacffe1f37442d23262c477df96e4d9852d12b3455bb",
+      "destination": "src/editor/locales/ru-RU.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/si-LK.json",
+      "sha256": "a15082df71851f4e9e07d59d8fff358df7614622e9bf3c3ebd67f12e20524468",
+      "destination": "src/editor/locales/si-LK.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/sk-SK.json",
+      "sha256": "4fd302c6e849be99d51ebaed2ed7e44ce343e06f5a776b4993acfcc8bacb3560",
+      "destination": "src/editor/locales/sk-SK.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/sl-SI.json",
+      "sha256": "7d75bb7f24bf8fb5bb553438255b4222024dfa00c81c861e8f7f96ff7c235528",
+      "destination": "src/editor/locales/sl-SI.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/sv-SE.json",
+      "sha256": "390b8c4862b24aaff5509137d94fdfdcbf951618bc83ba5b06972d1a4ae59ac0",
+      "destination": "src/editor/locales/sv-SE.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/ta-IN.json",
+      "sha256": "fb25d8e32a4d005e1c6c368df539d0a877e00f96a18c89cd896ca4e43b464564",
+      "destination": "src/editor/locales/ta-IN.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/th-TH.json",
+      "sha256": "4c5c2a931c3025e111e9a2b4e6da221607d18102c9cc2538cbd35c387c0fdaaf",
+      "destination": "src/editor/locales/th-TH.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/tr-TR.json",
+      "sha256": "61d5b849120c36b6c46f22409bf2b08045b26ab645016bd4cbb5af010c2f333c",
+      "destination": "src/editor/locales/tr-TR.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/uk-UA.json",
+      "sha256": "0f057d58e3faac9cde3132bd516aa16ac46df6ac3e58c2dadff2273b5e9b38d5",
+      "destination": "src/editor/locales/uk-UA.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/vi-VN.json",
+      "sha256": "80384a773688e0f9ab2133acd7cfd243abafe36a572afb42bc439abd792fbd7b",
+      "destination": "src/editor/locales/vi-VN.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/zh-CN.json",
+      "sha256": "546f7e4b28902b9501fd3c64585d9ac2c490b13a9ff4223892a0b6d479f49b52",
+      "destination": "src/editor/locales/zh-CN.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/zh-HK.json",
+      "sha256": "ef1dae7e1043eae0a271b035d9c05fe34af6db3fede4f569eecc3ce7e488cc3e",
+      "destination": "src/editor/locales/zh-HK.json"
+    },
+    {
+      "path": "packages/excalidraw/locales/zh-TW.json",
+      "sha256": "ee77c88dd62ebc35375c7b18e69f49a96ed1cb91dcecf7fd4d89edc74a5f5b16",
+      "destination": "src/editor/locales/zh-TW.json"
+    },
+    {
+      "path": "packages/excalidraw/mermaid.ts",
+      "sha256": "e388a1b7c01b333ab98f24b4f756619328b500f9f9f2abf122db9cf7ef249d3c",
+      "destination": "src/editor/mermaid.ts"
+    },
+    {
+      "path": "packages/excalidraw/points.ts",
+      "sha256": "40becd0dce3678c3a982fde23ac2b556db2f958fe94fe0177fd0c5a75a75fe2c",
+      "destination": "src/editor/points.ts"
+    },
+    {
+      "path": "packages/excalidraw/polyfill.ts",
+      "sha256": "4005302cde091e434c116728aac841115618f9e67f3010c78bfadc2a4cf559d5",
+      "destination": "src/editor/polyfill.ts"
+    },
+    {
+      "path": "packages/excalidraw/pwacompat.d.ts",
+      "sha256": "f8a7ec5b298ce49bd0e4fd5dd47880768ecb156a790c5d5c37a2baca65060e82",
+      "destination": "src/editor/pwacompat.d.ts"
+    },
+    {
+      "path": "packages/excalidraw/queue.ts",
+      "sha256": "dce464c4d9f262e90b5bfbf5e471fe5c040fffb41bfee820574227d8b80e9fc4",
+      "destination": "src/editor/queue.ts"
+    },
+    {
+      "path": "packages/excalidraw/random.ts",
+      "sha256": "c3c14544c5d16cb0f892543fed7b3f28270b4279aa49e37d411063fa85b6150a",
+      "destination": "src/editor/random.ts"
+    },
+    {
+      "path": "packages/excalidraw/react-app-env.d.ts",
+      "sha256": "57eda4c4c04a1dca45c62857326882ce9cc948c4b52973c0e3c3b7e4c3fa3990",
+      "destination": "src/editor/react-app-env.d.ts"
+    },
+    {
+      "path": "packages/excalidraw/reactUtils.ts",
+      "sha256": "b9544a7a0ceab55f7c99786ca16242752458761d03bf662df30ba73698ce981a",
+      "destination": "src/editor/reactUtils.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/helpers.ts",
+      "sha256": "9913a5d50d1e1e90b430dc61d37a7adaa899dc782160697c29768adf1ba7b11f",
+      "destination": "src/editor/renderer/helpers.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/interactiveScene.ts",
+      "sha256": "d428c5e7d07db06ee0c1d8e6f5743ee97d1ffbf682a0a50e1fdb28f774b6576b",
+      "destination": "src/editor/renderer/interactiveScene.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/renderElement.ts",
+      "sha256": "b45a76dfb1e429732e3e1d54888389e78da6797d24ba8addd0ed442c1e7e9bd5",
+      "destination": "src/editor/renderer/renderElement.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/renderNewElementScene.ts",
+      "sha256": "fe3074d8e39aaa94809333a207a5ea1bd13404a53d2d8238c50d7421d02ee79e",
+      "destination": "src/editor/renderer/renderNewElementScene.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/renderSnaps.ts",
+      "sha256": "395e18d07bff5dba59647b6ca12081f196fccfad025f5ca218835fe174b8cf90",
+      "destination": "src/editor/renderer/renderSnaps.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/roundRect.ts",
+      "sha256": "82d3e4972890525dacb51fe10a3965ab8ebbe1b1913bfc0aebea84a87a652fff",
+      "destination": "src/editor/renderer/roundRect.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/staticScene.ts",
+      "sha256": "8b916ad38220c9d9023d61c5f070f2c0ff4263e1c9502087bc30486de8b1448a",
+      "destination": "src/editor/renderer/staticScene.ts"
+    },
+    {
+      "path": "packages/excalidraw/renderer/staticSvgScene.ts",
+      "sha256": "6ac60a185c8e7f5aba7f9abd85f4a102f4eb4d0520497590af365471b2675ca3",
+      "destination": "src/editor/renderer/staticSvgScene.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/Renderer.ts",
+      "sha256": "1162b9ba030255592fd8f80f212143f8f917eb28c7cd7047b4da977c92ed70c3",
+      "destination": "src/editor/scene/Renderer.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/Scene.ts",
+      "sha256": "befda5de3bb007fae2c558022cb87460921cab182ddf56304d3a458d83c0d40c",
+      "destination": "src/editor/scene/Scene.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/Shape.ts",
+      "sha256": "fa39770b6e373718db623ec066daa3d536c86071f382f879124b4b736746da6e",
+      "destination": "src/editor/scene/Shape.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/ShapeCache.ts",
+      "sha256": "3c6c6440589a2cdc7554b4f36922dca6d76fe73abd8b6c4be384bda1c5ad4b0b",
+      "destination": "src/editor/scene/ShapeCache.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/comparisons.ts",
+      "sha256": "747cf6c307b7e1fb2c6d884cbda557b072d3e04992b0a5ba951aedbfdd50c9aa",
+      "destination": "src/editor/scene/comparisons.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/export.ts",
+      "sha256": "433fa7168cc7080ab936f11f3a12bd1c583b01f9ca1eb2737613f0707d319418",
+      "destination": "src/editor/scene/export.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/index.ts",
+      "sha256": "1c076918ff30115ae7070b21972e0a74e666dc7172dbc983bb27c0b2f2534670",
+      "destination": "src/editor/scene/index.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/normalize.ts",
+      "sha256": "0537575b1318bc85423c648b885bfedc6a56f217b1e49a965830862e461c26da",
+      "destination": "src/editor/scene/normalize.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/scroll.ts",
+      "sha256": "b2d4afd4033b408e5d226b2348d4e5b38d0cee17c69e3d9c16b8def284fd2976",
+      "destination": "src/editor/scene/scroll.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/scrollbars.ts",
+      "sha256": "db615ce040ff64a0e1b2942aec5c120b81eb178203ce9c395f2fbf6e653b65ff",
+      "destination": "src/editor/scene/scrollbars.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/selection.ts",
+      "sha256": "139b87a1b3691d502c04081c24953c4344cad7808746f8b2e5ee672680c2f74d",
+      "destination": "src/editor/scene/selection.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/types.ts",
+      "sha256": "35b2a671c80d97b127b791dab164d9c06dacf1c535c7e844218f9ba98482cde1",
+      "destination": "src/editor/scene/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/scene/zoom.ts",
+      "sha256": "b5e48da801d512a489749ef4e993421fa5747d347bbfc674b796b9928159ef09",
+      "destination": "src/editor/scene/zoom.ts"
+    },
+    {
+      "path": "packages/excalidraw/shapes.tsx",
+      "sha256": "0e00a29cf32aad78b87a6568c6890224b2848145e078b358bf7c8396fb50584e",
+      "destination": "src/editor/shapes.tsx"
+    },
+    {
+      "path": "packages/excalidraw/snapping.ts",
+      "sha256": "b1b8cf0025290da0fdacb681efc00622a0d6bd9b645dfaacb69bd455c3345205",
+      "destination": "src/editor/snapping.ts"
+    },
+    {
+      "path": "packages/excalidraw/store.ts",
+      "sha256": "a3928b1ca3dbbb59e067a334595b261b65d5dec9340598cb5863d24d0c955348",
+      "destination": "src/editor/store.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/harfbuzz/harfbuzz-bindings.ts",
+      "sha256": "2b5e890b599b815565c2d62c09d8f2b48f38f73ac7aace06747fc7955a559440",
+      "destination": "src/editor/subset/harfbuzz/harfbuzz-bindings.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/harfbuzz/harfbuzz-loader.ts",
+      "sha256": "79bc0089a326d9a25e0fc5dc734c51c6cda72e2f74e57b323f5de110e1cf0909",
+      "destination": "src/editor/subset/harfbuzz/harfbuzz-loader.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/harfbuzz/harfbuzz-wasm.ts",
+      "sha256": "8b85df14edb55e138bee3865ad5d13f7acd63fe3e967de4f9577ad9045fa4906",
+      "destination": "src/editor/subset/harfbuzz/harfbuzz-wasm.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/subset-main.ts",
+      "sha256": "1d8e454b42ce12b08ee7e2b95255e0f9b7810cad896b06c2c980def4594c4582",
+      "destination": "src/editor/subset/subset-main.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/subset-shared.chunk.ts",
+      "sha256": "46e6df884d49108a1c465a9def4a6237f46fb261eb8c3650084eac2f9331a674",
+      "destination": "src/editor/subset/subset-shared.chunk.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/subset-worker.chunk.ts",
+      "sha256": "7f824c1de567383843e7a4c7479376cabbd7d20dcba41ba0c326cd1d1e2eb147",
+      "destination": "src/editor/subset/subset-worker.chunk.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/woff2/woff2-bindings.ts",
+      "sha256": "3abc00fc69fa4261adcde05c1d1660fb5a0350f858e77daacdfb4bf1d37078f8",
+      "destination": "src/editor/subset/woff2/woff2-bindings.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/woff2/woff2-loader.ts",
+      "sha256": "f3c8cac5bfe392cc94d70636bea595d7d9fa87ae722dd2d0a2ec238bd429c118",
+      "destination": "src/editor/subset/woff2/woff2-loader.ts"
+    },
+    {
+      "path": "packages/excalidraw/subset/woff2/woff2-wasm.ts",
+      "sha256": "5428f71551fc004524353d50c66c09f98667e3bb7183b51de5ce4aefe4c78b9a",
+      "destination": "src/editor/subset/woff2/woff2-wasm.ts"
+    },
+    {
+      "path": "packages/excalidraw/types.ts",
+      "sha256": "b385a334ff270a4180311105bc0ffa3ddcab0ffe4c6a0f0d1707240301fe46c5",
+      "destination": "src/editor/types.ts"
+    },
+    {
+      "path": "packages/excalidraw/utility-types.ts",
+      "sha256": "449ff06b80f2834beafd567d50b32a7b5e359d8282f734a2852c5d3d9dbe2c6e",
+      "destination": "src/editor/utility-types.ts"
+    },
+    {
+      "path": "packages/excalidraw/utils.ts",
+      "sha256": "c6fd078c93b0a88728a5d78d915679b3f7661c91cc9e278777d30f818658314c",
+      "destination": "src/editor/utils.ts"
+    },
+    {
+      "path": "packages/excalidraw/visualdebug.ts",
+      "sha256": "4ee99a93ee74878029d7e3dccf78ae5057c99658a78ba57944f839e6eb351af5",
+      "destination": "src/editor/visualdebug.ts"
+    },
+    {
+      "path": "packages/excalidraw/vite-env.d.ts",
+      "sha256": "a649e21f6989e728b87523bff9aaa8a22ce17b96cceaa313112abad11f71755a",
+      "destination": "src/editor/vite-env.d.ts"
+    },
+    {
+      "path": "packages/excalidraw/workers.ts",
+      "sha256": "cf75b7e55e6d1f200859f496aeb7f2c75f40ab116576c8ca90b32fcdc8fdc9fa",
+      "destination": "src/editor/workers.ts"
+    },
+    {
+      "path": "packages/excalidraw/zindex.ts",
+      "sha256": "f6b7372a73c8a9fd271f286cb72e765b7695637827654e3b79da6011b285fb7f",
+      "destination": "src/editor/zindex.ts"
+    },
+    {
+      "path": "packages/math/angle.ts",
+      "sha256": "548e0f0d2b77ecb9b7d6e5292e633752e667b86bb90bacebd8003c6745f39b09",
+      "destination": "src/math/angle.ts"
+    },
+    {
+      "path": "packages/math/curve.ts",
+      "sha256": "80ee4acf94185bf9fd8bf37d96b0b496c7e4b8757412e9593f5818763b682a4f",
+      "destination": "src/math/curve.ts"
+    },
+    {
+      "path": "packages/math/ellipse.ts",
+      "sha256": "f7911ecb65e7bf56aa37fca0dc66f71159b2595e592708d7ebe1b28fe1a68090",
+      "destination": "src/math/ellipse.ts"
+    },
+    {
+      "path": "packages/math/global.d.ts",
+      "sha256": "4bbb7cd08392b521ff7ba7db4387162fc15aa6af1f400ff6c9e460485b2457f5",
+      "destination": "src/math/global.d.ts"
+    },
+    {
+      "path": "packages/math/index.ts",
+      "sha256": "cee1842af1010465dff85299a55d235cb0e2e561e3f6efc624481abf5bb908e7",
+      "destination": "src/math/index.ts"
+    },
+    {
+      "path": "packages/math/line.ts",
+      "sha256": "8ce49cc2077efc44b8e113d92c488a44ce34b211c36f6976eaeaa18163a7ba58",
+      "destination": "src/math/line.ts"
+    },
+    {
+      "path": "packages/math/point.ts",
+      "sha256": "6b682b784cec996a44facb175d8236572b8a55f6805e685f87da56d9ab08ff35",
+      "destination": "src/math/point.ts"
+    },
+    {
+      "path": "packages/math/polygon.ts",
+      "sha256": "f2b98ca2d3186c9a323cd966ae18af9e631261464435c9aadb63422bb4684a27",
+      "destination": "src/math/polygon.ts"
+    },
+    {
+      "path": "packages/math/range.ts",
+      "sha256": "9e94ef6558e5879b379e4ff3d29e9369885b146542fbc22b744ca63edb06f360",
+      "destination": "src/math/range.ts"
+    },
+    {
+      "path": "packages/math/rectangle.ts",
+      "sha256": "43ada7d3f920873deb29cd0c3aadcda0dcfce90b5bdf0633593ca921a5000da8",
+      "destination": "src/math/rectangle.ts"
+    },
+    {
+      "path": "packages/math/segment.ts",
+      "sha256": "28fb14fac0e9687b60f5b1f6c03b3b3c87ae028ffc86e63411496a952bf6a8d9",
+      "destination": "src/math/segment.ts"
+    },
+    {
+      "path": "packages/math/triangle.ts",
+      "sha256": "b15b458cd3b781eac3c1e2a00f1dd5df292bcf1a5f8b3a466f430e1e9a497aa1",
+      "destination": "src/math/triangle.ts"
+    },
+    {
+      "path": "packages/math/types.ts",
+      "sha256": "7f6b23d7f7aeeebe063254f04bdfbdade6906b392951d3a2fd22586ca6bf4dac",
+      "destination": "src/math/types.ts"
+    },
+    {
+      "path": "packages/math/utils.ts",
+      "sha256": "18af91526daf025a957f07040b79bea57d3412fe910a998ca64f11fab8e01ade",
+      "destination": "src/math/utils.ts"
+    },
+    {
+      "path": "packages/math/vector.ts",
+      "sha256": "e74629cb82b94025bcd6d2c458001ebdb8e1366cc2bc6d729ddbffdb64b0ae7e",
+      "destination": "src/math/vector.ts"
+    },
+    {
+      "path": "packages/utils/bbox.ts",
+      "sha256": "4a0fbf9e958564fe52388936254a931383db52886a438d9955fd1cb4aad23b55",
+      "destination": "src/utils/bbox.ts"
+    },
+    {
+      "path": "packages/utils/collision.ts",
+      "sha256": "563ee1b907a6450ef12ef147ce75b16cd8b098f49c90a3dbbeb8a1c67f4cc5d5",
+      "destination": "src/utils/collision.ts"
+    },
+    {
+      "path": "packages/utils/export.ts",
+      "sha256": "a7b8ecf9eb583f76b700b292d32e361d76eb7d1cc0627f656d75db6dd16000b2",
+      "destination": "src/utils/export.ts"
+    },
+    {
+      "path": "packages/utils/geometry/shape.ts",
+      "sha256": "d92ca23cfe36248bcc4e92faf7965b8de97ced847d5c53ec41914256af87fcee",
+      "destination": "src/utils/geometry/shape.ts"
+    },
+    {
+      "path": "packages/utils/global.d.ts",
+      "sha256": "4bbb7cd08392b521ff7ba7db4387162fc15aa6af1f400ff6c9e460485b2457f5",
+      "destination": "src/utils/global.d.ts"
+    },
+    {
+      "path": "packages/utils/index.ts",
+      "sha256": "01a9d755eeed846dabd2f7d1306e209ca581e96ae5995f91784744cd53e9d40d",
+      "destination": "src/utils/index.ts"
+    },
+    {
+      "path": "packages/utils/withinBounds.ts",
+      "sha256": "bfec81c297da0c1d07901bf561fb2a3a98ebdc4f70a84a7b4fc337046cab3926",
+      "destination": "src/utils/withinBounds.ts"
+    }
+  ]
+}

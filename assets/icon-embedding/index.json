@@ -1,0 +1,8 @@
+{
+  "model": "Xenova/all-MiniLM-L6-v2",
+  "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+  "dimension": 384,
+  "count": 1690,
+  "catalogHash": "dcd58104ee8d436868def6e53ca91edd4973d32fb13b7f92dbf8ece3f5632fd5",
+  "pooling": "masked-mean-l2"
+}

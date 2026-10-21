@@ -1,0 +1,43 @@
+# Dependencies and generated bundles
+node_modules/
+dist/
+dist-*/
+release/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Local app state, projects, and test output
+.easydraw/
+*.edw
+*.edw.*
+qa/
+test-results/
+playwright-report/
+screenshots/
+*.log
+*.tmp
+*.bak
+
+# Secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.secret.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite*
+*.db
+.npmrc
+.codex/
+.pi/
+
+# Editor and OS files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/

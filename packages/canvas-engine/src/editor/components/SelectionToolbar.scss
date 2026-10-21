@@ -1,0 +1,137 @@
+.excalidraw .selection-toolbar, .easydraw .selection-toolbar {
+  position: fixed;
+  z-index: 45;
+  pointer-events: auto;
+  color: #34363b;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  .selection-toolbar__bar {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 6px;
+    overflow-x: auto;
+    border: 1px solid rgba(35, 40, 48, .09);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .97);
+    box-shadow: 0 12px 32px rgba(26, 32, 44, .10), 0 2px 5px rgba(26, 32, 44, .04), inset 0 1px 0 white;
+  }
+  .selection-toolbar__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    gap: 6px;
+    height: 36px;
+    min-width: 38px;
+    padding: 0 9px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: inherit;
+    font-size: 12px;
+    font-weight: 550;
+    cursor: pointer;
+    transition: background .12s ease;
+    svg { width: 20px; height: 20px; }
+    &:hover { background: #f2f3f5; }
+    &[aria-expanded="true"] { background: #e9edf4; color: #293b56; }
+    &:focus-visible { outline: 2px solid #8095b4; outline-offset: -2px; }
+  }
+  .selection-toolbar__swatch {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: inset 0 0 0 2px white, 0 1px 3px rgba(0,0,0,.08);
+    &.is-mixed { background: conic-gradient(#9aa3b2 0 25%, white 0 50%, #9aa3b2 0 75%, white 0); }
+  }
+  .selection-toolbar__opacity { width: 17px; height: 17px; border-radius: 50%; border: 1.5px solid currentColor; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+  .selection-toolbar__groups { display: flex; border-left: 1px solid #e8e9ed; padding-left: 4px; }
+  .selection-toolbar__inspector-toggle { margin-left: 4px; border-left: 1px solid #e8e9ed; border-radius: 0 10px 10px 0; }
+  .selection-toolbar__popover {
+    position: absolute;
+    top: calc(100% + 9px);
+    left: 0;
+    width: min(270px, calc(100vw - 40px));
+    max-height: min(380px, 48vh);
+    overflow: auto;
+    padding: 14px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e6e8ec;
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(25,32,45,.13), 0 3px 8px rgba(25,32,45,.04);
+    &.is-above { top: auto; bottom: calc(100% + 9px); }
+    --color-primary: #445c7b;
+    --color-primary-light: #edf1f6;
+    --color-primary-light-darker: #dfe7f1;
+  }
+  .selection-toolbar__heading { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    button { border: 0; background: #f4f5f7; border-radius: 7px; width: 24px; height: 24px; cursor: pointer; color: #727985; }
+  }
+  .selection-toolbar__content { display: grid; gap: 12px;
+    fieldset { margin: 0; padding: 0; border: 0; }
+    h3, legend { font-size: 11px; color: #7b828d; margin: 0 0 8px; font-weight: 500; }
+    .control-label { display: block; font-size: 11px; color: #7b828d; }
+    .buttonList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+      label, button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        background: #f3f4f6;
+        cursor: pointer;
+        &.active { background: #e6edf5; border-color: #c3d0e1; color: #344e6e; }
+        &:hover { background: #e9edf2; }
+      }
+    }
+    .ToolIcon__icon { border-radius: 8px; }
+  }
+  .selection-toolbar__content--layers,
+  .selection-toolbar__content--align {
+    grid-template-columns: repeat(6, 34px);
+    justify-content: start;
+    column-gap: 6px;
+    row-gap: 8px;
+    > div { display: contents; }
+    .zIndexButton,
+    .ToolIcon.ToolIcon_type_button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      background: #f3f4f6;
+      color: #34363b;
+      cursor: pointer;
+      &:hover { background: #e9edf2; }
+    }
+    .ToolIcon__icon {
+      width: 34px;
+      height: 34px;
+      background: transparent;
+    }
+    svg {
+      display: block;
+      width: 20px;
+      height: 20px;
+      color: currentColor;
+    }
+  }
+  .selection-toolbar__content--opacity {
+    --button-bg: #e5e7eb;
+    --color-slider-track: #9aaac0;
+    --color-slider-thumb: #34363b;
+  }
+}
+@media (prefers-reduced-motion: reduce) { .selection-toolbar * { transition: none !important; } }

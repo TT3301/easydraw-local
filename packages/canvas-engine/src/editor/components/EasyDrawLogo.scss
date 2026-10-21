@@ -1,0 +1,73 @@
+.easydraw {
+  .EasyDrawLogo {
+    --logo-icon--xs: 2rem;
+    --logo-text--xs: 1.5rem;
+
+    --logo-icon--small: 2.5rem;
+    --logo-text--small: 1.75rem;
+
+    --logo-icon--normal: 3rem;
+    --logo-text--normal: 2.2rem;
+
+    --logo-icon--large: 90px;
+    --logo-text--large: 65px;
+
+    display: flex;
+    align-items: center;
+
+    svg {
+      flex: 0 0 auto;
+    }
+
+    .EasyDrawLogo-icon {
+      width: auto;
+      color: var(--color-logo-icon);
+    }
+
+    .EasyDrawLogo-text {
+      margin-left: 0.75rem;
+      width: auto;
+      color: var(--color-logo-text);
+    }
+
+    &.is-xs {
+      .EasyDrawLogo-icon {
+        height: var(--logo-icon--xs);
+      }
+
+      .EasyDrawLogo-text {
+        height: var(--logo-text--xs);
+      }
+    }
+
+    &.is-small {
+      .EasyDrawLogo-icon {
+        height: var(--logo-icon--small);
+      }
+
+      .EasyDrawLogo-text {
+        height: var(--logo-text--small);
+      }
+    }
+
+    &.is-normal {
+      .EasyDrawLogo-icon {
+        height: var(--logo-icon--normal);
+      }
+
+      .EasyDrawLogo-text {
+        height: var(--logo-text--normal);
+      }
+    }
+
+    &.is-large {
+      .EasyDrawLogo-icon {
+        height: var(--logo-icon--large);
+      }
+
+      .EasyDrawLogo-text {
+        height: var(--logo-text--large);
+      }
+    }
+  }
+}
