@@ -1,6 +1,6 @@
 {
   "name": "easydraw-local",
-  "version": "0.3.4",
+  "version": "0.3.7",
   "description": "A local-first desktop canvas for editable sketches, prototypes, and AI-assisted drawing.",
   "author": "EasyDraw contributors",
   "license": "MIT",
@@ -29,6 +29,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:desktop": "npm run build && node scripts/desktop-smoke.cjs",
+    "test:canvas-fit": "npm run build && tsx scripts/canvas-fit-smoke.ts",
     "check:source": "node scripts/check-public-source.mjs",
     "check": "npm run check:source && npm test && npm run build",
     "mcp": "tsx packages/mcp-server/src/index.ts",
@@ -100,6 +101,7 @@
       "package.json",
       "!**/*.map",
       "!**/*.test.*",
+      "!**/tests/**",
       "!**/__tests__/**"
     ],
     "directories": {

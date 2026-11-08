@@ -82,7 +82,6 @@ import {
 } from "../element/typeChecks";
 import type {
   Arrowhead,
-  EasyDrawBindableElement,
   EasyDrawElement,
   EasyDrawLinearElement,
   EasyDrawTextElement,
@@ -106,21 +105,13 @@ import {
   arrayToMap,
   getFontFamilyString,
   getShortcutKey,
-  tupleToCoors,
 } from "../utils";
 import { register } from "./register";
 import { CaptureUpdateAction } from "../store";
 import { Fonts, getLineHeight } from "../fonts";
-import {
-  bindLinearElement,
-  bindPointToSnapToElementOutline,
-  calculateFixedPointForElbowArrowBinding,
-  getHoveredElementForBinding,
-  updateBoundElements,
-} from "../element/binding";
+import { updateBoundElements } from "../element/binding";
+import { routeElbowArrow } from "../element/elbowArrowRouting";
 import { LinearElementEditor } from "../element/linearElementEditor";
-import type { LocalPoint } from "../../math";
-import { pointFrom } from "../../math";
 import { Range } from "../components/Range";
 import type { PanelComponentProps } from "./types";
 
@@ -1606,109 +1597,13 @@ export const actionChangeArrowType = register({
 
         app.dismissLinearEditor();
 
-        const startGlobalPoint =
-          LinearElementEditor.getPointAtIndexGlobalCoordinates(
-            newElement,
-            0,
-            elementsMap,
-          );
-        const endGlobalPoint =
-          LinearElementEditor.getPointAtIndexGlobalCoordinates(
-            newElement,
-            -1,
-            elementsMap,
-          );
-        const startHoveredElement =
-          !newElement.startBinding &&
-          getHoveredElementForBinding(
-            tupleToCoors(startGlobalPoint),
-            elements,
-            elementsMap,
-            appState.zoom,
-            false,
-            true,
-          );
-        const endHoveredElement =
-          !newElement.endBinding &&
-          getHoveredElementForBinding(
-            tupleToCoors(endGlobalPoint),
-            elements,
-            elementsMap,
-            appState.zoom,
-            false,
-            true,
-          );
-        const startElement = startHoveredElement
-          ? startHoveredElement
-          : newElement.startBinding &&
-            (elementsMap.get(
-              newElement.startBinding.elementId,
-            ) as EasyDrawBindableElement);
-        const endElement = endHoveredElement
-          ? endHoveredElement
-          : newElement.endBinding &&
-            (elementsMap.get(
-              newElement.endBinding.elementId,
-            ) as EasyDrawBindableElement);
-
-        const finalStartPoint = startHoveredElement
-          ? bindPointToSnapToElementOutline(
-              newElement,
-              startHoveredElement,
-              "start",
-            )
-          : startGlobalPoint;
-        const finalEndPoint = endHoveredElement
-          ? bindPointToSnapToElementOutline(
-              newElement,
-              endHoveredElement,
-              "end",
-            )
-          : endGlobalPoint;
-
-        startHoveredElement &&
-          bindLinearElement(
-            newElement,
-            startHoveredElement,
-            "start",
-            elementsMap,
-          );
-        endHoveredElement &&
-          bindLinearElement(newElement, endHoveredElement, "end", elementsMap);
-
-        mutateElement(newElement, {
-          points: [finalStartPoint, finalEndPoint].map(
-            (p): LocalPoint =>
-              pointFrom(p[0] - newElement.x, p[1] - newElement.y),
-          ),
-          ...(startElement && newElement.startBinding
-            ? {
-                startBinding: {
-                  // @ts-ignore TS cannot discern check above
-                  ...newElement.startBinding!,
-                  ...calculateFixedPointForElbowArrowBinding(
-                    newElement,
-                    startElement,
-                    "start",
-                    elementsMap,
-                  ),
-                },
-              }
-            : {}),
-          ...(endElement && newElement.endBinding
-            ? {
-                endBinding: {
-                  // @ts-ignore TS cannot discern check above
-                  ...newElement.endBinding,
-                  ...calculateFixedPointForElbowArrowBinding(
-                    newElement,
-                    endElement,
-                    "end",
-                    elementsMap,
-                  ),
-                },
-              }
-            : {}),
+        // The new copy is not in the scene yet, so route it against the
+        // scene's map explicitly; otherwise the route only appears after the
+        // next edit.
+        routeElbowArrow(newElement, elements, elementsMap, {
+          zoom: appState.zoom,
+          bindHovered: true,
+          keepFixedPoints: false,
         });
 
         LinearElementEditor.updateEditorMidPointsCache(

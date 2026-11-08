@@ -18,6 +18,44 @@ function normalizeConnectorScope(elements: readonly EasyDrawElement[]): EasyDraw
   });
 }
 
+/** Connectors bind to shapes, images, free text and pages (for flows between screens). Must match the engine's isBindableElement. */
+export function isConnectorBindingTarget(element: EasyDrawElement): boolean {
+  switch (element.type) {
+    case "rectangle": case "diamond": case "ellipse": case "image":
+    case "frame": case "magicframe": case "iframe": case "embeddable": return true;
+    case "text": return element.containerId === null;
+    default: return false;
+  }
+}
+
+/** Drops connector bindings whose target is missing or not bindable, with the target's back-reference. */
+function normalizeConnectorBindings(elements: readonly EasyDrawElement[]): EasyDrawElement[] {
+  const byId = new Map(elements.map((element) => [element.id, element]));
+  const detached = new Map<string, Set<string>>();
+  let changed = false;
+  const unbound = elements.map((element) => {
+    if (element.type !== "arrow" && element.type !== "line") return element;
+    const patch: Partial<Record<"startBinding" | "endBinding", null>> = {};
+    for (const key of ["startBinding", "endBinding"] as const) {
+      const targetId = element[key]?.elementId;
+      if (!targetId) continue;
+      const target = byId.get(targetId);
+      if (target && target.id !== element.id && isConnectorBindingTarget(target)) continue;
+      patch[key] = null;
+      detached.set(targetId, (detached.get(targetId) ?? new Set()).add(element.id));
+    }
+    if (Object.keys(patch).length === 0) return element;
+    changed = true;
+    return { ...element, ...patch, version: element.version + 1 };
+  });
+  if (!changed) return elements as EasyDrawElement[];
+  return unbound.map((element) => {
+    const removed = detached.get(element.id);
+    if (!removed || !element.boundElements?.some((bound) => removed.has(bound.id))) return element;
+    return { ...element, boundElements: element.boundElements.filter((bound) => !removed.has(bound.id)), version: element.version + 1 };
+  });
+}
+
 /** Page children precede their container; their relative stacking stays intact. */
 export function normalizePageLayerOrder(elements: readonly EasyDrawElement[]): EasyDrawElement[] {
   const pages = new Set(elements.filter((element) => element.type === "frame").map((element) => element.id));
@@ -27,7 +65,7 @@ export function normalizePageLayerOrder(elements: readonly EasyDrawElement[]): E
 
 /** One canonical ordering for command commits, persistence and the renderer. */
 export function normalizeSceneElements(elements: readonly EasyDrawElement[]): EasyDrawElement[] {
-  const ordered = normalizePageLayerOrder(normalizeConnectorScope(elements));
+  const ordered = normalizePageLayerOrder(normalizeConnectorBindings(normalizeConnectorScope(elements)));
   let previous: string | null = null;
   const valid = ordered.every((element) => {
     const valid = element.index !== null && (previous === null || element.index > previous);

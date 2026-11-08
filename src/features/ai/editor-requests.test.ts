@@ -3,10 +3,12 @@ import { readFileSync } from "node:fs";
 vi.mock("@easydraw/canvas-engine", () => ({ CaptureUpdateAction: { NEVER: "NEVER" }, exportToBlob: vi.fn(), exportToSvg: vi.fn() }));
 vi.mock("./canvas-runtime", () => ({
   reconcileCanvasBindings: vi.fn(),
+  layoutCanvasText: vi.fn(async () => {}),
   measureCanvasText: vi.fn(async (input: { text: string }) => ({ width: input.text.length * 10, height: 20, text: input.text })),
   renderedBounds: (elements: Array<{ id: string; x: number; y: number; width: number; height: number }>) => elements.map(e => ({ id: e.id, x: e.x, y: e.y, width: e.width, height: e.height })),
 }));
 import { createEditorRequestHandler } from "./editor-requests";
+import { layoutCanvasText, reconcileCanvasBindings } from "./canvas-runtime";
 import { createInitialDocument } from "../../core/protocol";
 import { SceneController } from "../../core/scene-controller";
 import type { EditorRequestPorts } from "./request-ports";
@@ -145,6 +147,86 @@ describe("required editing tasks", () => {
   });
 });
 describe("general MCP request handler", () => {
+  it("re-routes connectors after a page grows and reports them as updated", async () => {
+    const { handle, base } = setup();
+    await handle("apply_operations", { ...base, operations: [
+      { op: "create", element: { id: "home", type: "frame", x: 0, y: 0, width: 300, height: 300 } },
+      { op: "create", element: { id: "detail", type: "frame", x: 400, y: 0, width: 300, height: 300 } },
+      { op: "create", element: { id: "flow", type: "arrow", x: 305, y: 150, width: 90, height: 0, points: [[0, 0], [90, 0]], startBinding: { elementId: "home" }, endBinding: { elementId: "detail" } } },
+    ] });
+    const reconcile = vi.mocked(reconcileCanvasBindings);
+    reconcile.mockClear();
+    reconcile.mockImplementation((_before, draft) => {
+      const page = draft.scene.elements.find(e => e.id === "detail")!;
+      if (page.height > 300) Object.assign(draft.scene.elements.find(e => e.id === "flow")!, { y: 151 });
+    });
+    try {
+      const result = await handle("apply_operations", { ...base, baseRevision: 1, requestId: "grow", operations: [
+        { op: "create", element: { id: "content", type: "rectangle", frameId: "detail", x: 420, y: 500, width: 100, height: 40 } },
+      ] }) as any;
+      expect(result.frameHeightChanges).toEqual([{ frameId: "detail", previousHeight: 300, height: 540 }]);
+      expect(reconcile).toHaveBeenCalledTimes(2);
+      expect(result.affected.updatedIds).toEqual(expect.arrayContaining(["detail", "flow"]));
+    } finally { reconcile.mockReset(); }
+  });
+
+  it("lets connectors follow covered changes but still scopes direct connector edits", async () => {
+    const { handle, base, controller } = setup();
+    await handle("apply_operations", { ...base, operations: [
+      { op: "create", element: { id: "home", type: "frame", x: 0, y: 0, width: 300, height: 300 } },
+      { op: "create", element: { id: "detail", type: "frame", x: 400, y: 0, width: 300, height: 300 } },
+      { op: "create", element: { id: "card", type: "rectangle", frameId: "home", x: 100, y: 100, width: 100, height: 60 } },
+      { op: "create", element: { id: "flow", type: "arrow", x: 205, y: 130, width: 190, height: 0, points: [[0, 0], [190, 0]], startBinding: { elementId: "card" }, endBinding: { elementId: "detail" } } },
+      { op: "create", element: { id: "flow-label", type: "text", x: 280, y: 110, width: 40, height: 20, text: "go", containerId: "flow" } },
+    ] });
+    await handle("finish_task", { documentId: base.documentId, canvasId: base.canvasId, taskId: base.taskId, status: "completed" });
+    // Simulates the engine re-routing the connector and its label whenever bindings are maintained.
+    const reconcile = vi.mocked(reconcileCanvasBindings);
+    reconcile.mockImplementation((before, draft) => {
+      for (const id of ["flow", "flow-label"]) {
+        const previous = before.scene.elements.find(e => e.id === id), current = draft.scene.elements.find(e => e.id === id);
+        if (previous && current && current.y === previous.y) Object.assign(current, { y: previous.y + 1 });
+      }
+    });
+    const page = async (taskId: string, id: string) => handle("begin_task", { documentId: base.documentId, canvasId: base.canvasId, taskId, label: `Edit ${id}`, scope: { kind: "container", id } });
+    try {
+      await page("home-task", "home");
+      let revision = 1;
+      const write = (taskId: string, requestId: string, operations: unknown[]) => handle("apply_operations", { ...base, taskId, baseRevision: revision, requestId, operations });
+      const moved = await write("home-task", "move-card", [{ op: "move", ids: ["card"], dx: 0, dy: 40 }]) as any;
+      revision = moved.revision;
+      expect(moved.affected.updatedIds).toEqual(expect.arrayContaining(["card", "flow", "flow-label"]));
+      expect(controller.getSnapshot().document.scene.elements.find(e => e.id === "flow")?.y).toBe(131);
+
+      await page("detail-task", "detail");
+      const grown = await write("detail-task", "grow-detail", [{ op: "create", element: { id: "more", type: "rectangle", frameId: "detail", x: 420, y: 560, width: 100, height: 40 } }]) as any;
+      revision = grown.revision;
+      expect(grown.frameHeightChanges).toEqual([{ frameId: "detail", previousHeight: 300, height: 600 }]);
+
+      for (const [requestId, operations] of [
+        ["recolor-flow", [{ op: "update", id: "flow", patch: { strokeColor: "#e03131" } }]],
+        ["relabel-flow", [{ op: "update", id: "flow-label", patch: { text: "open" } }]],
+        ["move-other-page", [{ op: "move", ids: ["more"], dx: 0, dy: 10 }]],
+      ] as const) {
+        await expect(write("home-task", requestId, [...operations])).rejects.toMatchObject({ code: "TASK_SCOPE_MISMATCH" });
+      }
+      expect(controller.getSnapshot().document.revision).toBe(revision);
+    } finally { reconcile.mockReset(); }
+  });
+
+  it("lays out written text before dry-run results, frame growth and commit", async () => {
+    const { handle, base, controller } = setup();
+    vi.mocked(layoutCanvasText).mockImplementation(async (_before, draft) => {
+      for (const e of draft.scene.elements) if (e.type === "text") Object.assign(e, { width: 80, height: 25 });
+    });
+    try {
+      const input = { ...base, operations: [{ op: "create", element: { id: "note", type: "text", x: 0, y: 0, width: 200, height: 60, text: "one line", autoResize: true } }] };
+      const dry = await handle("apply_operations", { ...input, requestId: "preview-text", dryRun: true }) as any;
+      expect(dry.affected.createdIds).toEqual(["note"]);
+      await handle("apply_operations", input);
+      expect(controller.getSnapshot().document.scene.elements.find(e => e.id === "note")).toMatchObject({ width: 80, height: 25 });
+    } finally { vi.mocked(layoutCanvasText).mockReset(); }
+  });
   it("grows a page in the same AI transaction, previews without writing and undoes/redoes height with content", async () => {
     const { handle, base, controller } = setup();
     await handle("apply_operations", { ...base, operations: [

@@ -1,4 +1,4 @@
-import { createNativeElement, NativeElementSchema, type EasyDrawElement, type ProjectAsset } from "@easydraw/document-model";
+import { createNativeElement, isConnectorBindingTarget, NativeElementSchema, type EasyDrawElement, type ProjectAsset } from "@easydraw/document-model";
 import type { ApplyOperationsInput, ProjectDocument } from "./protocol";
 import { elementBounds, unionBounds } from "./canvas-geometry";
 
@@ -66,10 +66,25 @@ export function executeCanvasOperations(document: ProjectDocument, input: ApplyO
     text: ["text", "fontSize", "fontFamily", "textAlign", "verticalAlign", "lineHeight", "autoResize", "containerId"],
     rectangle: ["vectorData", "assetId"], image: ["fileId", "crop"],
     line: ["points", "startBinding", "endBinding", "startArrowhead", "endArrowhead"],
-    arrow: ["points", "startBinding", "endBinding", "startArrowhead", "endArrowhead"],
+    arrow: ["points", "startBinding", "endBinding", "startArrowhead", "endArrowhead", "elbowed"],
     freedraw: ["points", "pressures", "simulatePressure"],
   };
   const specialized = new Set(Object.values(fieldsForType).flat());
+  // Arrow styles are exclusive, as in the editor: elbow, curved (roundness) or straight.
+  // An explicit curve implies elbowed:false; switching to elbow drops roundness.
+  const arrowStyle = (patch: Record<string, unknown>, current?: EasyDrawElement) => {
+    const result = { ...patch };
+    if (result.elbowed === undefined && result.roundness) result.elbowed = false;
+    if (result.elbowed === undefined && !current) result.elbowed = true;
+    if (result.elbowed === true && result.roundness) fail("INVALID_ELEMENT_PROPERTY", "Elbow arrows cannot have roundness; set elbowed:false for a curved arrow");
+    if (result.elbowed === true && result.roundness === undefined) result.roundness = null;
+    // Leaving elbow keeps only the endpoints, like the editor's arrow type switch.
+    if (current && "elbowed" in current && current.elbowed && result.elbowed === false && result.points === undefined) {
+      const [[x0, y0], [x, y]] = [current.points[0], current.points[current.points.length - 1]];
+      Object.assign(result, { points: [[x0, y0], [x, y]], width: Math.abs(x - x0), height: Math.abs(y - y0) });
+    }
+    return result;
+  };
   const checkFields = (type: string, patch: Record<string, unknown>) => {
     for (const key of Object.keys(patch)) if (specialized.has(key) && !fieldsForType[type]?.includes(key)) fail("INVALID_ELEMENT_PROPERTY", `${type} does not support ${key}`);
     if (patch.frameId && type === "arrow") fail("UNSUPPORTED_CONTAINER", "Arrows belong to the canvas, not a frame");
@@ -82,9 +97,12 @@ export function executeCanvasOperations(document: ProjectDocument, input: ApplyO
         if (draft.scene.elements.some(e => e.id === id)) fail("DUPLICATE_ELEMENT_ID", id);
         checkFields(operation.element.type, operation.element);
         if (["frame", "image", "text"].includes(operation.element.type) && (operation.element.width === 0 || operation.element.height === 0)) fail("INVALID_DIMENSIONS", "Frame, text and image dimensions must be positive");
-        const patch = resolvePatch(operation.element);
+        const resolved = resolvePatch(operation.element);
+        const patch = operation.element.type === "arrow" ? arrowStyle(resolved) : resolved;
         const asset = applyAsset(operation.element.type, operation.assetRef);
-        const element = createNativeElement({ ...patch, ...asset, id, type: operation.element.type,
+        // New text fits its content unless a wrapping width is requested, as with the editor's text tool.
+        const textDefaults = operation.element.type === "text" ? { autoResize: true } : {};
+        const element = createNativeElement({ ...textDefaults, ...patch, ...asset, id, type: operation.element.type,
           x: operation.element.x + origin.x, y: operation.element.y + origin.y,
           width: operation.element.width, height: operation.element.height,
         });
@@ -95,7 +113,7 @@ export function executeCanvasOperations(document: ProjectDocument, input: ApplyO
       if (operation.op === "update") {
         const element = get(operation.id);
         checkFields(element.type, operation.patch);
-        const patch = resolvePatch(operation.patch);
+        const patch = element.type === "arrow" ? arrowStyle(resolvePatch(operation.patch), element) : resolvePatch(operation.patch);
         if (typeof patch.x === "number") patch.x += origin.x;
         if (typeof patch.y === "number") patch.y += origin.y;
         if (element.type === "text" && patch.text !== undefined) patch.originalText = patch.text;
@@ -216,12 +234,14 @@ export function executeCanvasOperations(document: ProjectDocument, input: ApplyO
   const bound = new Map<string, Array<{ id: string; type: "arrow" | "text" }>>();
   for (const e of draft.scene.elements) {
     if (e.type === "frame" && (e.frameId || e.angle !== 0)) fail("UNSUPPORTED_NESTING", "Frames must be unrotated and top-level");
-    const refs = e.type === "text" && e.containerId ? [{ id: e.containerId, type: "text" as const }]
-      : e.type === "arrow" || e.type === "line" ? [e.startBinding, e.endBinding].filter(Boolean).map(b => ({ id: b!.elementId, type: "arrow" as const })) : [];
+    const refs = e.type === "text" && e.containerId ? [{ id: e.containerId, type: "text" as const, field: "containerId" }]
+      : e.type === "arrow" || e.type === "line" ? (["startBinding", "endBinding"] as const).flatMap(field => e[field] ? [{ id: e[field]!.elementId, type: "arrow" as const, field }] : []) : [];
     for (const ref of refs) {
-      const target = byId.get(ref.id) ?? fail("INVALID_BINDING", ref.id);
-      const allowedTargets = e.type === "text" ? ["rectangle", "diamond", "ellipse", "arrow"] : ["rectangle", "diamond", "ellipse", "text", "image"];
-      if (target.id === e.id || !allowedTargets.includes(target.type)) fail("INVALID_BINDING", ref.id);
+      const target = byId.get(ref.id);
+      const details = { elementId: e.id, elementType: e.type, field: ref.field, targetId: ref.id, targetType: target?.type ?? null };
+      if (!target) fail("INVALID_BINDING", `${e.type} ${e.id} ${ref.field} references missing element ${ref.id}`, details);
+      const allowed = target!.id !== e.id && (e.type === "text" ? ["rectangle", "diamond", "ellipse", "arrow"].includes(target!.type) : isConnectorBindingTarget(target!));
+      if (!allowed) fail("INVALID_BINDING", `${e.type} ${e.id} ${ref.field} cannot bind to ${target!.type} ${ref.id}; ${e.type === "text" ? "text containers must be rectangle, diamond, ellipse or arrow" : "connectors bind only to rectangle, diamond, ellipse, image, free text or frame"}`, details);
       const list = bound.get(ref.id) ?? [];
       if (!list.some(b => b.id === e.id)) list.push({ id: e.id, type: ref.type });
       bound.set(ref.id, list);

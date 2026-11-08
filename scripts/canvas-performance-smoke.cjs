@@ -54,12 +54,6 @@ app.whenReady().then(async () => {
           if (value?.observe && value?.flush && value?.controller) return value;
         }
       };
-      window.viewWrites = [];
-      const originalSetItem = Storage.prototype.setItem;
-      Storage.prototype.setItem = function(key, value) {
-        if (key.startsWith('easydraw:view:')) viewWrites.push({key, value});
-        return originalSetItem.call(this, key, value);
-      };
     ` });
     await window.loadFile(resolve("dist/index.html"));
     console.log("Canvas performance smoke: workbench loaded");
@@ -72,18 +66,13 @@ app.whenReady().then(async () => {
     await delay(300);
     const version = await run("api.getSceneVersion()");
     const renders = await run("hostRenders");
-    await run("viewWrites = []");
     for (let i = 0; i < 30; i++) {
       await run(`api.updateScene({appState:{scrollX:api.getAppState().scrollX+1,zoom:{value:1+${i}/100}},captureUpdate:'NEVER'})`);
       await delay(30);
     }
-    assert.equal(await run("viewWrites.length"), 0, "continuous movement must not persist intermediate positions");
     assert.equal(await run("api.getSceneVersion()"), version, "view movement must not change content version");
     assert.equal(await run("hostRenders"), renders, "view changes must not render the host menus/sidebar");
     assert.equal(await run("document.querySelector('.zoom-value').textContent"), "129%", "zoom label must update independently");
-    await delay(250);
-    assert.equal(await run("viewWrites.length"), 1, "stopping must persist just the final view");
-    assert.equal(await run("JSON.parse(viewWrites[0].value).zoom"), 1.29);
 
     // Native external updates must clear only stale selected IDs.
     await run(`(() => {
@@ -102,14 +91,12 @@ app.whenReady().then(async () => {
     const point = await run(`(() => { const s=api.getAppState(),e=api.getSceneElements().find(e=>e.id==='perf-a');
       return {x:Math.round((e.x+e.width/2+s.scrollX)*s.zoom.value+s.offsetLeft),
         y:Math.round((e.y+e.height/2+s.scrollY)*s.zoom.value+s.offsetTop),startX:e.x}; })()`);
-    await run("viewWrites=[]");
     window.webContents.sendInputEvent({type:'mouseMove',x:point.x,y:point.y});
     window.webContents.sendInputEvent({type:'mouseDown',x:point.x,y:point.y,button:'left',clickCount:1});
     for (let i = 1; i <= 30; i++) {
       window.webContents.sendInputEvent({type:'mouseMove',x:point.x+i*2,y:point.y,button:'left'});
       await delay(100);
     }
-    assert.equal(await run("viewWrites.length"), 0, "element drag must not rewrite unchanged view position");
     window.webContents.sendInputEvent({type:'mouseUp',x:point.x+60,y:point.y,button:'left',clickCount:1});
     await delay(400);
     const movedX = await run("api.getSceneElements().find(e=>e.id==='perf-a').x");
@@ -121,12 +108,12 @@ app.whenReady().then(async () => {
     await delay(250);
     assert.equal(await run("api.getSceneElements().find(e=>e.id==='perf-a').x"), movedX);
 
-    // Switching immediately must flush the original view under its original key.
+    // Within one opened project, leaving a canvas (even before the idle timer) keeps its view;
+    // the first visit of a canvas fits its content at most at 100%.
     await run(`(() => {
       window.canvasSession = getTestCanvasSession();
       const controller = canvasSession.controller, doc = controller.getSnapshot().document;
       window.oldCanvasId = doc.activeCanvasId;
-      window.oldViewKey = 'easydraw:view:' + doc.projectId + ':' + oldCanvasId;
       window.nextCanvasId = controller.manageTree({op:'create',type:'canvas',parentId:null});
     })()`);
     await delay(250);
@@ -137,12 +124,13 @@ app.whenReady().then(async () => {
     await delay(40);
     await run("canvasSession.controller.switchCanvas(nextCanvasId)");
     await delay(300);
-    assert.equal(await run("JSON.parse(localStorage.getItem(oldViewKey)).scrollX"), 123);
+    assert(await run("api.getAppState().zoom.value") <= 1, "a first visit never zooms beyond 100%");
     await run("canvasSession.controller.switchCanvas(oldCanvasId)");
     await delay(300);
     assert.equal(await run("api.getAppState().scrollX"), 123);
     assert.equal(await run("api.getAppState().zoom.value"), 1.2);
-    console.log("CANVAS_PERFORMANCE_SMOKE_OK: view-only content version, zero host renders during pan/zoom, final-only view persistence, external selection cleanup, three-second drag, undo/redo, canvas switch/restoration");
+    assert.equal(await run("Object.keys(localStorage).filter(k => k.startsWith('easydraw:view:')).length"), 0, "views are not persisted across project opens");
+    console.log("CANVAS_PERFORMANCE_SMOKE_OK: view-only content version, zero host renders during pan/zoom, external selection cleanup, three-second drag, undo/redo, first-visit fit and in-session canvas view restoration");
   } catch (error) {
     console.error(error); process.exitCode = 1;
   } finally {

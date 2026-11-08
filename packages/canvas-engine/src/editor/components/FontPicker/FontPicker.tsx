@@ -78,7 +78,9 @@ export const FontPicker = React.memo(
     );
 
     return (
-      <div role="dialog" aria-modal="true" className="FontPicker__container">
+      // Always-visible font buttons are a group, not a modal dialog; only the
+      // popup list is. Hosts use dialog roles to suspend canvas shortcuts.
+      <div role="group" aria-label={t("labels.fontFamily")} className="FontPicker__container">
         <ButtonIconSelect<FontFamilyValues | false>
           type="button"
           options={defaultFonts}

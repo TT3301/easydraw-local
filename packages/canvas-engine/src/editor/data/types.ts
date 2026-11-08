@@ -42,6 +42,8 @@ export interface ImportedDataState {
     >
   > | null;
   scrollToContent?: boolean;
+  /** Fit the initial content into the viewport before the first paint. */
+  fitToContent?: { viewportZoomFactor?: number; maxZoom?: number };
   libraryItems?: LibraryItems_anyVersion;
   files?: BinaryFiles;
 }

@@ -1,5 +1,5 @@
 import { canvasPath, type TreeOperation } from "./features/canvases/project-tree";
-import { useCanvasUi } from "./canvas/use-canvas-ui";
+import { CANVAS_CONTENT_FIT, useCanvasUi } from "./canvas/use-canvas-ui";
 import { useWorkspaceInteraction } from "./canvas/workspace-interaction";
 import { LibrarySidebar } from "./components/LibrarySidebar";
 import { IconLibraryPopover } from "./features/assets/IconLibraryPopover";
@@ -144,7 +144,12 @@ export default function App() {
   }, [canvasSession]);
   const operateTree = useCallback((operation: TreeOperation): string | null => {
     try {
-      canvasSession.flush(); const id = controller.manageTree(operation);
+      // Renaming or reordering only touches the canvas list, so it need not wait for a
+      // pointer press on the canvas — such as the click that blurs the rename input.
+      // That edit still commits on pointer-up.
+      const listOnly = operation.op === "rename" || operation.op === "move";
+      if (!(listOnly && canvasSession.activeGesture)) canvasSession.flush();
+      const id = controller.manageTree(operation);
       if (operation.op === "create" && operation.type === "canvas" && id) controller.switchCanvas(id);
       return id;
     } catch (error) { setNotice({ tone: "warning", text: (error as Error).message }); return null; }
@@ -459,6 +464,7 @@ export default function App() {
             canvasAPI={setApi}
             initialData={{
               elements: sceneElements,
+              fitToContent: CANVAS_CONTENT_FIT,
               libraryItems: materialLibraryItems,
               appState: {
                 viewBackgroundColor: "#eef0f3",

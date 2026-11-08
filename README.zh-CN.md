@@ -20,6 +20,18 @@
 
 本仓库不包含账号、云端分享、在线只读 Viewer、同步服务或 EasyDraw 云端后端。
 
+## v0.3.7 更新
+
+同步 [EasyDraw v0.3.7](https://github.com/lostcrab9/EasyDraw/releases/tag/v0.3.7)
+（源码提交 `ee98f22d883d3c8aa3c20c4ba4f562c924810628`）中适用于本地版的改动：
+
+- AI 写入文字按自动尺寸或固定宽度排版，形状内文字正确对齐。
+- AI 新建箭头默认使用肘形走线，支持连接 Frame，目标变化后更新连线。
+- 打开项目时清理失效连线绑定，首次进入画布适配全部内容，切回保留会话内视图。
+- 修复右键、画布重命名后的操作阻塞，以及属性面板打开时的退格删除。
+
+账号、云端分享密钥、登录恢复、官网与服务端更新不包含在本地版中。
+
 ## 快速开始
 
 环境要求：**Node.js 22.12+**（建议 Node.js 22 或 24）、**npm 10+**，
@@ -73,6 +85,7 @@ npm run model:typecheck
 npm run mcp:smoke            # 使用模拟本地桥接进行 MCP 协议测试
 npm run mcp:bundle-smoke     # 验证构建后的 MCP sidecar
 npm run test:desktop         # 构建并运行 Electron 界面、文件操作冒烟测试
+npm run test:canvas-fit      # 构建并验证首次进入画布适配与切换视图
 ```
 
 桌面冒烟测试需要交互式桌面会话，使用隔离的临时用户目录。

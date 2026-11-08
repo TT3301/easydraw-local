@@ -20,6 +20,18 @@ Draw by hand or connect an AI agent through MCP—your projects stay in local fi
 
 No account, cloud sharing, hosted viewer, sync service, or EasyDraw backend is included.
 
+## v0.3.7 update
+
+Includes local changes from [EasyDraw v0.3.7](https://github.com/lostcrab9/EasyDraw/releases/tag/v0.3.7)
+(source commit `ee98f22d883d3c8aa3c20c4ba4f562c924810628`):
+
+- AI text writes use content sizing or fixed-width wrapping and align within shapes.
+- New AI arrows use elbow routing, can bind to frames, and follow changed targets.
+- Opening projects clears invalid connector bindings. First canvas visits fit all content; returning preserves the view within the session.
+- Fixes blocked actions after context menus or canvas renaming, and Backspace deletion with the property panel open.
+
+Account, cloud share key, sign-in recovery, website, and backend updates are excluded.
+
 ## Quick start
 
 Requirements: **Node.js 22.12+** (Node.js 22 or 24 recommended), **npm 10+**,
@@ -76,6 +88,7 @@ npm run model:typecheck
 npm run mcp:smoke            # MCP protocol test with a mock local bridge
 npm run mcp:bundle-smoke     # Same test against the built sidecar
 npm run test:desktop         # Build and run Electron UI/file-operation smoke tests
+npm run test:canvas-fit      # Build and verify initial canvas fitting and view switching
 ```
 
 Desktop smoke tests need an interactive desktop session and use temporary profiles.

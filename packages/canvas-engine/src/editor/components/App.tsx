@@ -2392,6 +2392,30 @@ class App extends React.Component<AppProps, AppState> {
         }),
       };
     }
+    // Computed here rather than by the host after loading, which would paint the
+    // default viewport first and be overwritten if applied before loading ends.
+    const initialContent = scene.elements.filter((element) => !element.isDeleted);
+    if (initialData?.fitToContent && initialContent.length) {
+      const { appState } = zoomToFit({
+        targetElements: initialContent,
+        appState: {
+          ...scene.appState,
+          width: this.state.width,
+          height: this.state.height,
+          offsetTop: this.state.offsetTop,
+          offsetLeft: this.state.offsetLeft,
+        },
+        fitToViewport: true,
+        viewportZoomFactor: initialData.fitToContent.viewportZoomFactor,
+        maxZoom: initialData.fitToContent.maxZoom,
+      });
+      scene.appState = {
+        ...scene.appState,
+        scrollX: appState.scrollX,
+        scrollY: appState.scrollY,
+        zoom: appState.zoom,
+      };
+    }
 
     this.resetStore();
     this.resetHistory();
@@ -6412,6 +6436,35 @@ class App extends React.Component<AppProps, AppState> {
     }
   }
 
+  private cursorButtonPressSequence = 0;
+
+  /**
+   * Several pointer-down branches return before registering their own
+   * pointer-up handling (secondary button / context menu, link icons, adding a
+   * linear point, rejected pen input, ...), which left `cursorButton` at
+   * "down" until the next ordinary click. Hosts treat "down" as an active
+   * gesture, so always release it once the press ends. Regular handlers set
+   * "up" themselves first; this only covers the branches that do not.
+   */
+  private releaseCursorButtonAfterPointerUp() {
+    const press = ++this.cursorButtonPressSequence;
+    const release = () => {
+      window.removeEventListener(EVENT.POINTER_UP, release);
+      window.removeEventListener(EVENT.BLUR, release);
+      setTimeout(() => {
+        if (
+          !this.unmounted &&
+          press === this.cursorButtonPressSequence &&
+          this.state.cursorButton === "down"
+        ) {
+          this.setState({ cursorButton: "up" });
+        }
+      });
+    };
+    window.addEventListener(EVENT.POINTER_UP, release);
+    window.addEventListener(EVENT.BLUR, release);
+  }
+
   private handleCanvasPointerDown = (
     event: React.PointerEvent<HTMLElement>,
   ) => {
@@ -6536,6 +6589,7 @@ class App extends React.Component<AppProps, AppState> {
       cursorButton: "down",
     });
     this.savePointer(event.clientX, event.clientY, "down");
+    this.releaseCursorButtonAfterPointerUp();
 
     if (
       event.button === POINTER_BUTTON.ERASER &&

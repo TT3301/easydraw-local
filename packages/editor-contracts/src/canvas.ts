@@ -22,6 +22,7 @@ export const CanvasElementTypeSchema = z.enum(["frame", "rectangle", "diamond", 
 // Keep the runtime tuple type while publishing a homogeneous, fixed-size array.
 const point = z.array(finite).length(2).transform(([x, y]): [number, number] => [x, y]);
 const binding = z.object({ elementId: id, focus: finite.min(-1).max(1).default(0), gap: finite.nonnegative().default(5), fixedPoint: point.optional() }).strict();
+const connectorBindingHelp = "Connector target: rectangle, diamond, ellipse, image, free text or frame (page-to-page flows). Writes never bind automatically by proximity; set the binding explicitly so the endpoint follows its target.";
 const nativeFields = {
   x: finite, y: finite, width: finite.nonnegative().max(100000), height: finite.nonnegative().max(100000),
   angle: finite, frameId: id.nullable(), groupIds: z.array(id).max(32), locked: z.boolean(),
@@ -32,11 +33,16 @@ const nativeFields = {
   roundness: z.object({ type: z.union([z.literal(1), z.literal(2), z.literal(3)]), value: finite.nonnegative().optional() }).strict().nullable(),
   text: z.string().max(10000), fontSize: finite.positive().max(1000),
   fontFamily: z.number().int().refine(value => Object.values(FONT_FAMILY).includes(value), "Unsupported font family"),
-  textAlign: z.enum(["left", "center", "right"]), verticalAlign: z.enum(["top", "middle", "bottom"]),
-  lineHeight: finite.positive().max(10), autoResize: z.boolean(), containerId: id.nullable(),
+  textAlign: z.enum(["left", "center", "right"]),
+  verticalAlign: z.enum(["top", "middle", "bottom"]).describe("Position of text inside its containerId shape. Free text boxes always fit their content, so it has no visible effect without containerId."),
+  lineHeight: finite.positive().max(10),
+  autoResize: z.boolean().describe("Text only. true (default for new text): width and height are recomputed to fit the text without wrapping. false: width is kept, text wraps to it and height is recomputed. The measured size replaces the supplied size, as in the editor."),
+  containerId: id.nullable(),
   name: z.string().max(160).nullable(), order: finite.int().nonnegative(), exportScale: finite.min(0.25).max(4),
   points: z.array(point).min(2).max(512), pressures: z.array(finite.min(0).max(1)).max(512), simulatePressure: z.boolean(),
-  startBinding: binding.nullable(), endBinding: binding.nullable(),
+  elbowed: z.boolean().describe("Arrow only. true (default for new arrows, as in the editor): the engine routes right-angle segments between the endpoints or bound elements; intermediate points are ignored. false: straight segments through points, or a curve with roundness {type:2}. Supplying a non-null roundness without elbowed creates a curved arrow."),
+  startBinding: binding.nullable().describe(connectorBindingHelp),
+  endBinding: binding.nullable().describe(connectorBindingHelp),
   startArrowhead: z.enum(["arrow", "bar", "dot", "triangle", "diamond", "circle"]).nullable(),
   endArrowhead: z.enum(["arrow", "bar", "dot", "triangle", "diamond", "circle"]).nullable(),
   vectorData: SvgVectorDataSchema, assetId: id, fileId: id.nullable(), altText: z.string().max(500),

@@ -3,6 +3,9 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 exports.run = async (window, userData) => {
   window.show(); window.focus();
+  // Keep page focus deterministic even when another app owns the desktop focus.
+  if (!window.webContents.debugger.isAttached()) window.webContents.debugger.attach("1.3");
+  await window.webContents.debugger.sendCommand("Emulation.setFocusEmulationEnabled", { enabled: true });
   const run = async source => { try { return await window.webContents.executeJavaScript(source); } catch (error) { await fs.writeFile("/private/tmp/easydraw-multi-canvas-failure.png", (await window.webContents.capturePage()).toPNG()); throw new Error(`UI action failed: ${source}: ${error.message}`); } };
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
   const settle = async () => delay(160);
@@ -79,8 +82,31 @@ exports.run = async (window, userData) => {
   await settle();
   assert.notDeepEqual(await viewport(),beforePan,"space-drag must pan immediately after switching canvases");
   await run(`Array.from(document.querySelectorAll('.tree-name')).find(n => n.title === ${JSON.stringify(canvas.name)}).click()`); await settle();
+  // A canvas right-click (context menu) must not leave the editor in a pressed-button
+  // state that blocks list commands such as rename.
+  window.webContents.sendInputEvent({type:"mouseMove",x:1000,y:500});
+  window.webContents.sendInputEvent({type:"mouseDown",x:1000,y:500,button:"right",clickCount:1});
+  window.webContents.sendInputEvent({type:"mouseUp",x:1000,y:500,button:"right",clickCount:1});
+  await settle();
+  window.webContents.sendInputEvent({type:"keyDown",keyCode:"Escape"}); window.webContents.sendInputEvent({type:"keyUp",keyCode:"Escape"});
+  await settle();
   await run(`document.querySelector('.canvas-tree-row.is-active .tree-more').click()`); await settle(); await choose("重命名");
   await run(`(() => { const input = document.querySelector('.canvas-tree-row input'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'原型画布'); input.dispatchEvent(new Event('input',{bubbles:true})); })()`); await settle(); await finishRename();
+  assert(!(await run(`document.querySelector('.canvas-notice')?.textContent ?? ''`)).includes("请先结束拖拽"), "rename after a canvas right-click must not be blocked");
+  assert.equal(await run(`document.querySelector('.canvas-tree-row.is-active .tree-name').title`), "原型画布");
+  // Clicking the canvas ends the rename by blur while that click is still pressed.
+  await run(`document.querySelector('.canvas-tree-row.is-active .tree-more').click()`); await settle(); await choose("重命名");
+  await run(`(() => { const input = document.querySelector('.canvas-tree-row input'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'流程画布'); input.dispatchEvent(new Event('input',{bubbles:true})); })()`); await settle();
+  require("electron").app.focus({ steal: true }); window.focus(); window.webContents.focus(); await settle();
+  await run(`document.querySelector('.canvas-tree-row input').focus()`);
+  assert(await run(`document.hasFocus() && document.activeElement === document.querySelector('.canvas-tree-row input')`), "rename input must hold real focus before the canvas click");
+  window.webContents.sendInputEvent({type:"mouseMove",x:1000,y:500});
+  window.webContents.sendInputEvent({type:"mouseDown",x:1000,y:500,button:"left",clickCount:1});
+  window.webContents.sendInputEvent({type:"mouseUp",x:1000,y:500,button:"left",clickCount:1});
+  await settle();
+  assert(!(await run(`document.querySelector('.canvas-notice')?.textContent ?? ''`)).includes("请先结束拖拽"), "clicking the canvas must commit the rename without a gesture warning");
+  assert.equal(await run(`document.querySelector('.canvas-tree-row.is-active .tree-name').title`), "流程画布");
+  assert.equal((await saved()).document.tree.find(n => n.id === canvas.id).name, "流程画布");
   await run(`document.querySelector('.canvas-tree-row.is-active .tree-more').click()`); await settle(); await choose("复制画布");
   snapshot = await saved();
   const copied = snapshot.document.tree.find(n => n.name.includes("副本"));
@@ -90,14 +116,114 @@ exports.run = async (window, userData) => {
   snapshot = await saved(); assert.equal(snapshot.document.tree.length, 2);
   await run(`document.querySelector('.history-control [aria-label="撤销"]').click()`); await settle();
   snapshot = await saved(); assert.equal(snapshot.document.tree.length, 3); assert(snapshot.document.canvases[copied.id]);
+  // Scrolled to empty space: switching canvases keeps that view, reopening the project fits content.
+  const scrolledAway = () => run(`!!document.querySelector('.scroll-back-to-content')`);
+  await clickCanvas(copied.name);
+  const panStart = await viewport();
+  for (let i = 0; i < 6; i++) {
+    window.webContents.sendInputEvent({type:"keyDown",keyCode:"Space"});
+    window.webContents.sendInputEvent({type:"mouseDown",x:1100,y:650,button:"left",clickCount:1});
+    window.webContents.sendInputEvent({type:"mouseMove",x:300,y:100,button:"left"});
+    window.webContents.sendInputEvent({type:"mouseUp",x:300,y:100,button:"left",clickCount:1});
+    window.webContents.sendInputEvent({type:"keyUp",keyCode:"Space"});
+    await settle();
+  }
+  await delay(300);
+  assert(await scrolledAway(), "precondition: the canvas is scrolled away from its content " + JSON.stringify([panStart, await viewport()]));
+  await clickCanvas(original.name);
+  await clickCanvas(copied.name);
+  await delay(300);
+  assert(await scrolledAway(), "returning to a canvas keeps its view within the opened project");
   window.webContents.sendInputEvent({ type: "keyDown", keyCode: "O", modifiers: ["meta"] });
   window.webContents.sendInputEvent({ type: "keyUp", keyCode: "O", modifiers: ["meta"] });
   await delay(500);
   assert(await run(`document.querySelector('.canvas-tree-row.is-active .tree-name').title === ${JSON.stringify(copied.name)}`), "last canvas restores on reopen");
   assert.equal(await run(`document.querySelectorAll('.tree-name').length`), 3);
+  assert(!await run(`!!document.querySelector('.scroll-back-to-content')`), "an opened canvas shows its content without scrolling back");
+  assert(parseInt(await run(`document.querySelector('.zoom-value').textContent`)) <= 100, "fitting content never zooms beyond 100%");
   await run(`document.querySelector('.canvas-tree-row.is-active .tree-more').click()`); await settle();
   await fs.writeFile(process.env.EASYDRAW_MULTI_CANVAS_SCREENSHOT || path.join(process.env.TMPDIR || "/tmp", "easydraw-multi-canvas.png"), (await window.webContents.capturePage()).toPNG());
   await run(`document.querySelector('.canvas-context-menu').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}))`);
+  // A new canvas opens in rename mode; clicking its empty canvas must commit the name quietly.
+  require("electron").app.focus({ steal: true }); window.focus(); window.webContents.focus(); await settle();
+  const newCanvas = await run(`(() => { const b = document.querySelector('.tree-toolbar [aria-label="新建画布"]'); const r = b.getBoundingClientRect(); return {x:Math.round(r.x+r.width/2),y:Math.round(r.y+r.height/2)}; })()`);
+  window.webContents.sendInputEvent({type:"mouseMove",...newCanvas});
+  window.webContents.sendInputEvent({type:"mouseDown",...newCanvas,button:"left",clickCount:1});
+  window.webContents.sendInputEvent({type:"mouseUp",...newCanvas,button:"left",clickCount:1});
+  await delay(400);
+  assert(await run(`document.hasFocus() && document.activeElement === document.querySelector('.canvas-tree-row input')`), "a new canvas starts in focused rename mode");
+  window.webContents.sendInputEvent({type:"mouseMove",x:1000,y:500});
+  window.webContents.sendInputEvent({type:"mouseDown",x:1000,y:500,button:"left",clickCount:1});
+  window.webContents.sendInputEvent({type:"mouseUp",x:1000,y:500,button:"left",clickCount:1});
+  await settle();
+  assert(!(await run(`document.querySelector('.canvas-notice')?.textContent ?? ''`)).includes("请先结束拖拽"), "clicking a new canvas must commit its pending rename without a gesture warning");
+  assert(await run(`!document.querySelector('.canvas-tree-row input') && document.querySelectorAll('.tree-name').length === 4`));
+  // Backspace deletes the selection with the floating toolbar and with the property panel open.
+  const liveElements = async () => Object.values((await saved()).document.canvases).reduce((n, c) => n + c.scene.elements.length, 0);
+  const nativeClick = async point => {
+    window.webContents.sendInputEvent({ type: "mouseMove", ...point });
+    window.webContents.sendInputEvent({ type: "mouseDown", ...point, button: "left", clickCount: 1 });
+    window.webContents.sendInputEvent({ type: "mouseUp", ...point, button: "left", clickCount: 1 });
+    await settle();
+  };
+  const centerOf = async selector => {
+    const point = await run(`(() => { const e = document.querySelector(${JSON.stringify(selector)}); if (!e) return null; const r = e.getBoundingClientRect(); return {x:Math.round(r.x+r.width/2),y:Math.round(r.y+r.height/2)}; })()`);
+    assert(point, `missing control: ${selector}`);
+    return point;
+  };
+  const backspace = async () => {
+    window.webContents.sendInputEvent({ type: "keyDown", keyCode: "Backspace" });
+    window.webContents.sendInputEvent({ type: "keyUp", keyCode: "Backspace" });
+    await settle();
+  };
+  const canvasFocused = () => run(`document.activeElement === document.querySelector('.canvas-wrap .easydraw')`);
+  const inspectorOpen = () => run(`!!document.querySelector('.selection-inspector__heading')`);
+  const drawAndSelect = async () => {
+    require("electron").app.focus({ steal: true }); window.focus(); window.webContents.focus(); await settle();
+    assert(await run(`document.hasFocus()`), "keyboard tests require an active window");
+    await run(`document.querySelector(".App-toolbar__shape-tools-trigger").click()`); await settle();
+    await run(`document.querySelector('[data-testid="toolbar-shape-menu-rectangle"]').click()`); await settle();
+    window.webContents.sendInputEvent({ type: "mouseMove", x: 900, y: 400 });
+    window.webContents.sendInputEvent({ type: "mouseDown", x: 900, y: 400, button: "left", clickCount: 1 });
+    window.webContents.sendInputEvent({ type: "mouseMove", x: 1000, y: 470, button: "left" });
+    window.webContents.sendInputEvent({ type: "mouseUp", x: 1000, y: 470, button: "left", clickCount: 1 });
+    await settle();
+    await nativeClick({ x: 1200, y: 650 }); await nativeClick({ x: 950, y: 401 });
+  };
+  const baseElements = await liveElements();
+  await drawAndSelect();
+  assert.equal(await liveElements(), baseElements + 1);
+  await backspace();
+  assert.equal(await liveElements(), baseElements, "Backspace deletes with the floating selection toolbar");
+  await drawAndSelect();
+  await nativeClick(await centerOf(".selection-toolbar__inspector-toggle"));
+  assert(await inspectorOpen(), "the toolbar toggle opens the property panel");
+  assert(await canvasFocused(), "opening the property panel returns keyboard focus to the canvas");
+  await backspace();
+  assert.equal(await liveElements(), baseElements, "Backspace deletes while the property panel is open");
+  await drawAndSelect();
+  assert(await inspectorOpen(), "the property panel stays preferred for the next selection");
+  await nativeClick(await centerOf(".selected-shape-actions .color-picker__top-picks .color-picker__button:not(.active)"));
+  assert(await canvasFocused(), "editing a property returns keyboard focus to the canvas");
+  await backspace();
+  assert.equal(await liveElements(), baseElements, "Backspace deletes after editing a property in the panel");
+  // Text shows the font picker in the panel as well.
+  await run(`document.querySelector('[data-testid="toolbar-text"]').click()`); await settle();
+  await nativeClick({ x: 820, y: 560 });
+  for (const ch of "hello") window.webContents.sendInputEvent({ type: "char", keyCode: ch });
+  await settle();
+  window.webContents.sendInputEvent({ type: "keyDown", keyCode: "Escape" }); window.webContents.sendInputEvent({ type: "keyUp", keyCode: "Escape" });
+  await settle();
+  assert.equal(await liveElements(), baseElements + 1);
+  assert(await inspectorOpen() && await run(`!!document.querySelector('.selected-shape-actions .FontPicker__container')`), "text selection shows its property panel");
+  assert(await canvasFocused(), "finishing text entry with the property panel open keeps keyboard focus on the canvas");
+  await backspace();
+  assert.equal(await liveElements(), baseElements, "Backspace deletes a text element while its property panel is open");
+  await drawAndSelect();
+  await nativeClick(await centerOf(".selection-inspector__heading button"));
+  assert(!await inspectorOpen());
+  await backspace();
+  assert.equal(await liveElements(), baseElements);
   await require("./workspace-interaction-smoke.cjs").run(window);
   await fs.writeFile(path.join(userData, "multicanvas-ready"), "ready");
   console.log("MULTI_CANVAS_DESKTOP_SMOKE_OK: flat list, count, hover, popup, keyboard, search, manual edit, switching, rename, duplicate, delete, undo, save and reopen");

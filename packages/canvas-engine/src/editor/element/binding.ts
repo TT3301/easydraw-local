@@ -658,7 +658,7 @@ const getElementAtPositionForBinding = (
   elements: readonly NonDeletedEasyDrawElement[],
   isAtPositionFn: (element: NonDeletedEasyDrawElement) => boolean,
 ) => {
-  let hitElement = null;
+  let frameHit = null;
   // We need to to hit testing from front (end of the array) to back (beginning of the array)
   // because array is ordered from lower z-index to highest and we want element z-index
   // with higher z-index
@@ -668,12 +668,16 @@ const getElementAtPositionForBinding = (
       continue;
     }
     if (isAtPositionFn(element)) {
-      hitElement = element;
-      break;
+      // Pages stack above their members, but a member at the page edge is
+      // the more specific target; the page border is only the fallback.
+      if (!isFrameLikeElement(element)) {
+        return element;
+      }
+      frameHit ??= element;
     }
   }
 
-  return hitElement;
+  return frameHit;
 };
 
 const getAllElementsAtPositionForBinding = (

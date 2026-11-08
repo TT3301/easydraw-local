@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("@easydraw/canvas-engine", () => ({ CaptureUpdateAction: { NEVER: "NEVER" } }));
-vi.mock("./canvas-runtime", () => ({ reconcileCanvasBindings: vi.fn(),
+vi.mock("./canvas-runtime", () => ({ reconcileCanvasBindings: vi.fn(), layoutCanvasText: vi.fn(async () => {}),
   renderedBounds: (elements: Array<{ id: string; x: number; y: number; width: number; height: number }>) => elements.map(e => ({ id: e.id, x: e.x, y: e.y, width: e.width, height: e.height })),
 }));
 vi.mock("./canvas-output", () => ({ renderCanvasScope: vi.fn(async () => ({ mimeType: "image/png" })) }));

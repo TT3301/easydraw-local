@@ -17,6 +17,10 @@ describe("local-only distribution", () => {
     expect(pkg.build.appId).toBe("com.easydraw.local");
     expect(pkg.build.productName).toBe("EasyDraw Local");
     expect(pkg.build.files.some((path: string) => path.startsWith("tests/"))).toBe(false);
+    expect(Object.keys(pkg.dependencies).join(" ")).not.toMatch(/@easydraw\/share-|fastify|ali-oss|better-sqlite3/);
+    expect(JSON.stringify([pkg.build.files, pkg.build.extraResources])).not.toMatch(/apps\/|infra\/|share-api|share-viewer|share-service/);
+    expect(pkg.scripts.build).toBe("npm run build:desktop");
+    expect(pkg.scripts["build:desktop"]).not.toMatch(/share|website/);
     for (const path of ["apps", "infra", "src/share", "electron/share-service.cjs", "packages/share-codec", "packages/share-contracts", "packages/share-storage"]) {
       expect(existsSync(join(root, path)), path).toBe(false);
     }

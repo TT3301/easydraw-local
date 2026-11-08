@@ -7,7 +7,7 @@ import { executeCanvasOperations, fail, type ResolvedAsset } from "../../core/ca
 import { canvasOutline, scopeElements } from "../../core/canvas-query";
 import { contains, intersects, unionBounds } from "../../core/canvas-geometry";
 import { CanvasAssets } from "./canvas-assets";
-import { measureCanvasText, reconcileCanvasBindings, renderedBounds } from "./canvas-runtime";
+import { layoutCanvasText, measureCanvasText, reconcileCanvasBindings, renderedBounds } from "./canvas-runtime";
 import { renderCanvasScope } from "./canvas-output";
 import { growAiFrameHeights } from "./frame-height";
 import type { EditorRequestPorts } from "./request-ports";
@@ -138,18 +138,22 @@ export function createEditorRequestHandler(ports: EditorRequestPorts) {
       checkRevision();
       const task = input.dryRun ? null : tasks.require(input.taskId);
       const checkTask = () => { if (task) tasks.assertCurrent(task); };
-      const checkCoverage = (draft: ProjectDocument, idMap: Record<string, string>) => {
-        if (!task) return;
+      // Reorder resets engine indices for the whole array; only intended
+      // reorder targets and real content changes belong to the edit scope.
+      const changedIds = (draft: ProjectDocument) => {
         const before = new Map(document.scene.elements.map(e => [e.id, e]));
+        return new Set(draft.scene.elements.filter(e => {
+          const old = before.get(e.id);
+          return !old || JSON.stringify({ ...old, index: null }) !== JSON.stringify({ ...e, index: null });
+        }).map(e => e.id));
+      };
+      // `maintained` holds connectors that only followed their bound elements;
+      // they are outside the scope check unless an operation targets them.
+      const checkCoverage = (draft: ProjectDocument, idMap: Record<string, string>, maintained: ReadonlySet<string> = new Set()) => {
+        if (!task) return;
         const after = new Map(draft.scene.elements.map(e => [e.id, e]));
-        const targets = new Set<string>();
-        for (const [id, e] of after) {
-          const old = before.get(id);
-          // Reorder resets engine indices for the whole array; only intended
-          // reorder targets and real content changes belong to the edit scope.
-          if (!old || JSON.stringify({ ...old, index: null }) !== JSON.stringify({ ...e, index: null })) targets.add(id);
-        }
-        for (const id of before.keys()) if (!after.has(id)) targets.add(id);
+        const targets = new Set([...changedIds(draft)].filter(id => !maintained.has(id)));
+        for (const e of document.scene.elements) if (!after.has(e.id)) targets.add(e.id);
         for (const op of input.operations) {
           for (const id of op.ids ?? (op.id ? [op.id] : [])) targets.add(idMap[id] ?? id);
         }
@@ -171,18 +175,33 @@ export function createEditorRequestHandler(ports: EditorRequestPorts) {
       for (const op of operations) if ("assetRef" in op && op.assetRef && !resolved.has(op.assetRef)) resolved.set(op.assetRef, await assets.resolve(op.assetRef, input.dryRun));
       assertRequest(); checkRevision(); checkTask();
       const { draft, idMap, duplicates, groups, creationOrder } = executeCanvasOperations(document, { ...input, operations }, resolved);
+      await layoutCanvasText(document, draft);
+      assertRequest(); checkRevision(); checkTask();
+      const written = changedIds(draft);
       reconcileCanvasBindings(document, draft);
       const before = new Map(document.scene.elements.map(e => [e.id, e]));
       const affected = { createdIds: draft.scene.elements.filter(e => !before.has(e.id)).map(e => e.id), updatedIds: draft.scene.elements.filter(e => before.has(e.id) && JSON.stringify(before.get(e.id)) !== JSON.stringify(e)).map(e => e.id), deletedIds: [...before.keys()].filter(id => !draft.scene.elements.some(e => e.id === id)) };
       const frameHeightChanges = growAiFrameHeights(document.scene.elements, draft.scene.elements,
         [...affected.createdIds, ...affected.updatedIds, ...affected.deletedIds], renderedBounds);
-      for (const { frameId } of frameHeightChanges) {
-        if (before.has(frameId) && !affected.updatedIds.includes(frameId)) affected.updatedIds.push(frameId);
+      if (frameHeightChanges.length) {
+        // Connectors bound to a grown page follow its new edges.
+        reconcileCanvasBindings(document, draft);
+        for (const e of draft.scene.elements) {
+          if (before.has(e.id) && !affected.updatedIds.includes(e.id) && JSON.stringify(before.get(e.id)) !== JSON.stringify(e)) affected.updatedIds.push(e.id);
+        }
       }
       const validated = NativeProjectDocumentSchema.safeParse(draft);
       if (!validated.success) fail("VALIDATION_FAILED", validated.error.issues[0]?.message ?? "Invalid document", validated.error.issues);
       if (input.dryRun) return { ok: true, ...envelope(), dryRun: true, idMap, duplicates, groups, affected, iconSelections, frameHeightChanges };
-      checkTask(); checkCoverage(draft, idMap);
+      // Binding maintenance (connector endpoints and their labels) follows
+      // covered changes; it never widens the scope a task must declare.
+      const connectorIds = new Set(draft.scene.elements.filter(e => e.type === "arrow" || e.type === "line").map(e => e.id));
+      const maintained = new Set([...changedIds(draft)].filter(id => {
+        const e = draft.scene.elements.find(element => element.id === id)!;
+        const isConnector = connectorIds.has(id) || (e.type === "text" && e.containerId !== null && connectorIds.has(e.containerId));
+        return isConnector && before.has(id) && !written.has(id);
+      }));
+      checkTask(); checkCoverage(draft, idMap, maintained);
       const commit = () => controller.commitAiProjectChange(input.label, input.baseRevision, next => {
         next.scene.elements = draft.scene.elements; next.assets = draft.assets; next.focusedPageElementId = draft.focusedPageElementId;
       }, { reconcileContainers: false });

@@ -211,7 +211,10 @@ export const ColorPicker = ({
 }: ColorPickerProps) => {
   return (
     <div>
-      <div role="dialog" aria-modal="true" className="color-picker-container">
+      {/* Inline swatches are always visible, so they are a group, not a modal
+          dialog; only the popup palette (Picker) is a dialog. Hosts use dialog
+          roles to suspend canvas shortcuts and focus handoff. */}
+      <div role="group" aria-label={label} className="color-picker-container">
         <TopPicks
           activeColor={color}
           onChange={onChange}

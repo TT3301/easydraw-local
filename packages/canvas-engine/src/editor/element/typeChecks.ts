@@ -149,6 +149,7 @@ export const isBindableElement = (
   return (
     element != null &&
     (!element.locked || includeLocked === true) &&
+    // Must match isConnectorBindingTarget in @easydraw/document-model.
     (element.type === "rectangle" ||
       element.type === "diamond" ||
       element.type === "ellipse" ||

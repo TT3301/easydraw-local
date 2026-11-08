@@ -1,17 +1,8 @@
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import "../features/ai/engine-test-globals";
+import { describe, expect, it } from "vitest";
 import { createNativeElement } from "@easydraw/document-model";
 import type { AppState } from "@easydraw/canvas-engine/types";
-
-let calculateScrollCenter: typeof import("@easydraw/canvas-engine/editor/scene/scroll").calculateScrollCenter;
-
-beforeAll(async () => {
-  vi.stubGlobal("window", { location: { origin: "http://localhost" } });
-  vi.stubGlobal("document", { createElement: () => ({}) });
-  vi.stubGlobal("devicePixelRatio", 1);
-  vi.stubGlobal("navigator", { platform: "", userAgent: "" });
-  ({ calculateScrollCenter } = await import("@easydraw/canvas-engine/editor/scene/scroll"));
-});
-afterAll(() => vi.unstubAllGlobals());
+import { calculateScrollCenter } from "@easydraw/canvas-engine/editor/scene/scroll";
 
 const view = (zoom: number, scrollX = 0, scrollY = 0) => ({
   width: 1200, height: 800, offsetLeft: 0, offsetTop: 0,

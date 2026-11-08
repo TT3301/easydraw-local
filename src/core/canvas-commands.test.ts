@@ -71,5 +71,39 @@ describe("general canvas commands", () => {
     expect(draft.scene.elements.find(e => e.id === idMap.group)?.x).toBe(30);
     expect(groups[0].groupId).not.toBe(idMap.group);
   });
+  it("connects pages with arrows and keeps the binding through page moves and deletion", () => {
+    const page = (id: string, x: number) => ({ op: "create", element: { id, type: "frame", x, y: 0, width: 300, height: 300 } });
+    const flow = { op: "create", element: { id: "flow", type: "arrow", x: 305, y: 150, width: 90, height: 0, points: [[0, 0], [90, 0]],
+      startBinding: { elementId: "home" }, endBinding: { elementId: "detail" } } };
+    const { draft } = apply([page("home", 0), page("detail", 400), flow]);
+    expect(draft.scene.elements.find(e => e.id === "flow")).toMatchObject({ startBinding: { elementId: "home" }, endBinding: { elementId: "detail" }, frameId: null });
+    expect(draft.scene.elements.find(e => e.id === "detail")?.boundElements).toEqual([{ id: "flow", type: "arrow" }]);
+    const deleted = apply([{ op: "delete", ids: ["detail"], children: "delete" }], draft).draft;
+    expect(deleted.scene.elements.find(e => e.id === "flow")).toMatchObject({ startBinding: { elementId: "home" }, endBinding: null });
+  });
+  it("creates elbow arrows by default and keeps elbow, curved and straight styles exclusive", () => {
+    const arrow = (id: string, extra = {}) => ({ op: "create", element: { id, type: "arrow", x: 0, y: 0, width: 100, height: 50, points: [[0, 0], [100, 0], [100, 50]], ...extra } });
+    const { draft } = apply([arrow("elbow"), arrow("curve", { roundness: { type: 2 } }), arrow("straight", { elbowed: false })]);
+    const get = (d: typeof draft, id: string) => d.scene.elements.find(e => e.id === id) as any;
+    expect(get(draft, "elbow")).toMatchObject({ elbowed: true, roundness: null });
+    expect(get(draft, "curve")).toMatchObject({ elbowed: false, roundness: { type: 2 } });
+    expect(get(draft, "straight")).toMatchObject({ elbowed: false, roundness: null });
+    expect(() => apply([arrow("bad", { elbowed: true, roundness: { type: 2 } })])).toThrow("Elbow arrows cannot have roundness");
+    expect(() => apply([shape("box", { elbowed: true })])).toThrow("rectangle does not support elbowed");
 
+    const switched = apply([{ op: "update", id: "elbow", patch: { roundness: { type: 2 } } }, { op: "update", id: "curve", patch: { elbowed: true } }], draft).draft;
+    expect(get(switched, "elbow")).toMatchObject({ elbowed: false, roundness: { type: 2 }, points: [[0, 0], [100, 50]], width: 100, height: 50 });
+    expect(get(switched, "curve")).toMatchObject({ elbowed: true, roundness: null });
+    expect(get(apply([{ op: "update", id: "elbow", patch: { strokeColor: "#e03131" } }], draft).draft, "elbow")).toMatchObject({ elbowed: true, points: [[0, 0], [100, 0], [100, 50]] });
+  });
+  it("names the connector, field and target type when a binding is invalid", () => {
+    const line = { op: "create", element: { id: "rail", type: "line", x: 0, y: 0, width: 100, height: 0, points: [[0, 0], [100, 0]] } };
+    const arrow = { op: "create", element: { id: "flow", type: "arrow", x: 0, y: 0, width: 100, height: 0, points: [[0, 0], [100, 0]], endBinding: { elementId: "rail" } } };
+    let error: any;
+    try { apply([line, arrow]); } catch (e) { error = e; }
+    expect(error).toMatchObject({ code: "INVALID_BINDING", details: { elementId: "flow", field: "endBinding", targetId: "rail", targetType: "line" } });
+    expect(error.message).toContain("arrow flow endBinding cannot bind to line rail");
+    expect(() => apply([{ ...arrow, element: { ...arrow.element, startBinding: { elementId: "missing" }, endBinding: null } }]))
+      .toThrow("arrow flow startBinding references missing element missing");
+  });
 });

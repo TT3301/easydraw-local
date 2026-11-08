@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("@easydraw/canvas-engine", () => ({ CaptureUpdateAction: { NEVER: "NEVER" }, exportToBlob: vi.fn() }));
-vi.mock("./canvas-runtime", () => ({ reconcileCanvasBindings: vi.fn(), measureCanvasText: vi.fn(), renderedBounds: vi.fn() }));
+vi.mock("./canvas-runtime", () => ({ reconcileCanvasBindings: vi.fn(), layoutCanvasText: vi.fn(async () => {}), measureCanvasText: vi.fn(), renderedBounds: vi.fn() }));
 import { startAiSession } from "./ai-session";
 import { EditorSession } from "../../app/editor-session";
 import { SceneController } from "../../core/scene-controller";

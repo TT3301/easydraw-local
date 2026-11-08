@@ -1,5 +1,7 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import "../features/ai/engine-test-globals";
+import { describe, expect, it } from "vitest";
 import { createNativeElement } from "@easydraw/document-model";
+import { shouldApplyFrameClip } from "@easydraw/canvas-engine/editor/frame";
 import type {
   EasyDrawElement,
   EasyDrawFrameLikeElement,
@@ -8,17 +10,7 @@ import type {
 import type { StaticCanvasAppState } from "@easydraw/canvas-engine/types";
 
 describe("connector frame clipping", () => {
-  afterEach(() => vi.unstubAllGlobals());
-
-  it("does not clip a dragged connector to the highlighted page", async () => {
-    vi.stubGlobal("window", { location: { origin: "http://localhost" } });
-    vi.stubGlobal("document", { createElement: () => ({}) });
-    vi.stubGlobal("devicePixelRatio", 1);
-    vi.stubGlobal("navigator", { platform: "", userAgent: "" });
-
-    const { shouldApplyFrameClip } = await import(
-      "@easydraw/canvas-engine/editor/frame"
-    );
+  it("does not clip a dragged connector to the highlighted page", () => {
     const page = createNativeElement({
       id: "page",
       type: "frame",

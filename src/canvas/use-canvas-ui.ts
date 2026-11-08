@@ -1,7 +1,7 @@
 import { safeExportName } from "./export-names";
 import type { Notice } from "../app/ports";
 import { CanvasSession } from "./canvas-session";
-import { CanvasViewRecorder } from "./canvas-view-recorder";
+import { CanvasViewRecorder, type SavedCanvasView } from "./canvas-view-recorder";
 import { readObjectsSnapPreference, saveObjectsSnapPreference } from "./objects-snap-preference";
 import { isSupportedCanvasTool } from "./canvas-tool-support";
 import { EditorSession } from "../app/editor-session";
@@ -12,9 +12,15 @@ import type { EasyDrawImperativeAPI, EasyDrawProps } from "@easydraw/canvas-engi
 import { getStateForZoom } from "@easydraw/canvas-engine/editor/scene/zoom";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { getFocusedPage, getPageElements } from "../core/protocol";
 
 import type { ControllerSnapshot } from "../core/scene-controller";
+/** First visits show the whole canvas content, never above 100%. */
+export const CANVAS_CONTENT_FIT = { viewportZoomFactor: 0.82, maxZoom: 1 } as const;
+// Fit what the engine shows now; an empty canvas stays at the origin at 100%.
+function fitCanvasContent(api: EasyDrawImperativeAPI) {
+  const content = api.getSceneElements().filter(element => !element.isDeleted);
+  if (content.length) api.scrollToContent(content, { fitToViewport: true, ...CANVAS_CONTENT_FIT, animate: false });
+}
 type CanvasToolType =
   | "selection"
   | "hand"
@@ -61,17 +67,18 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
   const controller = editorSession.controller;
   const renderEpoch = controller.getCanvasEpoch();
   const sceneElements = snapshot.document.scene.elements;
-  const page = getFocusedPage(snapshot.document) ?? getPageElements(snapshot.document)[0];
   const [hasPendingEdit, setHasPendingEdit] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [objectsSnapModeEnabled, setObjectsSnapModeEnabled] = useState(readObjectsSnapPreference);
   const [activeCustomCanvasTool, setActiveCustomCanvasTool] =
     useState<"frame" | null>(null);
   const [canvasToolbar, setCanvasToolbar] = useState<HTMLElement | null>(null);
-  const [viewRecorder] = useState(() => new CanvasViewRecorder((key, view) => {
-    try { localStorage.setItem(key, JSON.stringify(view)); } catch { /* best effort */ }
-  }));
-  const didFitPage = useRef(false);
+  // Views of canvases visited since the project was opened (by canvas ID). A first
+  // visit fits the content; returning to a canvas keeps where the user left it.
+  const [visitedViews] = useState(() => new Map<string, SavedCanvasView>());
+  const [viewRecorder] = useState(() => new CanvasViewRecorder((canvasId, view) => { visitedViews.set(canvasId, view); }));
+  // False until the current canvas content has been fitted into view once.
+  const didFitContent = useRef(false);
   const latestApi = useRef(api);
   latestApi.current = api;
   const latestSelection = useRef<string[]>([]);
@@ -93,7 +100,7 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
         try {
           const target = resolveObjectLink(canvasSession.flush(), link);
           controller.switchCanvas(target.canvasId);
-          didFitPage.current = true;
+          didFitContent.current = true;
           const scope = editorSession.capture();
           window.requestAnimationFrame(() => {
             if (!scope.isCurrent() || !latestApi.current) return;
@@ -113,41 +120,37 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
     if (!api) return;
     let currentEpoch = -1;
     return canvasSession.connect(elements => {
-      const doc = controller.getSnapshot().document;
       const changed = currentEpoch !== controller.getCanvasEpoch();
       currentEpoch = controller.getCanvasEpoch();
       if (changed) {
         viewRecorder.reset();
         setHasPendingEdit(false); latestSelection.current = []; setSelectedIds([]);
-        let view: { zoom: number; scrollX: number; scrollY: number } | null = null;
-        try { view = JSON.parse(localStorage.getItem(`easydraw:view:${doc.projectId}:${doc.activeCanvasId}`) ?? "null"); } catch { /* use default viewport */ }
-        const validView = view && Number.isFinite(view.zoom) && view.zoom >= .1 && view.zoom <= 10 && Number.isFinite(view.scrollX) && Number.isFinite(view.scrollY);
-        didFitPage.current = Boolean(validView);
+        const activeCanvasId = controller.getSnapshot().document.activeCanvasId;
+        const view = activeCanvasId ? visitedViews.get(activeCanvasId) : undefined;
+        // A loading engine fits its initial data itself (CANVAS_CONTENT_FIT); otherwise fit
+        // in this same update so the canvas never paints an intermediate viewport.
+        const loading = api.getAppState().isLoading;
+        didFitContent.current = true;
         api.history.clear();
-        api.updateScene({ elements, appState: { selectedElementIds: {}, selectedGroupIds: {},
-          editingGroupId: null, scrollX: validView ? view!.scrollX : 0, scrollY: validView ? view!.scrollY : 0,
-          zoom: { value: (validView ? view!.zoom : 1) as any } }, captureUpdate: CaptureUpdateAction.NEVER });
+        const selection = { selectedElementIds: {}, selectedGroupIds: {}, editingGroupId: null };
+        if (loading) api.updateScene({ elements, appState: selection, captureUpdate: CaptureUpdateAction.NEVER });
+        else api.updateScene({ elements, appState: { ...selection, scrollX: view?.scrollX ?? 0, scrollY: view?.scrollY ?? 0,
+          zoom: { value: (view?.zoom ?? 1) as any } }, captureUpdate: CaptureUpdateAction.NEVER });
+        if (!view && !loading) fitCanvasContent(api);
       } else api.updateScene({ elements, captureUpdate: CaptureUpdateAction.NEVER });
     });
   }, [api, canvasSession]);
   useEffect(() => editorSession.subscribe(() => {
+    // Runs before the new project document is exposed: every canvas starts unvisited.
     viewRecorder.reset();
+    visitedViews.clear();
     canvasSession.reset();
     setHasPendingEdit(false);
     latestSelection.current = [];
     setSelectedIds([]);
-    didFitPage.current = false;
+    didFitContent.current = false;
   }), [canvasSession]);
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", viewRecorder.flush);
-    window.addEventListener("blur", viewRecorder.flush);
-    return () => {
-      window.removeEventListener("beforeunload", viewRecorder.flush);
-      window.removeEventListener("blur", viewRecorder.flush);
-      viewRecorder.reset();
-    };
-  }, [viewRecorder]);
+  useEffect(() => () => viewRecorder.reset(), [viewRecorder]);
 
   useEffect(() => {
     const doc = snapshot.document;
@@ -157,27 +160,16 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
 
   useEffect(() => {
     syncCanvas();
-    if (api && page && !didFitPage.current) {
-      didFitPage.current = true;
+    if (api && !didFitContent.current) {
+      didFitContent.current = true;
       const scope = editorSession.capture();
       window.requestAnimationFrame(() => {
         if (!scope.isCurrent()) return;
-        api.scrollToContent(
-          sceneElements.filter(
-            (element) =>
-              element.id === page.id || element.frameId === page.id,
-          ),
-          {
-            fitToViewport: true,
-            viewportZoomFactor: 0.82,
-            animate: false,
-          },
-        );
+        fitCanvasContent(api);
       });
     }
   }, [
     api,
-    page?.id,
     sceneElements,
     snapshot.document.revision,
     syncCanvas,
@@ -243,7 +235,6 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
         saveObjectsSnapPreference(appState.objectsSnapModeEnabled);
         setObjectsSnapModeEnabled(appState.objectsSnapModeEnabled);
       }
-      const doc = controller.getSnapshot().document;
       const nextActiveTool = appState.activeTool?.type;
       if (nextActiveTool && isSupportedCanvasTool(nextActiveTool)) {
         const nextCustomTool = nextActiveTool === "frame" ? "frame" : null;
@@ -260,8 +251,9 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
       const orderedElements = canvasSession.observe(elements, appState, latestApi.current?.getSceneVersion());
       setHasPendingEdit(canvasSession.hasPendingEdit);
       const hasActiveCanvasGesture = canvasSession.activeGesture;
-      if (doc.activeCanvasId && appState.zoom) {
-        viewRecorder.observe(`easydraw:view:${doc.projectId}:${doc.activeCanvasId}`, {
+      const activeCanvasId = controller.getSnapshot().document.activeCanvasId;
+      if (activeCanvasId && appState.zoom) {
+        viewRecorder.observe(activeCanvasId, {
           zoom: appState.zoom.value, scrollX: appState.scrollX ?? 0, scrollY: appState.scrollY ?? 0,
         }, hasActiveCanvasGesture);
       }
@@ -422,7 +414,7 @@ export function useCanvasUi({ editorSession, canvasSession, api, snapshot, t, se
   const select = useCallback((ids: string[]) => { latestSelection.current = ids; setSelectedIds(ids); }, []);
   const getSelection = useCallback(() => latestSelection.current, []);
   const getApi = useCallback(() => latestApi.current, []);
-  const requestFit = useCallback(() => { didFitPage.current = false; }, []);
+  const requestFit = useCallback(() => { didFitContent.current = false; }, []);
   return { selectedIds, select, getSelection, getApi, requestFit, activeCustomCanvasTool, hasPendingEdit,
     canvasToolbar, handleCanvasChange, objectsSnapModeEnabled, generateLinkForSelection, handleLinkOpen,
     activateFrameTool, selectCanvasPage, setCanvasZoom };
