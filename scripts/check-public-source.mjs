@@ -34,11 +34,13 @@ export function checkPublicSource(root = sourceRoot) {
 
   const textExtensions = new Set([".md", ".ts", ".tsx", ".cjs", ".mjs", ".json", ".css", ".scss", ".html", ".yaml", ".yml", ".txt", ".svg"]);
   const privatePath = /(?:^|\/)(?:\.env(?:\..*)?|\.npmrc|\.DS_Store|AGENTS\.md|DESIGN\.md|design-qa\.md)$|\.(?:edw(?:\..*)?|sqlite(?:-shm|-wal)?|db|log|pem|key|p12|pfx|secret\.json)$/i;
-  const privateDirectory = /^(?:apps|infra|qa|release|screenshots|\.easydraw|\.codex|\.pi)\/|^docs\/(?:research|validation|architecture|releases)\//;
+  // Fork: apps/share-server is the self-hosted share backend; any other app or infra directory stays private.
+  const privateDirectory = /^(?:apps\/(?!share-server\/)|(?:infra|qa|release|screenshots|\.easydraw|\.codex|\.pi)\/)|^docs\/(?:research|validation|architecture|releases)\//;
   const secret = /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bAKIA[0-9A-Z]{16}\b|\bLTAI[0-9A-Za-z]{16,}\b/;
   const personalPath = /\/Users\/(?!test(?:\/|"|')|example\/|user\/|<)[^/\s"']+\/|\/home\/(?!test\/|example\/|user\/|<)[^/\s"']+\//;
   const cloudDependency = /@easydraw\/share-|"(?:ali-oss|fastify|better-sqlite3)"\s*:/;
-  const cloudRuntime = /云端分享|分享工作台|easydraw:share:|(?:registerShareHandlers|getShareCapability|beginSharePublish|preparePublishSnapshot)\b|VITE_APP_(?:BACKEND|LIBRARY|WS_SERVER|PORTAL|FIREBASE|MATOMO|AI_BACKEND)/;
+  // Fork: `easydraw:share:` IPC is the allow-listed self-hosted share channel; upstream cloud APIs stay forbidden.
+  const cloudRuntime = /云端分享|分享工作台|(?:registerShareHandlers|getShareCapability|beginSharePublish|preparePublishSnapshot)\b|VITE_APP_(?:BACKEND|LIBRARY|WS_SERVER|PORTAL|FIREBASE|MATOMO|AI_BACKEND)/;
 
   for (const file of files) {
     if (privatePath.test(file) || privateDirectory.test(file) || file.split("/").some(generatedDirectory)) {

@@ -38,6 +38,17 @@ describe("public-source hygiene checker", () => {
     for (const path of [".env", "docs/validation/report.md", "project.edw", "infra/deploy.yml"]) expect(errors).toContain(path);
   });
 
+  it("allows only the fork's self-hosted share server under apps/", () => {
+    const root = fixture();
+    put(root, "apps/share-server/server.mjs", "export {};");
+    put(root, "apps/share-api/index.ts", "export {};");
+    put(root, "src/share.ts", 'ipcRenderer.invoke("easydraw:share:status");');
+    const errors = checkPublicSource(root).errors.join("\n");
+    expect(errors).not.toContain("apps/share-server");
+    expect(errors).not.toContain("src/share.ts");
+    expect(errors).toContain("apps/share-api/index.ts: private or generated artifact");
+  });
+
   it("detects cloud packages and application publication APIs", () => {
     const root = fixture();
     put(root, "src/accidental.ts", "desktop.getShareCapability();");
