@@ -18,7 +18,9 @@ describe("local-only distribution", () => {
     expect(pkg.build.productName).toBe("EasyDraw Local");
     expect(pkg.build.files.some((path: string) => path.startsWith("tests/"))).toBe(false);
     expect(Object.keys(pkg.dependencies).join(" ")).not.toMatch(/@easydraw\/share-|fastify|ali-oss|better-sqlite3/);
-    expect(JSON.stringify([pkg.build.files, pkg.build.extraResources])).not.toMatch(/apps\/|infra\/|share-api|share-viewer|share-service/);
+    // Fork: the bundled LAN share server ships exactly one app file; anything else from apps/ or infra/ stays out.
+    const packaged = pkg.build.files.filter((path: string) => path !== "apps/share-server/server.mjs");
+    expect(JSON.stringify([packaged, pkg.build.extraResources])).not.toMatch(/apps\/|infra\/|share-api|share-viewer|share-service/);
     expect(pkg.scripts.build).toBe("npm run build:desktop");
     expect(pkg.scripts["build:desktop"]).not.toMatch(/share|website/);
     for (const path of ["infra", "src/share", "packages/share-codec", "packages/share-contracts", "packages/share-storage"]) {
@@ -42,7 +44,7 @@ describe("local-only distribution", () => {
     expect(Object.keys(api).join(" ")).not.toMatch(/account|registration|password/i);
     expect(Object.keys(api).filter(name => /share/i.test(name)).sort()).toEqual([
       "copyShareLink", "deleteShare", "getShareSettings", "getShareStatus", "publishShare",
-      "setShareEnabled", "setShareExpiry", "setShareSettings", "testShareServer",
+      "setLanShare", "setShareEnabled", "setShareExpiry", "setShareMode", "setShareSettings", "testShareServer",
     ]);
     for (const method of ["openProject", "saveProject", "saveProjectAs", "importAsset", "savePng", "setMcpEnabled"]) {
       expect(api[method], method).toBeTypeOf("function");
@@ -102,10 +104,17 @@ describe("self-hosted share boundaries (fork)", () => {
     expect(source("src/core/mcp-bridge.ts")).not.toMatch(/publishShare|easydraw:share:/);
   });
 
-  it("keeps the share server dependency-free and out of the desktop package", () => {
+  it("keeps the share server dependency-free and packages only its single file plus the viewer", () => {
     const server = source("apps/share-server/server.mjs");
     for (const match of server.matchAll(/from\s+["']([^"']+)["']/g)) expect(match[1], "server import").toMatch(/^node:/);
     const pkg = JSON.parse(source("package.json"));
-    expect(JSON.stringify(pkg.build)).not.toMatch(/share-server|dist-viewer/);
+    expect(pkg.build.files.filter((path: string) => /share-server|dist-viewer/.test(path))).toEqual(["dist-viewer/**/*", "apps/share-server/server.mjs"]);
+    expect(source("electron/lan-share-host.cjs")).toContain('"apps", "share-server", "server.mjs"');
+  });
+
+  it("keeps the LAN share port closed unless the user turns it on", () => {
+    const service = source("electron/share-service.cjs");
+    expect(service).toMatch(/enabled: false, port: DEFAULT_LAN_PORT/);
+    expect(source("electron/main.cjs")).toMatch(/will-quit", \(\) => \{ void lanHost\.stop\(\); \}/);
   });
 });
