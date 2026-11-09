@@ -10,9 +10,10 @@ root="$(cd "$here/../.." && pwd)"
 
 (cd "$root" && npm run build:viewer)
 ssh "$host" "mkdir -p '$remote/data' '$remote/viewer' && chown 1000:1000 '$remote/data'"
-# tar over ssh: no rsync needed on the server. The viewer directory is replaced atomically.
+# tar over ssh: no rsync needed on the server. The viewer directory is replaced atomically;
+# the container is then recreated because its bind mount still points at the old directory.
 tar -C "$here" -cf - server.mjs Dockerfile compose.yaml | ssh "$host" "tar -C '$remote' -xf -"
 tar -C "$root/dist-viewer" -cf - . | ssh "$host" "rm -rf '$remote/viewer.new' && mkdir '$remote/viewer.new' && tar -C '$remote/viewer.new' -xf - \
   && rm -rf '$remote/viewer.old' && mv '$remote/viewer' '$remote/viewer.old' && mv '$remote/viewer.new' '$remote/viewer' && rm -rf '$remote/viewer.old'"
 ssh "$host" "test -f '$remote/.env' || { umask 077; printf 'SHARE_TOKEN=%s\n' \"\$(openssl rand -base64 36 | tr -d '\n')\" > '$remote/.env'; echo 'Created $remote/.env with a new SHARE_TOKEN'; }
-  cd '$remote' && docker compose up -d --build && docker compose ps"
+  cd '$remote' && docker compose up -d --build --force-recreate && docker compose ps"

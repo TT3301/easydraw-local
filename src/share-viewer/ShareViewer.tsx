@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { EasyDraw } from "@easydraw/canvas-engine";
+import { EasyDraw, MainMenu } from "@easydraw/canvas-engine";
 import type { BinaryFileData, BinaryFiles, DataURL } from "@easydraw/canvas-engine/types";
 import { NativeProjectDocumentSchema, projectCanvasIds, selectProjectCanvas, type StoredProjectDocument } from "@easydraw/document-model";
 import { CANVAS_CONTENT_FIT } from "../canvas/use-canvas-ui";
@@ -91,7 +91,13 @@ export function ShareViewer() {
         theme="light"
         langCode={english ? "en" : "zh-CN"}
         UIOptions={{ tools: { image: false }, canvasActions: { loadScene: false, saveToActiveFile: false, export: false, toggleTheme: false, saveAsImage: false, clearCanvas: false, changeViewBackgroundColor: false } }}
-      />
+      >
+        {/* Explicit menu: replaces the engine default, which appends external project links. */}
+        <MainMenu>
+          <MainMenu.DefaultItems.SearchMenu />
+          <MainMenu.DefaultItems.Help />
+        </MainMenu>
+      </EasyDraw>
     </main>
   </div>;
 }
