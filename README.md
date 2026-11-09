@@ -18,7 +18,11 @@ Draw by hand or connect an AI agent through MCP—your projects stay in local fi
 - **Optional AI assistance** — let a compatible MCP agent inspect and edit the canvas.
 - **English and Simplified Chinese UI** — switch languages in Settings.
 
-No account, cloud sharing, hosted viewer, sync service, or EasyDraw backend is included.
+No account, sync service, or official EasyDraw backend is included.
+
+> **Fork addition: self-hosted public sharing.** Configure your own VPS address and access token in Settings
+> to publish an end-to-end encrypted, read-only snapshot link (the key stays after `#`).
+> See [apps/share-server](apps/share-server/README.md) for the server and deployment.
 
 ## v0.3.7 update
 

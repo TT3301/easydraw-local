@@ -5,6 +5,8 @@ import { LibrarySidebar } from "./components/LibrarySidebar";
 import { IconLibraryPopover } from "./features/assets/IconLibraryPopover";
 import { SettingsDialog } from "./components/SettingsDialog";
 import { McpDialog } from "./components/McpDialog";
+import { ShareDialog, ShareIcon } from "./features/share/ShareDialog";
+import { serializeProjectDocument } from "@easydraw/document-model";
 import { hasSkillUpdate, SKILL_UPDATE_STORAGE_KEY } from "./core/skill-update";
 import { ApplicationMenu } from "./components/ApplicationMenu";
 import { ProjectService } from "./app/project-service";
@@ -108,6 +110,7 @@ export default function App() {
   const canHandleShortcut = useWorkspaceInteraction(workspaceRef, canvasWrapRef);
   const [locale, setLocale] = useState<AppLocale>(initialLocale);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const t = useCallback(
     (message: string, values?: Record<string, string | number>) =>
       translate(locale, message, values),
@@ -560,6 +563,16 @@ export default function App() {
           </div>
 
           <div className="canvas-top-right">
+            {window.easydrawDesktop && <button
+              className="mcp-status-control share-control"
+              onClick={() => setShareOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={shareOpen}
+              title={t("分享")}
+            >
+              <ShareIcon />
+              <span>{t("分享")}</span>
+            </button>}
             <button
               className={`mcp-status-control mcp-status-control--${connection}`}
               onClick={() => setMcpDialogOpen(true)}
@@ -655,6 +668,14 @@ export default function App() {
       {mcpDialogOpen && <McpDialog {...{ mcpDialogOpen, setMcpDialogOpen, t, mcpRuntime, mcpConnectionInfo, mcpLoading, setMcpEnabled, skillUpdateAvailable, acknowledgeSkillUpdate }} />}
 
       <SettingsDialog {...{ settingsOpen, setSettingsOpen, t, locale, setLocale }} />
+      {shareOpen && <ShareDialog
+        t={t}
+        onClose={() => setShareOpen(false)}
+        openSettings={() => { setShareOpen(false); setSettingsOpen(true); }}
+        projectId={snapshot.document.projectId}
+        projectPath={projectPath}
+        getDocument={() => serializeProjectDocument(canvasSession.flush())}
+      />}
 
     </div>
   );

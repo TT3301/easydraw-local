@@ -1,0 +1,118 @@
+:root {
+  --ink: oklch(0.205 0.012 35);
+  --muted: oklch(0.47 0.018 35);
+  --border: oklch(0.885 0.012 35);
+  --surface: oklch(1 0 0);
+  --surface-subtle: oklch(0.955 0.008 35);
+  --primary: oklch(0.6 0.205 34.8);
+  --primary-soft: oklch(0.94 0.035 34.8);
+  font-family: Inter, "SF Pro Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: oklch(0.975 0 0);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.viewer-shell {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.viewer-bar {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.viewer-title {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viewer-tabs {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.viewer-tabs button {
+  flex-shrink: 0;
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.viewer-tabs button:hover {
+  background: var(--surface-subtle);
+}
+
+.viewer-tabs button[aria-current="true"] {
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.viewer-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.viewer-canvas {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+}
+
+.viewer-canvas .easydraw {
+  --color-primary: 10, 10%, 20%;
+  --color-primary-darker: 10, 10%, 16%;
+  --color-primary-darkest: 10, 10%, 12%;
+  --color-primary-light: 12, 55%, 96%;
+}
+
+.viewer-status {
+  display: grid;
+  height: 100%;
+  place-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.viewer-status p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .viewer-badge {
+    display: none;
+  }
+}

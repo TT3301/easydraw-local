@@ -23,6 +23,7 @@
     "dev:desktop": "wait-on --config scripts/desktop-ready.cjs http://127.0.0.1:1420 && electron .",
     "build": "npm run build:desktop",
     "build:desktop": "npm run icons:manifest && tsc --noEmit -p tsconfig.desktop.json && npm run typecheck -w @easydraw/mcp-server && vite build && vite build --config vite.mcp.config.ts",
+    "build:viewer": "vite build --config vite.viewer.config.ts",
     "desktop:dir": "npm run build:desktop && node scripts/ensure-electron.cjs && electron-builder --dir --config.electronDist=node_modules/electron/dist",
     "desktop:pack": "npm run build:desktop && node scripts/ensure-electron.cjs && electron-builder --config.electronDist=node_modules/electron/dist",
     "preview": "vite preview --host 127.0.0.1",

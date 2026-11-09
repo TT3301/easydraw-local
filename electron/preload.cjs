@@ -57,6 +57,16 @@ contextBridge.exposeInMainWorld("easydrawDesktop", {
   copyMcpConnectionInfo: text => ipcRenderer.invoke("easydraw:mcp:copy-connection-info", text),
   copySkillDirectory: () => ipcRenderer.invoke("easydraw:skills:copy-directory"),
   updateSkills: () => ipcRenderer.invoke("easydraw:skills:update"),
+  // Self-hosted sharing: the token and share keys stay in the main process.
+  getShareSettings: () => ipcRenderer.invoke("easydraw:share:get-settings"),
+  setShareSettings: (payload) => ipcRenderer.invoke("easydraw:share:set-settings", payload),
+  testShareServer: () => ipcRenderer.invoke("easydraw:share:test"),
+  getShareStatus: (payload) => ipcRenderer.invoke("easydraw:share:status", payload),
+  publishShare: (payload) => ipcRenderer.invoke("easydraw:share:publish", payload),
+  setShareEnabled: (payload) => ipcRenderer.invoke("easydraw:share:set-enabled", payload),
+  setShareExpiry: (payload) => ipcRenderer.invoke("easydraw:share:set-expiry", payload),
+  deleteShare: (payload) => ipcRenderer.invoke("easydraw:share:delete", payload),
+  copyShareLink: (payload) => ipcRenderer.invoke("easydraw:share:copy-link", payload),
   onMenuCommand: (listener) => {
     const handler = (_event, command) => listener(command);
     ipcRenderer.on("easydraw:menu-command", handler);

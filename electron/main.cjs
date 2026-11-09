@@ -13,6 +13,8 @@ const {
   nativeImage,
   shell,
   clipboard,
+  net,
+  safeStorage,
 } = require("electron");
 
 const PRODUCT_NAME = "EasyDraw Local";
@@ -96,6 +98,10 @@ const registerDesktopHandlers = () => {
   projectStorage.register(ipcMain);
   require("./asset-service.cjs").registerAssetHandlers(ipcMain, { resolveAssetPath, localeText, windowForEvent });
   require("./export-service.cjs").registerExportHandlers(ipcMain, { localeText, windowForEvent, smokeUserData });
+  require("./share-service.cjs").createShareService({
+    userDataPath: app.getPath("userData"), safeStorage, fetch: net.fetch, clipboard, resolveAssetPath, localeText,
+    isTrusted: event => Boolean(mainWindow) && event.sender === mainWindow.webContents,
+  }).register(ipcMain);
   ipcMain.handle("easydraw:locale:set", async (_event, locale) => {
     currentLocale = locale === "en" ? "en" : "zh-CN";
     if (mainWindow && !mainWindow.isDestroyed()) {

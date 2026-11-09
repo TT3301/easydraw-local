@@ -1,0 +1,18 @@
+# Self-hosted EasyDraw share server. nginx (outside this stack) terminates TLS and proxies to 127.0.0.1:8787.
+services:
+  easydraw-share:
+    build: .
+    image: easydraw-share:local
+    container_name: easydraw-share
+    restart: unless-stopped
+    user: "1000:1000"
+    env_file: .env            # SHARE_TOKEN=<at least 32 random bytes>, optional MAX_BLOB_MB
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - ./data:/data
+      - ./viewer:/viewer:ro
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]

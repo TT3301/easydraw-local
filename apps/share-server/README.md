@@ -1,0 +1,62 @@
+# EasyDraw 自托管分享服务器
+
+本 fork 新增的「公网分享」后端。单文件、零依赖（Node 22+ 内置模块），只保存桌面端加密后的密文。
+
+## 安全模型
+
+- 桌面端用 AES-256-GCM 加密项目快照（含所有画布与素材），密钥只放在链接 `#` 之后，浏览器不会把它发给服务器或 Cloudflare。
+- 服务器只保存密文和元数据（大小、时间、是否暂停、过期时间），看不到项目名和内容。
+- 写操作需要 `SHARE_TOKEN`（Bearer）。令牌在桌面端由系统钥匙串加密保存，不写入 `.edw`。
+- 任何拿到完整链接的人都能查看；「删除」会立即清除密文，「暂停」保留密文但链接返回 404。
+
+## 接口
+
+| 方法 | 路径 | 鉴权 | 说明 |
+|---|---|---|---|
+| GET | `/api/health` | 是 | 测试连接，返回 `maxBytes` |
+| POST | `/api/shares` | 是 | 上传密文，可选 `X-Expires-At`，返回元数据和随机 id |
+| GET | `/api/shares/:id` | 是 | 元数据 |
+| PUT | `/api/shares/:id` | 是 | 覆盖密文（链接不变） |
+| PATCH | `/api/shares/:id` | 是 | `{ enabled?, expiresAt? }` |
+| DELETE | `/api/shares/:id` | 是 | 删除 |
+| GET | `/api/shares/:id/blob` | 否 | 公开下载密文；暂停或过期时返回 404 |
+| GET | `/s/:id` | 否 | 只读查看器（在浏览器端解密） |
+
+过期分享在访问时返回 404，并在启动时和之后每小时清理一次。认证失败超过 10 次/10 分钟的 IP 会收到 429。
+
+## 环境变量
+
+| 变量 | 默认 | 说明 |
+|---|---|---|
+| `SHARE_TOKEN` | 必填 | 至少 32 字节随机串 |
+| `MAX_BLOB_MB` | `50` | 单个快照上限；Cloudflare 免费版请求体上限是 100 MB |
+| `DATA_DIR` | `./data` | 密文目录 |
+| `VIEWER_DIR` | `./viewer` | `npm run build:viewer` 的产物 `dist-viewer/` |
+| `HOST` / `PORT` | `127.0.0.1` / `8787` | 只监听本机，由 nginx 反代 |
+
+## 部署（Docker + 已有 nginx + Cloudflare）
+
+1. Cloudflare：为分享域名添加 A 记录并开启代理（橙云），SSL 模式设为 **Full (strict)**，nginx 使用 Cloudflare Origin 证书。对这个子域名关闭 Rocket Loader 和 Email Obfuscation，它们会往页面注入脚本，与查看器的 CSP 冲突。
+2. 在本机仓库根目录执行：
+
+   ```sh
+   apps/share-server/deploy.sh <ssh-host>            # 默认部署到 /root/easydraw-share
+   ```
+
+   脚本会构建查看器，同步文件，首次部署时生成 `.env`（`SHARE_TOKEN`，权限 600），然后执行 `docker compose up -d --build`。
+3. nginx：参照 `nginx.share.conf.example`，**新增**一个站点文件，然后：
+
+   ```sh
+   docker exec nginx nginx -t && docker exec nginx nginx -s reload
+   ```
+
+4. 桌面端：设置 → 分享服务器，填写 `https://<分享域名>`，以及 `.env` 中的 `SHARE_TOKEN`，然后点「测试连接」。
+
+回滚：删除新增的 nginx 站点文件并 reload，再在部署目录执行 `docker compose down`。
+
+## 开发
+
+```sh
+SHARE_TOKEN=$(openssl rand -hex 24) VIEWER_DIR=dist-viewer node apps/share-server/server.mjs
+npx vitest run apps/share-server electron/share-service.test.ts src/features/share
+```

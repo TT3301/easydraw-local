@@ -3636,3 +3636,217 @@ code {
 }
 
 .canvas-empty{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none;color:#64748b;z-index:2}.canvas-empty button{pointer-events:auto;border:0;background:#5275d9;color:white;border-radius:7px;padding:10px 18px;font:inherit;cursor:pointer}
+
+/* Self-hosted public sharing */
+.share-control svg {
+  flex-shrink: 0;
+}
+
+.share-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  overflow: hidden auto;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 8px 18px oklch(0.15 0.01 35 / 0.22);
+}
+
+.dialog-heading.share-dialog__heading {
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.share-dialog__heading > div {
+  flex: 1;
+}
+
+.share-dialog__icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.share-dialog__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.share-dialog__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 22px;
+}
+
+.share-server-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface-subtle);
+}
+
+.share-server-card > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.share-server-card strong {
+  font-size: 13px;
+}
+
+.share-server-card span {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-row,
+.share-link-row,
+.share-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-row {
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.share-link {
+  flex: 1;
+  min-width: 0;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-subtle);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+}
+
+.share-meta,
+.share-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.share-expiry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.share-dialog__body > .share-expiry {
+  margin-left: 0;
+}
+
+.share-expiry select {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+}
+
+.share-notice {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.share-notice--success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.share-notice--danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.share-security {
+  margin: 0 22px 22px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface-subtle);
+}
+
+.share-security strong {
+  font-size: 13px;
+}
+
+.share-security p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.settings-dialog:has(.share-settings) {
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.share-settings__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.share-settings__form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.share-settings__form input {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.share-settings__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.share-settings .share-notice {
+  margin-top: 10px;
+}

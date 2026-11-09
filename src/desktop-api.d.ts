@@ -1,4 +1,5 @@
 import type { ProjectAsset, ProjectDocument } from "./core/protocol";
+import type { StoredProjectDocument } from "@easydraw/document-model";
 import type {
   BridgeRequest,
   BridgeResponse,
@@ -41,6 +42,12 @@ export interface InsertedAssetResult {
   data: string;
   copied: boolean;
 }
+
+export interface ShareSettings { serverUrl: string; hasToken: boolean }
+export interface ShareView { link: string; size: number; updatedAt: string; enabled: boolean; expiresAt: string | null }
+export interface ShareStatus { configured: boolean; serverUrl: string; share: ShareView | null; error?: string }
+/** 7 or 30 days; null keeps the share until it is deleted. */
+export type ShareExpiryDays = 7 | 30 | null;
 
 export interface DesktopApi {
   setLocale(locale: AppLocale): Promise<boolean>;
@@ -114,6 +121,16 @@ export interface DesktopApi {
   getMcpConnectionInfo(): Promise<McpConnectionInfo>;
   copyMcpConnectionInfo(text: string): Promise<boolean>;
   copySkillDirectory(): Promise<boolean>;
+  getShareSettings(): Promise<ShareSettings>;
+  /** token: string replaces, null clears, omitted keeps the saved token. */
+  setShareSettings(payload: { serverUrl: string; token?: string | null }): Promise<ShareSettings>;
+  testShareServer(): Promise<{ ok: true; maxBytes: number }>;
+  getShareStatus(payload: { projectId: string }): Promise<ShareStatus>;
+  publishShare(payload: { projectPath: string | null; document: StoredProjectDocument; expiresInDays?: ShareExpiryDays }): Promise<ShareView>;
+  setShareEnabled(payload: { projectId: string; enabled: boolean }): Promise<ShareView>;
+  setShareExpiry(payload: { projectId: string; expiresInDays: ShareExpiryDays }): Promise<ShareView>;
+  deleteShare(payload: { projectId: string }): Promise<null>;
+  copyShareLink(payload: { projectId: string }): Promise<boolean>;
   updateSkills(): Promise<boolean>;
 }
 

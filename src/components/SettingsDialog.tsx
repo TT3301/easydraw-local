@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 import type { AppLocale } from "../core/i18n";
 import { APP_LOCALES } from "../core/i18n";
+import { ShareServerSettings } from "../features/share/ShareServerSettings";
 
 type Setter<T> = Dispatch<SetStateAction<T>>;
 type Translate = (key: string, values?: Record<string, string | number>) => string;
@@ -80,6 +81,7 @@ return <>
                 {t("语言更改会立即生效并自动保存。")}
               </p>
             </div>
+            <ShareServerSettings t={t} />
             <div className="dialog-actions settings-dialog__actions">
               <button
                 className="primary-action"
