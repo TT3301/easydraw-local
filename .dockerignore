@@ -1,0 +1,12 @@
+# Build context for apps/share-server/Dockerfile: sources only.
+.git
+**/node_modules
+dist
+dist-*
+release
+qa
+coverage
+**/*.edw
+**/.env
+**/.env.*
+**/.DS_Store

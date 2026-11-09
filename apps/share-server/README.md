@@ -31,19 +31,29 @@
 | `SHARE_TOKEN` | 必填 | 至少 32 字节随机串 |
 | `MAX_BLOB_MB` | `50` | 单个快照上限；Cloudflare 免费版请求体上限是 100 MB |
 | `DATA_DIR` | `./data` | 密文目录 |
-| `VIEWER_DIR` | `./viewer` | `npm run build:viewer` 的产物 `dist-viewer/` |
+| `VIEWER_DIR` | `./viewer`（镜像内为 `/viewer`） | `npm run build:viewer` 的产物 `dist-viewer/` |
 | `HOST` / `PORT` | `127.0.0.1` / `8787` | 只监听本机，由 nginx 反代 |
 
-## 部署（Docker + 已有 nginx + Cloudflare）
+## 镜像
 
-1. Cloudflare：为分享域名添加 A 记录并开启代理（橙云），SSL 模式设为 **Full (strict)**，nginx 使用 Cloudflare Origin 证书。对这个子域名关闭 Rocket Loader 和 Email Obfuscation，它们会往页面注入脚本，与查看器的 CSP 冲突。
+GitHub Actions（`.github/workflows/share-server-image.yml`）构建 `linux/amd64` 与 `linux/arm64` 多架构镜像，推送到 GHCR，查看器已内置在镜像中：
+
+| 标签 | 来源 |
+|---|---|
+| `ghcr.io/tt3301/easydraw-share:latest`、`:sha-<短哈希>` | `tt/main` 分支 |
+| `:1.0.0`、`:1.0` | `v*` tag |
+
+## 部署（Docker Compose + 已有 nginx + Cloudflare）
+
+1. Cloudflare：为分享域名添加 A 记录并开启代理（橙云），SSL 模式设为 **Full (strict)**，nginx 使用 Cloudflare Origin 证书。对这个子域名关闭 Rocket Loader；Email Obfuscation 只在页面含邮箱地址时注入脚本，查看器不受影响。若 zone 里有通配的 Origin Rule 改写了回源端口，要为分享域名单独加一条回源 443 的规则。
 2. 在本机仓库根目录执行：
 
    ```sh
-   apps/share-server/deploy.sh <ssh-host>            # 默认部署到 /root/easydraw-share
+   apps/share-server/deploy.sh <ssh-host>                  # 默认 /root/easydraw-share，镜像标签 latest
+   apps/share-server/deploy.sh <ssh-host> /root/easydraw-share 1.0.0   # 固定版本
    ```
 
-   脚本会构建查看器，同步文件，首次部署时生成 `.env`（`SHARE_TOKEN`，权限 600），然后执行 `docker compose up -d --build`。
+   脚本只上传 `compose.yaml`，首次部署时生成 `.env`（`SHARE_TOKEN`，权限 600），然后执行 `docker compose pull && docker compose up -d`。服务器上不需要源码，也不在服务器上构建。也可以手动：把 `compose.yaml` 放到任意目录，写好 `.env`，执行 `docker compose up -d`。
 3. nginx：参照 `nginx.share.conf.example`，**新增**一个站点文件，然后：
 
    ```sh
@@ -52,7 +62,7 @@
 
 4. 桌面端：设置 → 分享服务器，填写 `https://<分享域名>`，以及 `.env` 中的 `SHARE_TOKEN`，然后点「测试连接」。
 
-回滚：删除新增的 nginx 站点文件并 reload，再在部署目录执行 `docker compose down`。
+回滚：删除新增的 nginx 站点文件并 reload，再在部署目录执行 `docker compose down`；固定到旧版本则用 `deploy.sh <host> <dir> <旧版本号>`。
 
 ## 开发
 
