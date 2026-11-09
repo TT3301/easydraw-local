@@ -22,6 +22,8 @@ jobs:
     timeout-minutes: 45
     env:
       # No Apple Developer certificate: ad-hoc sign (required for arm64 binaries to launch), no notarization.
+      # Hardened runtime is off: it only matters for notarization, and with ad-hoc signing its library
+      # validation can refuse the bundled onnxruntime dylib at load time.
       CSC_IDENTITY_AUTO_DISCOVERY: "false"
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +44,7 @@ jobs:
           exit 1
       - name: Package DMG
         run: |
-          pack() { npm run desktop:pack -- --mac dmg --arm64 --publish never -c.mac.identity=-; }
+          pack() { npm run desktop:pack -- --mac dmg --arm64 --publish never -c.mac.identity=- -c.mac.hardenedRuntime=false; }
           pack || ELECTRON_BUILDER_BINARIES_MIRROR=https://npmmirror.com/mirrors/electron-builder-binaries/ pack
       - name: Checksums
         working-directory: release
