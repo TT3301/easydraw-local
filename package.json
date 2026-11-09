@@ -1,6 +1,6 @@
 {
   "name": "easydraw-local",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A local-first desktop canvas for editable sketches, prototypes, and AI-assisted drawing.",
   "author": "EasyDraw contributors",
   "license": "MIT",
