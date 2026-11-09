@@ -23,6 +23,7 @@ No account, sync service, or official EasyDraw backend is included.
 > **Fork addition: self-hosted public sharing.** Configure your own VPS address and access token in Settings
 > to publish an end-to-end encrypted, read-only snapshot link (the key stays after `#`).
 > See [apps/share-server](apps/share-server/README.md) for the server and deployment.
+> Fork versions start at **1.0.0** (based on upstream EasyDraw Local v0.3.7); macOS Apple Silicon builds are on the Releases page.
 
 ## v0.3.7 update
 

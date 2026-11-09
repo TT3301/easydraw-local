@@ -23,6 +23,7 @@
 > **本 fork 新增：自托管公网分享。** 在设置中填写你自己的 VPS 地址和访问令牌，
 > 即可把项目快照端到端加密后发布为浏览器可打开的只读链接（密钥只在链接 `#` 之后）。
 > 服务端与部署方式见 [apps/share-server](apps/share-server/README.md)。
+> 二开版本号从 **1.0.0** 起（基于上游 EasyDraw Local v0.3.7），macOS Apple Silicon 安装包见 Releases。
 
 ## v0.3.7 更新
 
