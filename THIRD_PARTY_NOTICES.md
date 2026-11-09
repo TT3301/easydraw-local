@@ -49,3 +49,10 @@ utilities and test fixtures.
 Additional dependencies keep their own license and copyright notices. Exact
 versions are recorded in `package-lock.json`; see the licenses distributed with
 each installed package. Preserve applicable notices when redistributing a binary.
+
+## @noble/ciphers
+
+- Source: [paulmillr/noble-ciphers](https://github.com/paulmillr/noble-ciphers), version 2.4.0.
+- License: MIT, Copyright (c) 2022 Paul Miller (https://paulmillr.com).
+- Bundled in the share viewer (`dist-viewer/`) for AES-GCM decryption on non-HTTPS pages,
+  where browsers do not provide WebCrypto.
