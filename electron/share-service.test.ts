@@ -10,6 +10,7 @@ import { createShareServer } from "../apps/share-server/server.mjs";
 import { decodeSnapshot } from "../src/features/share/snapshot-codec";
 
 const { createShareService } = createRequire(import.meta.url)("./share-service.cjs");
+const { createLanShareHost } = createRequire(import.meta.url)("./lan-share-host.cjs");
 const TOKEN = "k".repeat(40);
 const PROJECT = "project-1";
 let root: string, server: Server, serverUrl: string, clipboardText: string, service: ReturnType<typeof createShareService>, clock: number;
@@ -49,13 +50,13 @@ describe("share service", () => {
     await expect(service.setSettings({ serverUrl: "http://example.com", token: TOKEN })).rejects.toThrow("https://");
     await expect(service.setSettings({ serverUrl: "https://example.com/path", token: TOKEN })).rejects.toThrow("路径");
     await expect(service.setSettings({ serverUrl, token: "short" })).rejects.toThrow("32");
-    expect(await service.setSettings({ serverUrl: `${serverUrl}/`, token: TOKEN })).toEqual({ serverUrl, hasToken: true });
+    expect(await service.setSettings({ serverUrl: `${serverUrl}/`, token: TOKEN })).toMatchObject({ mode: "custom", serverUrl, hasToken: true });
     const raw = await readFile(join(root, "user", "share-store.json"), "utf8");
     expect(raw).not.toContain(TOKEN);
     expect((await stat(join(root, "user", "share-store.json"))).mode & 0o777).toBe(0o600);
-    expect(await service.setSettings({ serverUrl })).toEqual({ serverUrl, hasToken: true });
+    expect(await service.setSettings({ serverUrl })).toMatchObject({ serverUrl, hasToken: true });
     expect(await service.testServer()).toEqual({ ok: true, maxBytes: 4096 });
-    expect(await service.setSettings({ serverUrl, token: null })).toEqual({ serverUrl, hasToken: false });
+    expect(await service.setSettings({ serverUrl, token: null })).toMatchObject({ serverUrl, hasToken: false });
     await expect(service.testServer()).rejects.toThrow("配置分享服务器");
   });
 
@@ -108,5 +109,84 @@ describe("share service", () => {
     await writeFile(join(root, "workspace", "assets", "logo.svg"), Buffer.from(Array.from({ length: 20_000 }, () => Math.random() * 256)));
     await expect(publish()).rejects.toThrow("超过服务器上限");
     await expect(publish({ expiresInDays: 3 })).rejects.toThrow();
+  });
+});
+
+describe("share service in LAN mode", () => {
+  let lanRoot: string, host: ReturnType<typeof createLanShareHost>, addresses: Array<{ address: string; name: string }>, lan: ReturnType<typeof createShareService>;
+  const freePort = async () => {
+    const probe = (await import("node:net")).createServer();
+    await new Promise<void>(done => probe.listen(0, "127.0.0.1", done));
+    const { port } = probe.address() as AddressInfo;
+    await new Promise(done => probe.close(done));
+    return port;
+  };
+  beforeEach(async () => {
+    lanRoot = await mkdtemp(join(tmpdir(), "share-lan-"));
+    await Promise.all([mkdir(join(lanRoot, "user")), mkdir(join(lanRoot, "viewer")), mkdir(join(lanRoot, "workspace", "assets"), { recursive: true })]);
+    await writeFile(join(lanRoot, "workspace", "assets", "logo.svg"), "<svg/>");
+    host = createLanShareHost({ dataDir: join(lanRoot, "lan-data"), viewerDir: join(lanRoot, "viewer"), localeText: (zh: string) => zh });
+    addresses = [{ address: "127.0.0.1", name: "en0" }];
+    lan = createShareService({
+      userDataPath: join(lanRoot, "user"), safeStorage, fetch, lanHost: host, listAddresses: () => addresses,
+      clipboard: { writeText: (text: string) => { clipboardText = text; } },
+      resolveAssetPath: (_project: string, relativePath: string) => join(lanRoot, "workspace", relativePath),
+      localeText: (zh: string) => zh, isTrusted: () => true, now: () => clock,
+    });
+  });
+  afterEach(async () => { await host.stop(); await rm(lanRoot, { recursive: true, force: true }); });
+
+  it("defaults to LAN mode with the service off and an address prefilled", async () => {
+    expect(await lan.getSettings()).toMatchObject({ mode: "lan", lan: { enabled: false, running: false, port: 8787, address: "127.0.0.1" } });
+    expect(await lan.status(PROJECT)).toEqual({ configured: false, serverUrl: "", share: null });
+    await expect(lan.publish({ projectPath: "/p.edw", document })).rejects.toThrow("启动局域网分享服务");
+  });
+
+  it("generates a sealed token, publishes over the bundled server, and builds links from the current LAN address", async () => {
+    const port = await freePort();
+    const settings = await lan.setLan({ enabled: true, port });
+    expect(settings.lan).toMatchObject({ enabled: true, running: true, port, error: null });
+    const stored = JSON.parse(await readFile(join(lanRoot, "user", "share-store.json"), "utf8"));
+    expect(stored.settings.lan.token).toBeTypeOf("string");
+    expect(Buffer.from(stored.settings.lan.token, "base64").reverse().toString()).toMatch(/^sealed:/);
+
+    expect((await lan.status(PROJECT)).serverUrl).toBe(`http://127.0.0.1:${port}`);
+    await lan.publish({ projectPath: "/p.edw", document });
+    await lan.copyLink(PROJECT);
+    const link = new URL(clipboardText);
+    expect(link.origin).toBe(`http://127.0.0.1:${port}`);
+    const blob = await fetch(`${link.origin}/api/shares${link.pathname.slice(2)}/blob`);
+    expect((await decodeSnapshot(new Uint8Array(await blob.arrayBuffer()), link.hash.slice(1))).document).toEqual(document);
+
+    // A new DHCP lease must not orphan the record: the link follows the current address.
+    addresses = [{ address: "localhost", name: "en0" }];
+    await lan.copyLink(PROJECT);
+    expect(new URL(clipboardText).origin).toBe(`http://localhost:${port}`);
+    expect((await lan.status(PROJECT)).share).not.toBeNull();
+  });
+
+  it("closes the port when LAN sharing is switched off or the user moves to a custom server", async () => {
+    const port = await freePort();
+    await lan.setLan({ enabled: true, port });
+    expect((await lan.setLan({ enabled: false })).lan.running).toBe(false);
+    await lan.setLan({ enabled: true });
+    expect(host.status().running).toBe(true);
+    expect((await lan.setMode("custom")).lan).toMatchObject({ enabled: false, running: false });
+    await expect(lan.setLan({ address: "10.9.9.9" })).rejects.toThrow("不属于本机");
+    await expect(lan.setMode("cloud")).rejects.toThrow("模式无效");
+  });
+
+  it("resumes a LAN service the user left on, and reports a busy port in settings instead of throwing", async () => {
+    const port = await freePort();
+    await lan.setLan({ enabled: true, port });
+    await host.stop();
+    await lan.resume();
+    expect(host.status()).toEqual({ running: true, port });
+    await host.stop();
+    const blocker = (await import("node:net")).createServer();
+    await new Promise<void>(done => blocker.listen(port, "0.0.0.0", done));
+    await lan.resume();
+    expect((await lan.getSettings()).lan.error).toContain("已被占用");
+    await new Promise(done => blocker.close(done));
   });
 });

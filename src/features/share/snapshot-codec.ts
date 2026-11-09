@@ -1,4 +1,6 @@
 // Browser decoder for the share snapshot format; see electron/share-codec.cjs for the layout.
+import { gcm } from "@noble/ciphers/aes.js";
+
 const MAGIC = new TextEncoder().encode("EDS1");
 const IV_BYTES = 12;
 const MAX_MANIFEST_BYTES = 64 * 1024 * 1024;
@@ -23,6 +25,17 @@ const base64UrlToBytes = (value: string) => {
 const gunzip = async (data: Uint8Array) =>
   new Uint8Array(await new Response(new Blob([data as BlobPart]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer());
 
+/**
+ * AES-256-GCM decryption. Browsers expose WebCrypto only in secure contexts (HTTPS, localhost);
+ * links served over plain HTTP on a LAN fall back to the audited pure-JS implementation.
+ */
+async function decrypt(key: Uint8Array, iv: Uint8Array, ciphertext: Uint8Array): Promise<Uint8Array> {
+  const subtle = globalThis.crypto?.subtle;
+  if (!subtle) return gcm(key, iv, MAGIC).decrypt(ciphertext);
+  const cryptoKey = await subtle.importKey("raw", key as BufferSource, "AES-GCM", false, ["decrypt"]);
+  return new Uint8Array(await subtle.decrypt({ name: "AES-GCM", iv: iv as BufferSource, additionalData: MAGIC }, cryptoKey, ciphertext as BufferSource));
+}
+
 /** Decrypts and unpacks an envelope. Throws on a wrong key, tampering, or a malformed layout. */
 export async function decodeSnapshot(envelope: Uint8Array, key: string): Promise<DecodedSnapshot> {
   if (envelope.length < MAGIC.length + IV_BYTES + 16 || MAGIC.some((byte, index) => envelope[index] !== byte)) {
@@ -31,11 +44,10 @@ export async function decodeSnapshot(envelope: Uint8Array, key: string): Promise
   let keyBytes: Uint8Array;
   try { keyBytes = base64UrlToBytes(key); } catch { keyBytes = new Uint8Array(); }
   if (keyBytes.length !== 32) throw new Error("Invalid share key");
-  const cryptoKey = await crypto.subtle.importKey("raw", keyBytes as BufferSource, "AES-GCM", false, ["decrypt"]);
   const iv = envelope.slice(MAGIC.length, MAGIC.length + IV_BYTES);
-  const plaintext = await crypto.subtle.decrypt({ name: "AES-GCM", iv, additionalData: MAGIC }, cryptoKey,
-    envelope.slice(MAGIC.length + IV_BYTES)).catch(() => { throw new Error("Wrong key or damaged snapshot"); });
-  const body = await gunzip(new Uint8Array(plaintext));
+  const plaintext = await decrypt(keyBytes, iv, envelope.slice(MAGIC.length + IV_BYTES))
+    .catch(() => { throw new Error("Wrong key or damaged snapshot"); });
+  const body = await gunzip(plaintext);
   const view = new DataView(body.buffer, body.byteOffset, body.byteLength);
   const manifestLength = body.length >= 4 ? view.getUint32(0) : -1;
   if (manifestLength < 0 || manifestLength > MAX_MANIFEST_BYTES || 4 + manifestLength > body.length) throw new Error("Malformed snapshot");

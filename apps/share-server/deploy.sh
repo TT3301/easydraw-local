@@ -3,6 +3,7 @@
 # Usage: apps/share-server/deploy.sh <ssh-host> [remote-dir] [image-tag]
 # The nginx site file and DNS record are set up once by hand (see README.md).
 set -euo pipefail
+export COPYFILE_DISABLE=1 # no macOS AppleDouble (._*) files in the tar stream
 host="${1:?usage: deploy.sh <ssh-host> [remote-dir] [image-tag]}"
 remote="${2:-/root/easydraw-share}"
 tag="${3:-latest}"

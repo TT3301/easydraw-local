@@ -3850,3 +3850,70 @@ code {
 .share-settings .share-notice {
   margin-top: 10px;
 }
+
+.share-mode {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.share-mode__option {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.share-mode__option.is-selected {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.share-mode__option input {
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.share-row.share-row--plain {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.share-row--plain > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.share-row--plain small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.share-settings__form select {
+  height: 34px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.share-settings__inline {
+  display: flex;
+  gap: 8px;
+}
+
+.share-settings__inline input {
+  width: 120px;
+}

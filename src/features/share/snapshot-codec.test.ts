@@ -1,5 +1,5 @@
 import { createRequire } from "node:module";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { decodeSnapshot } from "./snapshot-codec";
 
 const { createShareKey, encodeSnapshot } = createRequire(import.meta.url)("../../../electron/share-codec.cjs");
@@ -34,5 +34,19 @@ describe("share snapshot codec", () => {
     relabeled[3] = "2".charCodeAt(0);
     await expect(decodeSnapshot(relabeled, key)).rejects.toThrow("Unsupported");
     await expect(decodeSnapshot(envelope, "short")).rejects.toThrow("Invalid share key");
+  });
+
+  it("decrypts without WebCrypto, as browsers do on plain-HTTP LAN links", async () => {
+    const key = createShareKey();
+    const envelope = new Uint8Array(await encode(key));
+    vi.stubGlobal("crypto", {});
+    try {
+      expect(globalThis.crypto.subtle).toBeUndefined();
+      expect((await decodeSnapshot(envelope, key)).document).toEqual(document);
+      await expect(decodeSnapshot(envelope, createShareKey())).rejects.toThrow("Wrong key");
+      const tampered = envelope.slice();
+      tampered[tampered.length - 1] ^= 1;
+      await expect(decodeSnapshot(tampered, key)).rejects.toThrow("Wrong key");
+    } finally { vi.unstubAllGlobals(); }
   });
 });

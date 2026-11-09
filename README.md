@@ -20,8 +20,9 @@ Draw by hand or connect an AI agent through MCP—your projects stay in local fi
 
 No account, sync service, or official EasyDraw backend is included.
 
-> **Fork addition: self-hosted public sharing.** Configure your own VPS address and access token in Settings
-> to publish an end-to-end encrypted, read-only snapshot link (the key stays after `#`).
+> **Fork addition: end-to-end encrypted sharing.** Project snapshots are encrypted locally and published as read-only links (the key stays after `#`).
+> - **This computer (LAN)**, the default: turn on the LAN share service in Settings; address and token are prefilled and devices on the same network can open links. No VPS needed.
+> - **Custom server**: enter your own VPS address and access token to share publicly.
 > See [apps/share-server](apps/share-server/README.md) for the server and deployment.
 > Fork versions start at **1.0.0** (based on upstream EasyDraw Local v0.3.7); macOS Apple Silicon builds are on the Releases page.
 

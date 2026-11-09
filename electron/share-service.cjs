@@ -1,5 +1,6 @@
 // Self-hosted public sharing. Runs only in the main process: the server token and share keys
 // are encrypted with safeStorage (OS keychain) and never cross into the renderer or the .edw file.
+// Two modes: "lan" runs the bundled share server on this machine (no VPS needed); "custom" uses the user's server.
 const path = require("node:path");
 const fs = require("node:fs/promises");
 const crypto = require("node:crypto");
@@ -8,8 +9,10 @@ const { createShareKey, encodeSnapshot } = require("./share-codec.cjs");
 const STORE_FILE = "share-store.json";
 const MIN_TOKEN_BYTES = 32;
 const EXPIRY_DAYS = new Set([7, 30]);
+const LAN_KEY = "lan"; // Records made in LAN mode survive IP changes: the link host is resolved at copy time.
+const DEFAULT_LAN_PORT = 8787;
 
-exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, resolveAssetPath, localeText, isTrusted, now = () => Date.now() }) => {
+exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, resolveAssetPath, localeText, isTrusted, lanHost, listAddresses = () => [], now = () => Date.now() }) => {
   const storePath = path.join(userDataPath, STORE_FILE);
   let queue = Promise.resolve();
   /** Serializes operations so concurrent IPC calls never interleave store writes. */
@@ -46,10 +49,29 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
     }
     return url.origin;
   };
+  // Existing custom-server users keep their setup; everyone else starts in LAN mode.
+  const modeOf = (settings) => settings.mode ?? (settings.serverUrl ? "custom" : "lan");
+  const lanOf = (settings) => ({ enabled: false, port: DEFAULT_LAN_PORT, address: null, ...settings.lan });
+  /** The LAN address others should use: the saved choice while it still exists, else the best candidate. */
+  const lanAddress = (lan) => {
+    const addresses = listAddresses();
+    return addresses.find(entry => entry.address === lan.address)?.address ?? addresses[0]?.address ?? "127.0.0.1";
+  };
+  const publicBase = (store, key) => key === LAN_KEY ? `http://${lanAddress(lanOf(store.settings))}:${lanOf(store.settings).port}` : key;
+  const serverKey = (store) => modeOf(store.settings) === "lan" ? LAN_KEY : store.settings.serverUrl;
+  const isConfigured = (store) => modeOf(store.settings) === "lan"
+    ? Boolean(lanHost?.status().running && store.settings.lan?.token)
+    : Boolean(store.settings.serverUrl && store.settings.token);
   const connection = (store) => {
+    if (modeOf(store.settings) === "lan") {
+      const lan = lanOf(store.settings);
+      if (!lanHost?.status().running || !lan.token) throw new Error(localeText("请先在设置中启动局域网分享服务", "Start the LAN share service in Settings first"));
+      // API calls stay on loopback; only the published link uses the LAN address.
+      return { serverUrl: `http://127.0.0.1:${lanHost.status().port}`, token: unseal(lan.token), key: LAN_KEY };
+    }
     const { serverUrl, token } = store.settings;
     if (!serverUrl || !token) throw new Error(localeText("请先在设置中配置分享服务器", "Configure the share server in Settings first"));
-    return { serverUrl, token: unseal(token) };
+    return { serverUrl, token: unseal(token), key: serverUrl };
   };
   const request = async ({ serverUrl, token }, method, route, { body, headers = {}, timeout = 15_000 } = {}) => {
     let response;
@@ -82,19 +104,70 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
   /** The record for this project on the currently configured server, if any. */
   const recordFor = (store, projectId) => {
     const record = store.shares[projectId];
-    return record && record.serverUrl === store.settings.serverUrl ? record : null;
+    return record && record.serverUrl === serverKey(store) ? record : null;
   };
-  const shareUrl = (record) => `${record.serverUrl}/s/${record.id}#${unseal(record.key)}`;
-  const publicView = (record) => record ? {
-    link: `${record.serverUrl}/s/${record.id.slice(0, 8)}…#••••••••••••`,
+  const shareUrl = (store, record) => `${publicBase(store, record.serverUrl)}/s/${record.id}#${unseal(record.key)}`;
+  const publicView = (store, record) => record ? {
+    link: `${publicBase(store, record.serverUrl)}/s/${record.id.slice(0, 8)}…#••••••••••••`,
     size: record.size, updatedAt: record.updatedAt, enabled: record.enabled, expiresAt: record.expiresAt,
   } : null;
   const applyMeta = (record, meta) => ({ ...record, size: meta.size, updatedAt: meta.updatedAt, enabled: meta.enabled, expiresAt: meta.expiresAt });
 
+  let lanError = null;
   const getSettings = async () => {
     const { settings } = await readStore();
-    return { serverUrl: settings.serverUrl ?? "", hasToken: Boolean(settings.token) };
+    const lan = lanOf(settings);
+    return {
+      mode: modeOf(settings), serverUrl: settings.serverUrl ?? "", hasToken: Boolean(settings.token),
+      lan: { enabled: lan.enabled, running: Boolean(lanHost?.status().running), port: lan.port, address: lanAddress(lan), addresses: listAddresses(), error: lanError },
+    };
   };
+  const setMode = (mode) => serial(async () => {
+    if (mode !== "lan" && mode !== "custom") throw new Error(localeText("分享模式无效", "Invalid share mode"));
+    const store = await readStore();
+    store.settings.mode = mode;
+    if (mode === "custom" && store.settings.lan?.enabled) {
+      // Leaving LAN mode closes the port: nothing listens unless LAN sharing is in use.
+      store.settings.lan.enabled = false;
+      await lanHost?.stop();
+    }
+    await writeStore(store);
+    return getSettings();
+  });
+  /** enabled starts or stops the bundled server; address and port are remembered, a port change restarts it. */
+  const setLan = ({ enabled, address, port }) => serial(async () => {
+    const store = await readStore();
+    const lan = lanOf(store.settings);
+    if (address !== undefined) {
+      if (!listAddresses().some(entry => entry.address === address)) throw new Error(localeText("该地址不属于本机网卡", "That address does not belong to this machine"));
+      lan.address = address;
+    }
+    if (port !== undefined) {
+      if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error(localeText("端口需在 1024–65535 之间", "The port must be between 1024 and 65535"));
+      if (port !== lan.port && lanHost?.status().running) await lanHost.stop();
+      lan.port = port;
+    }
+    if (typeof enabled === "boolean") lan.enabled = enabled;
+    lan.token ??= seal(crypto.randomBytes(32).toString("base64url"));
+    store.settings.mode = "lan";
+    store.settings.lan = lan;
+    await writeStore(store);
+    lanError = null;
+    if (!lan.enabled) await lanHost?.stop();
+    else {
+      try { await lanHost.start({ port: lan.port, token: unseal(lan.token) }); }
+      catch (error) { lanError = error.message; throw error; }
+    }
+    return getSettings();
+  });
+  /** Restores a LAN service the user left running; failures are reported in Settings, not thrown at startup. */
+  const resume = () => serial(async () => {
+    const store = await readStore();
+    const lan = lanOf(store.settings);
+    if (modeOf(store.settings) !== "lan" || !lan.enabled || !lan.token) return;
+    try { await lanHost.start({ port: lan.port, token: unseal(lan.token) }); }
+    catch (error) { lanError = error.message; }
+  });
   /** token: string replaces, null clears, undefined keeps the saved one. */
   const setSettings = ({ serverUrl, token }) => serial(async () => {
     const store = await readStore();
@@ -110,18 +183,19 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
 
   const status = (projectId) => serial(async () => {
     const store = await readStore();
-    const configured = Boolean(store.settings.serverUrl && store.settings.token);
+    const configured = isConfigured(store);
+    const base = configured ? publicBase(store, serverKey(store)) : "";
     const record = recordFor(store, projectIdOf(projectId));
-    if (!configured || !record) return { configured, serverUrl: store.settings.serverUrl ?? "", share: null };
+    if (!configured || !record) return { configured, serverUrl: base, share: null };
     try {
       const meta = await request(connection(store), "GET", `/api/shares/${record.id}`);
       store.shares[projectId] = applyMeta(record, meta);
     } catch (error) {
-      if (error.status !== 404) return { configured, serverUrl: store.settings.serverUrl, share: publicView(record), error: error.message };
+      if (error.status !== 404) return { configured, serverUrl: base, share: publicView(store, record), error: error.message };
       delete store.shares[projectId]; // Deleted elsewhere or expired and swept.
     }
     await writeStore(store);
-    return { configured, serverUrl: store.settings.serverUrl, share: publicView(store.shares[projectId]) };
+    return { configured, serverUrl: base, share: publicView(store, store.shares[projectId]) };
   });
 
   const publish = ({ projectPath, document, expiresInDays }) => serial(async () => {
@@ -153,11 +227,11 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
       const expiresAt = expiryFrom(expiresInDays);
       if (expiresAt) upload.headers["X-Expires-At"] = expiresAt;
       meta = await request(server, "POST", "/api/shares", upload);
-      record = { serverUrl: server.serverUrl, id: meta.id, key: seal(key) };
+      record = { serverUrl: server.key, id: meta.id, key: seal(key) };
     }
     store.shares[projectId] = applyMeta(record, meta);
     await writeStore(store);
-    return publicView(store.shares[projectId]);
+    return publicView(store, store.shares[projectId]);
   });
 
   const patch = (projectId, body) => serial(async () => {
@@ -167,7 +241,7 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
     const meta = await request(connection(store), "PATCH", `/api/shares/${record.id}`, { body: JSON.stringify(body), headers: { "Content-Type": "application/json" } });
     store.shares[projectId] = applyMeta(record, meta);
     await writeStore(store);
-    return publicView(store.shares[projectId]);
+    return publicView(store, store.shares[projectId]);
   });
   const remove = (projectId) => serial(async () => {
     const store = await readStore();
@@ -184,7 +258,7 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
     const store = await readStore();
     const record = recordFor(store, projectIdOf(projectId));
     if (!record) throw new Error(localeText("该项目还没有分享", "This project has not been shared"));
-    clipboard.writeText(shareUrl(record));
+    clipboard.writeText(shareUrl(store, record));
     return true;
   };
 
@@ -196,6 +270,8 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
     handle("easydraw:share:get-settings", () => getSettings());
     handle("easydraw:share:set-settings", setSettings);
     handle("easydraw:share:test", () => testServer());
+    handle("easydraw:share:set-mode", ({ mode }) => setMode(mode));
+    handle("easydraw:share:set-lan", setLan);
     handle("easydraw:share:status", ({ projectId }) => status(projectId));
     handle("easydraw:share:publish", publish);
     handle("easydraw:share:set-enabled", ({ projectId, enabled }) => {
@@ -206,5 +282,5 @@ exports.createShareService = ({ userDataPath, safeStorage, fetch, clipboard, res
     handle("easydraw:share:delete", ({ projectId }) => remove(projectId));
     handle("easydraw:share:copy-link", ({ projectId }) => copyLink(projectId));
   };
-  return { register, getSettings, setSettings, testServer, status, publish, setEnabled: (id, enabled) => patch(id, { enabled }), remove, copyLink };
+  return { register, getSettings, setSettings, setMode, setLan, resume, testServer, status, publish, setEnabled: (id, enabled) => patch(id, { enabled }), remove, copyLink };
 };

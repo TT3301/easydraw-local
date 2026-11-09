@@ -150,6 +150,7 @@ export function createShareServer({ token, dataDir, viewerDir, maxBytes, now = (
 
   const server = createServer((req, res) => {
     handle(req, res).catch(error => {
+      if (error?.code === "ERR_STREAM_PREMATURE_CLOSE") return; // The client went away mid-transfer.
       const status = error instanceof HttpError ? error.status : 500;
       if (status === 500) console.error(error);
       if (res.headersSent) { res.destroy(); return; }

@@ -43,7 +43,13 @@ export interface InsertedAssetResult {
   copied: boolean;
 }
 
-export interface ShareSettings { serverUrl: string; hasToken: boolean }
+export type ShareMode = "lan" | "custom";
+export interface LanShareSettings {
+  enabled: boolean; running: boolean; port: number;
+  /** Address used in links: the saved choice, or the best detected LAN address. */
+  address: string; addresses: Array<{ address: string; name: string }>; error: string | null;
+}
+export interface ShareSettings { mode: ShareMode; serverUrl: string; hasToken: boolean; lan: LanShareSettings }
 export interface ShareView { link: string; size: number; updatedAt: string; enabled: boolean; expiresAt: string | null }
 export interface ShareStatus { configured: boolean; serverUrl: string; share: ShareView | null; error?: string }
 /** 7 or 30 days; null keeps the share until it is deleted. */
@@ -125,6 +131,9 @@ export interface DesktopApi {
   /** token: string replaces, null clears, omitted keeps the saved token. */
   setShareSettings(payload: { serverUrl: string; token?: string | null }): Promise<ShareSettings>;
   testShareServer(): Promise<{ ok: true; maxBytes: number }>;
+  setShareMode(payload: { mode: ShareMode }): Promise<ShareSettings>;
+  /** enabled starts/stops the bundled LAN server; a port change restarts it. */
+  setLanShare(payload: { enabled?: boolean; address?: string; port?: number }): Promise<ShareSettings>;
   getShareStatus(payload: { projectId: string }): Promise<ShareStatus>;
   publishShare(payload: { projectPath: string | null; document: StoredProjectDocument; expiresInDays?: ShareExpiryDays }): Promise<ShareView>;
   setShareEnabled(payload: { projectId: string; enabled: boolean }): Promise<ShareView>;

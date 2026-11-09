@@ -93,7 +93,7 @@ export function ShareDialog({ t, onClose, openSettings, projectId, projectPath, 
         </div>
 
         {!projectPath && <p className="share-hint">{t("请先保存项目，再发布分享。")}</p>}
-        {status && !status.configured && <p className="share-hint">{t("在设置中填写你的 VPS 地址和访问令牌后即可发布。")}</p>}
+        {status && !status.configured && <p className="share-hint">{t("在设置中启动局域网分享服务，或配置你自己的服务器后即可发布。")}</p>}
 
         <div className="share-row">
           <strong id="share-switch-label">{t("链接分享")}</strong>

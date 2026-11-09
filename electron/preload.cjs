@@ -61,6 +61,8 @@ contextBridge.exposeInMainWorld("easydrawDesktop", {
   getShareSettings: () => ipcRenderer.invoke("easydraw:share:get-settings"),
   setShareSettings: (payload) => ipcRenderer.invoke("easydraw:share:set-settings", payload),
   testShareServer: () => ipcRenderer.invoke("easydraw:share:test"),
+  setShareMode: (payload) => ipcRenderer.invoke("easydraw:share:set-mode", payload),
+  setLanShare: (payload) => ipcRenderer.invoke("easydraw:share:set-lan", payload),
   getShareStatus: (payload) => ipcRenderer.invoke("easydraw:share:status", payload),
   publishShare: (payload) => ipcRenderer.invoke("easydraw:share:publish", payload),
   setShareEnabled: (payload) => ipcRenderer.invoke("easydraw:share:set-enabled", payload),

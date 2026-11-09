@@ -480,6 +480,18 @@ const english: Record<string, string> = {
   "至少 32 个字符，与服务器 SHARE_TOKEN 一致": "At least 32 characters, same as the server SHARE_TOKEN",
   "访问令牌已清除": "Access token cleared",
   "分享服务器设置已保存": "Share server settings saved",
+  "在设置中启动局域网分享服务，或配置你自己的服务器后即可发布。": "Start the LAN share service or configure your own server in Settings to publish.",
+  "没有公网服务器时，可用本机作为局域网分享服务器；也可以填写你自己的 VPS。": "Without a public server, this computer can act as a LAN share server; or enter your own VPS.",
+  "本机局域网": "This computer (LAN)",
+  "自定义服务器": "Custom server",
+  "启动局域网分享服务": "Run LAN share service",
+  "运行中：{url}": "Running: {url}",
+  "未启动": "Stopped",
+  "本机地址": "Local address",
+  "未检测到局域网地址": "No LAN address detected",
+  "端口": "Port",
+  "端口已更新": "Port updated",
+  "访问令牌已自动生成并加密保存。其他设备需与本机处于同一局域网；本机关闭或休眠时链接无法打开。首次启动时 macOS 可能询问是否允许传入连接。": "An access token was generated and stored encrypted. Other devices must be on the same LAN; links stop working while this computer is off or asleep. macOS may ask to allow incoming connections the first time.",
 };
 
 const iconGroups: Record<string, string> = {

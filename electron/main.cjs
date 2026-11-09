@@ -98,10 +98,16 @@ const registerDesktopHandlers = () => {
   projectStorage.register(ipcMain);
   require("./asset-service.cjs").registerAssetHandlers(ipcMain, { resolveAssetPath, localeText, windowForEvent });
   require("./export-service.cjs").registerExportHandlers(ipcMain, { localeText, windowForEvent, smokeUserData });
-  require("./share-service.cjs").createShareService({
+  const { createLanShareHost, lanAddresses } = require("./lan-share-host.cjs");
+  const lanHost = createLanShareHost({ dataDir: path.join(app.getPath("userData"), "lan-share"), localeText });
+  app.once("will-quit", () => { void lanHost.stop(); });
+  const shareService = require("./share-service.cjs").createShareService({
     userDataPath: app.getPath("userData"), safeStorage, fetch: net.fetch, clipboard, resolveAssetPath, localeText,
     isTrusted: event => Boolean(mainWindow) && event.sender === mainWindow.webContents,
-  }).register(ipcMain);
+    lanHost, listAddresses: () => lanAddresses(),
+  });
+  shareService.register(ipcMain);
+  void shareService.resume();
   ipcMain.handle("easydraw:locale:set", async (_event, locale) => {
     currentLocale = locale === "en" ? "en" : "zh-CN";
     if (mainWindow && !mainWindow.isDestroyed()) {
